@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向） | EDAdong_博客</title><meta name="author" content="EDAdong"><meta name="copyright" content="EDAdong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言博主大三上学期接触全国大学生电子设计竞赛，九月份第一次进入实验室参加2020年湖南省大学生电子设计竞赛，啥都不会，闹了很多笑话。经过一年在校期间的训练学习，在2021年全国大学生电子设计竞赛的电源方向获得全国一等奖，在训练阶段的心路历程和收获的一些东西，分享给大家！（多多包涵！！）另针对电源方向，我建了一个分享交流群，里面有很多做电源的朋友大佬，大家可以进来交流学习学习，QQ群28073034">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）">
+<meta property="og:url" content="http://example.com/2025/02/11/post1/index.html">
+<meta property="og:site_name" content="EDAdong_博客">
+<meta property="og:description" content="前言博主大三上学期接触全国大学生电子设计竞赛，九月份第一次进入实验室参加2020年湖南省大学生电子设计竞赛，啥都不会，闹了很多笑话。经过一年在校期间的训练学习，在2021年全国大学生电子设计竞赛的电源方向获得全国一等奖，在训练阶段的心路历程和收获的一些东西，分享给大家！（多多包涵！！）另针对电源方向，我建了一个分享交流群，里面有很多做电源的朋友大佬，大家可以进来交流学习学习，QQ群28073034">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/post1.jpg">
+<meta property="article:published_time" content="2025-02-11T14:00:44.509Z">
+<meta property="article:modified_time" content="2025-02-11T15:24:10.107Z">
+<meta property="article:author" content="EDAdong">
+<meta property="article:tag" content="STM32">
+<meta property="article:tag" content="单模块实例">
+<meta property="article:tag" content="新手教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/post1.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）",
+  "url": "http://example.com/2025/02/11/post1/",
+  "image": "http://example.com/images/post1.jpg",
+  "datePublished": "2025-02-11T14:00:44.509Z",
+  "dateModified": "2025-02-11T15:24:10.107Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "EDAdong",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/02/11/post1/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/页面背景.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/post1.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/%E7%BD%91%E7%AB%99logo.png" alt="Logo"><span class="site-name">EDAdong_博客</span></a><a class="nav-page-title" href="/"><span class="site-name">02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-02-11T14:00:44.509Z" title="发表于 2025-02-11 22:00:44">2025-02-11</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-02-11T15:24:10.107Z" title="更新于 2025-02-11 23:24:10">2025-02-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%8D%95%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/">单模块实例</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>博主大三上学期接触全国大学生电子设计竞赛，九月份第一次进入实验室参加2020年湖南省大学生电子设计竞赛，啥都不会，闹了很多笑话。经过一年在校期间的训练学习，在2021年全国大学生电子设计竞赛的电源方向获得全国一等奖，在训练阶段的心路历程和收获的一些东西，分享给大家！（多多包涵！！）另针对电源方向，我建了一个分享交流群，里面有很多做电源的朋友大佬，大家可以进来交流学习学习，QQ群280730348，博客edadong.com，视频同步在哔哩哔哩和知乎。</p>
+<h1 id="电赛是什么"><a href="#电赛是什么" class="headerlink" title="电赛是什么"></a>电赛是什么</h1><p>全国大学生电子设计竞赛（National Undergraduate Electronics Design Contest） 是教育部和工业和信息化部共同发起的大学生学科竞赛之一，是面向大学生的群众性科技活动，目的在于推动高等学校促进信息与电子类学科课程体系和课程内容的改革。竞赛的特点是与高等学校相关专业的课程体系和课程内容改革密切结合，以推动其课程教学、教学改革和实验室建设工作。</p>
+<p>在我的理解中，电赛是一类能够检验你在训练期间段所学的，所实践的一个工程类比赛。电赛涵盖的面很广，有做仪器仪表的，有做控制的，有做通信的也有做电源的。所面向的工科专业也很多，门槛也不高，只要你针对某个方向去学习，去训练，网络上也有很多开源的资料以及往年的赛题复现。</p>
+<p>同样，电赛也是国家承认的大学生A类竞赛，含金量很高。无论是在找工作还是在申请保研和考研复试中，都是一个很好的加分项。当然，更重要的是你在电赛训练过程中所学会的知识，所实践得来的东西。</p>
+<p>赛题的质量随着一年一年也变得越来越有技术含量，以后的赛题只会朝着越来越难的趋势发展，如果有想法备战2025年全国大学生电子设计竞赛的同学，可以开始早做准备了。</p>
+<h1 id="电源方向是什么"><a href="#电源方向是什么" class="headerlink" title="电源方向是什么"></a>电源方向是什么</h1><p>通俗一点理解电源方向，就是给定一个电源输入，再获得想要的电源输出。这个电源输入到电源输出的过程，通过各种变换方式来实现。通常四种为DC-DC，DC-AC，AC-DC，AC-AC，其中AC代表的是交流，DC代表的是直流。</p>
+<p>简单说一下四种变换方式会用到什么基础电路</p>
+<p>1、DC-DC</p>
+<p>DC-DC电路最常用的就是boost电路和buck电路，两大基础。顾名思义，boost电路的意思就是输入一个直流电压进来，通过电感储能和MOSFET等作开关，使其能量在微观的层次变化，最终从宏观上得到输出比输入电压更高的电压。buck电路同样如此，与boost电路所用的元器件一致，区别在于拓扑结构的不同。至于电路的工作原理就不在本篇文章里面过多赘述，会在后面分单章进行工作原理的讲解。</p>
+<p>2、DC-AC</p>
+<p>DC-AC电路最常用的就是单相逆变电路。单相逆变电路输入的是直流电压，输出的是频率，幅值均可控的交流电压。具体是通过四个开关器件的瞬时开关状态，使的电压以正弦规律加至负载上，通过多种滤波方式，最终得出正弦交流电的效果。其中涉及到四个MOSFET管的驱动（常用MOSFET管）方式，工作状态，软件如何去发一个SPWM波控制整体电路，通过什么样的滤波方式使得最终的波形平滑好看。</p>
+<p>3、AC-DC</p>
+<p>最经典的就是整流电路了，四个二极管，输入交流电，输出得到直流电压。一般建议整流输出端加电容滤波，感兴趣的朋友可以看看没有加电容和加了电容的整流输出，没加电容的话会对后面电路的直流供电产生很大的负荷。</p>
+<p>4、AC-AC</p>
+<p>AC-AC变换电路在近些年也开始展露獠牙，不过读研后博主的方向并不属于开关电源方向，因此博主对这方面不太了解。有感兴趣的朋友可以去网上搜一下，博主搜到的资料显示一般可以通过变压器绕组实现，若有朋友知道相关知识，可在评论下方留言，感谢！</p>
+<p>当我们了解熟悉了这四种变换方式以后，就可以通过对其组合去实现某些特定的功能。电子设计竞赛有很明显的变化就是，从以前最开始的只是单纯对电能进行变化到后面越来越侧重于功能方面的需求。如15年的锂电池充放电的赛题，17年的微电网模拟系统，19年的不讲也罢，20年的UPS电源，21年的C题最大功率点跟踪（模拟光伏），22年的pfc模拟电子负载，23年的单相逆变器并联运行系统，24年的AC-AC 变换电路并联运行系统越来越接近功能性的设计，难度也在逐渐变大。很多赛题其实就是把以上四种变换方式组合在一起，进行一个最终的输出。对基础能力的要求也越来越多</p>
+<p>以2020年省赛题UPS电源为例。从市电取电，通过自耦变压器和隔离变压器得到较低幅值的交流电压，通过一系列的电能变化后，最终输出稳定的30V交流供电。在其中需要用到AC-DC，将输入较低幅值的交流电压整流成直流电压，得到直流电压后需要用到DC-DC中的boost电路，将整流得到的电压升压成更高的直流电压，最终通过DC-AC单相逆变电路，将较高的直流电压转换为我们想要的交流电压30V。</p>
+<p>不知道大家是否能够理解电源方向到底要做什么？在我的认识之中，最简单粗暴的理解就是，明确输入和输出，明确要进行什么特殊功能的设计，明确可能要用到的基础拓扑结构，然后确认工作状态，组合调参，最终得到理想的输出结果。</p>
+<h1 id="该怎么去学习电源方向的知识"><a href="#该怎么去学习电源方向的知识" class="headerlink" title="该怎么去学习电源方向的知识"></a>该怎么去学习电源方向的知识</h1><h2 id="博主的建议"><a href="#博主的建议" class="headerlink" title="博主的建议"></a>博主的建议</h2><p>一定要实践，实践，实践！！！</p>
+<p>电源方向不是短时间就可以入门的，想要真正做出一个优秀的比赛作品，必须得建立在长期的努力坚持实践前提下（此条排除某些天才型选手），若时间充足，对基础电路进行深刻的分析，思考如何在基础电路的基础上做出花儿来！做电源的就是思维开阔一点，特别是在做电路的时候，思路不同可能最终实现比赛电路的难度有很大的区别。所以说，你能抓住时间学的越多，就能够在比赛的时候，想出更多的思路。</p>
+<p>仿真虽然挺有用的，但是电路一定要应用到实际里面！不调你永远不知道炸电容有多么的美丽，呲电火花有多么的好看，变压器嗡嗡的叫有多么的悦耳！当然，朋友们不要害怕，答主调试了一年，目前还没遭遇过什么危险，除了那一次脑袋抽了两只手指同时去摸上下对管的D端，能够明显的感觉电流的流过，有点心悸抽抽的感觉。不过不用担心，比赛方也会人性化一些的，危险的题目也不会让你们去做，毕竟生命安全大于天。</p>
+<h2 id="硬件该准备什么"><a href="#硬件该准备什么" class="headerlink" title="硬件该准备什么"></a>硬件该准备什么</h2><p>1、基础电路</p>
+<p>比如boost，buck，桥式boost-buck，逆变什么的，基础电路可以都玩一遍，跑出最基础的效果。</p>
+<p>2、检测电路</p>
+<p>比如直流电压检测，直流电流检测（分高端和低端检测，高端就是可以接在电路中的任何位置，让电流流过检测电流，低端就是一侧必须接地。两者的区别在于高端会有共模干扰，低端没有干扰），交流电压检测，交流电流检测，过零检测等等</p>
+<p>3、供电电路</p>
+<p>可以用开关芯片供电，也可以用专门的电源砖供电。比如我用的就是金升阳的电源砖，输入范围大，输出较为稳定，而且是隔离的电源，用了这么久没有烧过供电电源。这个是需要考虑的东西，因为有时候赛题里面会要求所有供电电源必须在实际电路中进行取电，不用采取外部供电的方式。</p>
+<p>4、驱动电路</p>
+<p>通常采用的有IR2104S半桥驱动芯片，或者是光耦驱动，也有隔离驱动</p>
+<p>5、功能性电路</p>
+<p>如EMC，EMI电路，继电器电路，负载开关电路，保险丝保护电路等等</p>
+<h2 id="软件该准备什么"><a href="#软件该准备什么" class="headerlink" title="软件该准备什么"></a>软件该准备什么</h2><p>在这里我推荐用STM32F4系列的单片机，内核采用M4内核，功能强大，主频高特别是还带有DSP库处理函数，关于浮点运算等都在单片机内部优化了，可谓是屡试不爽，很大程度上节省了运算的时间。因为在实际电路的控制中，需要对信号进行检测处理，比如检测交流信号，自己要是写个均方根函数去处理有效值，效率比较低，用dsp库里面的有效值函数一下子就能得到想要的结果，十分推荐。</p>
+<p>1、定时器的使用</p>
+<p>建议学会PWM输出，输入捕获，定时器中断等功能。对高级定时器的互补输出，刹车和死区设计等等。</p>
+<p>2、DMA</p>
+<p>学会将采集到的电压数据通过高速的DMA传输至运算单元进行处理，DMA是越过CPU的，所以速度很快</p>
+<p>3、DSP库</p>
+<p>里面有很多数据处理函数，直接调用即可</p>
+<p>4、PID</p>
+<p>万物皆可PID，网上一堆教程，学会如何去用即可，一般用个P环就能调出较好的效果</p>
+<p>5、ADC</p>
+<p>采集电压就得靠它，学清楚交替采集就好了，可以提高采集的速度</p>
+<p>6、位带操作</p>
+<p>非必须的，但是有时候会对你整体电路的控制起到帮助，用函数也能实现同样的效果</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上就是博主的浅薄认识，后面会针对基础电路发几篇文章出来，给新入门的朋友们以简洁明了的方式带你们去了解电路的工作状态和方式。以后所发的任何文章也不会有什么订阅啥的，全是公益性分享的性质，希望技术方面的学习能带给各位提升，希望大家一起努力，慢慢成长，加油！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">EDAdong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/02/11/post1/">http://example.com/2025/02/11/post1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">EDAdong_博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/STM32/">STM32</a><a class="post-meta__tags" href="/tags/%E5%8D%95%E6%A8%A1%E5%9D%97%E5%AE%9E%E4%BE%8B/">单模块实例</a><a class="post-meta__tags" href="/tags/%E6%96%B0%E6%89%8B%E6%95%99%E7%A8%8B/">新手教程</a></div><div class="post-share"><div class="social-share" data-image="/images/post1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/02/11/post/" title="01-适合新手的ATK-ESP8266+STM32F103系列单片机通过MQTT协议直连阿里云的教程"><img class="cover" src="/images/post.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">01-适合新手的ATK-ESP8266+STM32F103系列单片机通过MQTT协议直连阿里云的教程</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/02/11/post/" title="01-适合新手的ATK-ESP8266+STM32F103系列单片机通过MQTT协议直连阿里云的教程"><img class="cover" src="/images/post.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-11</div><div class="info-item-2">01-适合新手的ATK-ESP8266+STM32F103系列单片机通过MQTT协议直连阿里云的教程</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">EDAdong</div><div class="author-info-description">不积跬步，无以至千里.<br>不积小流，无以成江海.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/EDAdong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://www.zhihu.com/people/qi-shi-wo-shi-zuo-jia" target="_blank" title="知乎"><i class="fab fa-zhihu" style="color: #24292e;"></i></a><a class="social-icon" href="https://space.bilibili.com/476184293?spm_id_from=333.1007.0.0" target="_blank" title="哔哩哔哩"><i class="fab fa-bilibili" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章均在BiliBili同步视频分享<br>有疑惑可在b站下方评论区发表或博客评论~<br>欢迎大家讨论电子、热爱电子</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E8%B5%9B%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">2.</span> <span class="toc-text">电赛是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E6%BA%90%E6%96%B9%E5%90%91%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">3.</span> <span class="toc-text">电源方向是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%A5%E6%80%8E%E4%B9%88%E5%8E%BB%E5%AD%A6%E4%B9%A0%E7%94%B5%E6%BA%90%E6%96%B9%E5%90%91%E7%9A%84%E7%9F%A5%E8%AF%86"><span class="toc-number">4.</span> <span class="toc-text">该怎么去学习电源方向的知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E4%B8%BB%E7%9A%84%E5%BB%BA%E8%AE%AE"><span class="toc-number">4.1.</span> <span class="toc-text">博主的建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E8%AF%A5%E5%87%86%E5%A4%87%E4%BB%80%E4%B9%88"><span class="toc-number">4.2.</span> <span class="toc-text">硬件该准备什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E8%AF%A5%E5%87%86%E5%A4%87%E4%BB%80%E4%B9%88"><span class="toc-number">4.3.</span> <span class="toc-text">软件该准备什么</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/02/11/post1/" title="02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）"><img src="/images/post1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）"/></a><div class="content"><a class="title" href="/2025/02/11/post1/" title="02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）">02-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）</a><time datetime="2025-02-11T14:00:44.509Z" title="发表于 2025-02-11 22:00:44">2025-02-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/02/11/post/" title="01-适合新手的ATK-ESP8266+STM32F103系列单片机通过MQTT协议直连阿里云的教程"><img src="/images/post.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="01-适合新手的ATK-ESP8266+STM32F103系列单片机通过MQTT协议直连阿里云的教程"/></a><div class="content"><a class="title" href="/2025/02/11/post/" title="01-适合新手的ATK-ESP8266+STM32F103系列单片机通过MQTT协议直连阿里云的教程">01-适合新手的ATK-ESP8266+STM32F103系列单片机通过MQTT协议直连阿里云的教程</a><time datetime="2025-02-11T09:47:59.087Z" title="发表于 2025-02-11 17:47:59">2025-02-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By EDAdong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
