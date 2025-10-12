@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等） | EDAdong_博客</title><meta name="author" content="EDAdong"><meta name="copyright" content="EDAdong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言电源方向资料免费开源到QQ群1：280730348、QQ群2：725438563、QQ群3：961600221、QQ群4：961951045、QQ群5：966375130、QQ群6：1065090414 嵌入式方向资料免费开源到QQ群1：976387827、QQ群2：418493877。 博客地址edadong.com，博文同步发布在知乎、bilibili，其中bilibili主要以视频为主。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="小董杂谈-25嵌入式秋招多家SSP&#x2F;SP的OFFER面试内容分享（小米&#x2F;VIVO&#x2F;格力&#x2F;华为&#x2F;景嘉微等）">
+<meta property="og:url" content="http://example.com/2025/10/12/post30/index.html">
+<meta property="og:site_name" content="EDAdong_博客">
+<meta property="og:description" content="前言电源方向资料免费开源到QQ群1：280730348、QQ群2：725438563、QQ群3：961600221、QQ群4：961951045、QQ群5：966375130、QQ群6：1065090414 嵌入式方向资料免费开源到QQ群1：976387827、QQ群2：418493877。 博客地址edadong.com，博文同步发布在知乎、bilibili，其中bilibili主要以视频为主。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/post30.png">
+<meta property="article:published_time" content="2025-10-12T09:11:21.268Z">
+<meta property="article:modified_time" content="2025-10-12T09:46:58.144Z">
+<meta property="article:author" content="EDAdong">
+<meta property="article:tag" content="设计实例">
+<meta property="article:tag" content="实战教程">
+<meta property="article:tag" content="嵌入式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/post30.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）",
+  "url": "http://example.com/2025/10/12/post30/",
+  "image": "http://example.com/images/post30.png",
+  "datePublished": "2025-10-12T09:11:21.268Z",
+  "dateModified": "2025-10-12T09:46:58.144Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "EDAdong",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/10/12/post30/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/页面背景.png);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/images/post30.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/%E7%BD%91%E7%AB%99logo.png" alt="Logo"><span class="site-name">EDAdong_博客</span></a><a class="nav-page-title" href="/"><span class="site-name">小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></div><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-12T09:11:21.268Z" title="发表于 2025-10-12 17:11:21">2025-10-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-12T09:46:58.144Z" title="更新于 2025-10-12 17:46:58">2025-10-12</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E4%BE%8B/">设计实例</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E4%BE%8B/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>电源方向资料</strong>免费开源到<strong>QQ群1：280730348</strong>、<strong>QQ群2：725438563</strong>、<strong>QQ群3：961600221</strong>、<strong>QQ群4：961951045</strong>、<strong>QQ群5：966375130</strong>、<strong>QQ群6：1065090414</strong></p>
+<p><strong>嵌入式方向资料</strong>免费开源到<strong>QQ群1：976387827</strong>、<strong>QQ群2：418493877</strong>。</p>
+<p>博客地址edadong.com，博文同步发布在知乎、bilibili，其中bilibili主要以视频为主。对开源项目的疑惑请尽量在b站下方留言，其次在群内商讨，所有开源项目均自己设计验证过。</p>
+<p>由于个人精力有限，以后不做私聊问题回答，但B站我会做最快的响应回答，此初衷主要是想更多人看到问题的解决方法或者开源项目这么做的意义，在B站解答大家都能看得到，私人解答就丢失了开源解答的优势了。</p>
+<p>更详细的讲解请移步Bilibili：EDAdong。</p>
+<h1 id="博文内容"><a href="#博文内容" class="headerlink" title="博文内容"></a>博文内容</h1><p>25嵌入式秋招多家SSP&#x2F;SP的OFFER面试内容分享，更具体的建议移步<strong>牛客猪脚饭超好吃</strong>或者<strong>小红书猪脚饭超好吃</strong></p>
+<p>背景：双非本末流211硕，有竞赛经验+小厂实习</p>
+<p><img src="/2025/10/12/post30/image-20251012172916175.png" alt="image-20251012172916175"></p>
+<h1 id="面试经验："><a href="#面试经验：" class="headerlink" title="面试经验："></a>面试经验：</h1><p>华为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">这个不能透露太多，三轮面试大家应该是清楚地。</span><br><span class="line">我个人觉得，如果你是硬件岗位的话，对于一些基础电路的设计和原理讲解是比较重要的。</span><br><span class="line">    </span><br><span class="line">当时一面、二面都有手撕电源方向的题目，包括一些常见基础电路的讲解等等，电源方向跟我的简历内容硬相关，因为我之前本科是主做电源电路的，所以常见的那些BUCK、BOOST，逆变什么的都有可能考到。一些常见的基础电路，我觉得集中在模电的BJT及其之前的内容即可，很多模拟八股感觉只会考到这范围内的内容，后面更深层次的模拟电路问题没有怎么考到过。题目都有共通性，在后面的公司进行分享。</span><br><span class="line">    </span><br><span class="line">面试的时候一定要大胆自信，而且可以关注一些行业比较先进的技术（这个在主管面可能会有帮助），不要磕磕巴巴的，一定要刻意养成迅速思考，不结巴的回答问题。要对自己的项目胸有成竹，并且一些项目可以引申一些新的东西出来，能讲的尽量都讲出来。</span><br><span class="line">    </span><br><span class="line">抗压、团队协作、沟通交流这三点比较重要！！！也要提前想好对华为的印象等等</span><br></pre></td></tr></table></figure>
+
+
+
+<p>小米：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">🤔 面试感受</span><br><span class="line">一面技术面<span class="number">55</span>min，感觉很好，面试官除了声音比较小，全程都是很好的面试体验。</span><br><span class="line"><span class="number">1</span>、自我介绍。</span><br><span class="line"><span class="number">2</span>、BUCK-BOOST电路的区别以及具体的工作原理。</span><br><span class="line"><span class="number">3</span>、电感的选型，怎么样去考虑功耗问题。</span><br><span class="line"><span class="number">4</span>、项目的介绍和设计流程。</span><br><span class="line"><span class="number">5</span>、PCB采用的叠层结构。</span><br><span class="line"><span class="number">6</span>、PCB是什么孔（他的意思是直接全过孔还是其中比如<span class="number">1</span><span class="number">-4</span>层有过孔这样的）。</span><br><span class="line"><span class="number">7</span>、剩下的就是针对项目细节追问，问的很细很全面。</span><br><span class="line"></span><br><span class="line">二面技术面<span class="number">90</span>min，突破面试时长极限了，面试官是真深挖，汗流浃背，但是确实也很感谢面试官。</span><br><span class="line"><span class="number">1</span>、自我介绍。</span><br><span class="line"><span class="number">2</span>、选择一个项目进行介绍。</span><br><span class="line"><span class="number">3</span>、从头系统介绍一遍核心板设计的电路原理图（期间掺杂八股）。</span><br><span class="line"><span class="number">4</span>、介绍一下走线的方式以及走线的规范。</span><br><span class="line"><span class="number">5</span>、电源怎么设计的，上电的时序如何。</span><br><span class="line"><span class="number">6</span>、你是怎么选择电源芯片的，电源输出变化对整体内核的影响。</span><br><span class="line"><span class="number">7</span>、我看你这个功率电感值都一样，你怎么进行选型的。</span><br><span class="line"><span class="number">8</span>、开关电源的损耗点在哪里？</span><br><span class="line"><span class="number">9</span>、讲解一下你的PCB怎么设计的，为什么这么设计。</span><br><span class="line"><span class="number">10</span>、你说你花了很长时间在器件布局上，你是怎么安排这个布局的。</span><br><span class="line"><span class="number">11</span>、介绍一下你怎么去带团队的，遇到困难怎么解决的。</span><br><span class="line"><span class="number">12</span>、你对手机工程师的认识，跟其他工程师的区别。</span><br><span class="line">反问环节：</span><br><span class="line"><span class="number">1</span>、公司的培养方案。</span><br><span class="line"><span class="number">2</span>、后续的环节。</span><br><span class="line"></span><br><span class="line">压力拉满，但是感觉面试官确实人很好，没有给太多的压力，后续的话听说是技术就结束了，问我对小米的意愿如何，等后面hr之类的。</span><br><span class="line"></span><br><span class="line">三面HR面<span class="number">20</span>min，主要是聊一些基本情况之类的。</span><br><span class="line"><span class="number">1</span>、是哪里人，听口音有点像南方人。</span><br><span class="line"><span class="number">2</span>、目标的工作地点，为什么选择投递小米。</span><br><span class="line"><span class="number">3</span>、对于自己未来的规划，以及对于电路工程师这个岗位的看法。</span><br><span class="line"><span class="number">4</span>、个人情况的询问（成绩、手头的offer等等）。</span><br><span class="line">反问：</span><br><span class="line"><span class="number">1</span>、后续的环节（说是这就是最后一面，后续就是国庆节以后陆陆续续开奖）</span><br></pre></td></tr></table></figure>
+
+
+
+<p>VIVO：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">🤔 面试感受</span><br><span class="line">一面技术面55min，技术面试官很和蔼，感觉跟网上的面经感觉一样，vivo这面试官确实不错。</span><br><span class="line">1、自我介绍。</span><br><span class="line">2、根据项目进行电路结构的展现。</span><br><span class="line">3、面试官给一个图，让你去判断电路。</span><br><span class="line">4、做的大功率LED光源的驱动系统框图（期间掺杂八股）。</span><br><span class="line">5、你团队经验比较丰富，系统性的讲述一下你怎么带团队打比赛的。</span><br><span class="line">6、高速PCB的一些问题。</span><br><span class="line">7、对于信号完整性的一些问题。</span><br><span class="line">反问环节：</span><br><span class="line">1、入职培养模式。</span><br><span class="line">2、后续环节。</span><br><span class="line">总体来说面试官很好，公司也很好，他们问的问题更侧重于你的系统本身，所以大家要对自己的系统有了解，才能应对面试官，都是根据项目来的。</span><br><span class="line"></span><br><span class="line">二面HR面30min，HR小姐姐很温柔。</span><br><span class="line">1、自我介绍。</span><br><span class="line">2、选择一个印象最深的比赛进行介绍。</span><br><span class="line">3、你研究生期间做的东西对你的提升。</span><br><span class="line">4、你对未来工作的规划和认知。</span><br><span class="line">5、家庭问题和女朋友问题。</span><br><span class="line">6、有没有收到其它offer，预期的薪资。</span><br><span class="line">反问环节：</span><br><span class="line">1、大概多久会有offer消息通知（统一十月中旬左右）。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>格力：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">🤔 面试感受</span><br><span class="line">一面25min，首先是个人介绍，介绍自己的本科和研究生阶段的经历。接着就开始进行项目的介绍，针对这个岗位我展现出来的项目主要是开关电源电力电子这一块儿的，所以有很多本科电赛时候做的一些电路。第一个问的电路是单相全桥逆变并网系统，主要回答的技术点就是逆变工作原理，怎么并网的。接着是MPPT电路，问的用什么拓扑结构，用的什么驱动电路，用到了电流环和电压环没有。然后问了PFC电路，我当时回答无桥PFC，画了一下拓扑结构，问了一下工作状态。差不多项目这一块儿就结束了。后面问了我的目标工作地点，珠海能接受么，家是哪里的，能够快速上手设计么？有接触过110kw级别的变频电源么？</span><br><span class="line">反问环节：1、公司除了单相PFC还有做过三相PFC么？2、是纯硬件电路还是软件硬件结合？</span><br><span class="line"></span><br><span class="line">二面20min，首先是个人介绍，跟一面差不多。应该属于人力资源部的HR面试，有个小小的问题就是面试的时候HR是在工位上面面试的，旁边都是人，有点嘈杂，耳朵有点听不太清楚。第一个问题就是说一段对自己意义最重要的经历，我选的是本科期间做电赛的经历，重点突出学到了什么，得到了什么样的提升。第二个是怎么开展团队合作的，我说我主要是跟其它做电源的同学沟通交流。第三个问题是未来的规划。第四个问题是家庭情况。最后一个问题就是考虑薪资多少？我说薪资不重要，重要的是有发展前景。这些问题问完了以后就是核对一些资料，其实就是身高体重啥的。</span><br><span class="line"></span><br><span class="line">总结：还好，没什么压力，一面八股有点，二面没啥压力。</span><br></pre></td></tr></table></figure>
+
+
+
+<p>景嘉微：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">一面技术面50min，两个面试官，很久没面FPGA了，感觉讲起来都有点磕磕巴巴的。</span><br><span class="line">1、自我介绍。</span><br><span class="line">2、选择一个最有印象的项目进行介绍。</span><br><span class="line">3、你负责系统的哪一部分。</span><br><span class="line">4、图像清晰度评价你是怎么去实现。</span><br><span class="line">5、详细介绍一下FPGA的架构，你整体是怎么设计的。</span><br><span class="line">6、DDR用的是什么系列的，多高工作频率。</span><br><span class="line">7、ZYNQ的程序加载流程。</span><br><span class="line">8、你用的高斯滤波怎么实现的。</span><br><span class="line">9、你说对图像算法进行加速，它相对于CPU的优势在哪里。</span><br><span class="line">10、聊一下AXI总线的工作协议。</span><br><span class="line">11、HDMI是用芯片还是直接IO口进行驱动。</span><br><span class="line">12、你在做这个项目过程中印象最深刻的错误在哪里。</span><br><span class="line">13、你做的方向很全面，那你未来是想要走哪个方向呢。</span><br><span class="line"></span><br><span class="line">反问环节：</span><br><span class="line">1、进去的部门大概是什么方向。</span><br><span class="line">2、部门的FPGA开发规模。</span><br><span class="line">3、公司用国外还是国内芯片多一点。</span><br><span class="line">4、后续的流程（还有部门一面，HR一面）</span><br><span class="line"></span><br><span class="line">二面部门主管面20min，两个面试官。</span><br><span class="line">1、自我介绍。</span><br><span class="line">2、家庭情况，手上的offer情况。</span><br><span class="line">3、对于自己的职业规划安排，遇到难题怎么解决的。</span><br><span class="line">4、期望的薪资情况，大概是多少。</span><br><span class="line">5、了解过景嘉微么？对他的印象是什么。</span><br><span class="line"></span><br><span class="line">反问环节：</span><br><span class="line">1、公司的新人培养方案。</span><br><span class="line">2、公司的晋升流程。</span><br><span class="line">3、公司的加班情况，出差情况。</span><br><span class="line"></span><br><span class="line">三面HR面25min，一个面试官，</span><br><span class="line">1、自我介绍。</span><br><span class="line">2、实验室经历介绍一下。</span><br><span class="line">3、事业部的选择。</span><br><span class="line">4、你选择企业的标准是什么。</span><br><span class="line">5、家庭情况询问。</span><br><span class="line"></span><br><span class="line">反问环节：</span><br><span class="line">1、后续的流程（一到两周offer审批下发）</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>加油，祝秋招顺利！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">EDAdong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/10/12/post30/">http://example.com/2025/10/12/post30/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">EDAdong_博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%BE%E8%AE%A1%E5%AE%9E%E4%BE%8B/">设计实例</a><a class="post-meta__tags" href="/tags/%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B/">实战教程</a><a class="post-meta__tags" href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a></div><div class="post-share"><div class="social-share" data-image="/images/post30.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/10/08/post29/" title="嵌入式-常用跌倒检测及心率监控C语言实现（适用智能健康监测）"><img class="cover" src="/images/post29.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">嵌入式-常用跌倒检测及心率监控C语言实现（适用智能健康监测）</div></div><div class="info-2"><div class="info-item-1">前言电源方向资料免费开源到QQ群1：280730348、QQ群2：725438563、QQ群3：961600221、QQ群4：961951045、QQ群5：966375130、QQ群6：1065090414 嵌入式方向资料免费开源到QQ群1：976387827、QQ群2：418493877。 博客地址edadong.com，博文同步发布在知乎、bilibili，其中bilibili主要以视频为主。对开源项目的疑惑请尽量在b站下方留言，其次在群内商讨，所有开源项目均自己设计验证过。 由于个人精力有限，以后不做私聊问题回答，但B站我会做最快的响应回答，此初衷主要是想更多人看到问题的解决方法或者开源项目这么做的意义，在B站解答大家都能看得到，私人解答就丢失了开源解答的优势了。 更详细的讲解请移步Bilibili：EDAdong。 设计目标和方案常见智能健康监测 关键代码及原理图姿态检测： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152 ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/06/08/post16/" title="嵌入式-手把手教你制作FOC无刷电机驱动电路（STM32移植，结合灯哥和loop222大佬）"><img class="cover" src="/images/post16.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-08</div><div class="info-item-2">嵌入式-手把手教你制作FOC无刷电机驱动电路（STM32移植，结合灯哥和loop222大佬）</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/2025/06/09/post17/" title="嵌入式-手把手教你制作超声波测距电路（基于STC89C52，可用作普通51单片机课毕设最小系统模板）"><img class="cover" src="/images/post17.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-09</div><div class="info-item-2">嵌入式-手把手教你制作超声波测距电路（基于STC89C52，可用作普通51单片机课毕设最小系统模板）</div></div><div class="info-2"><div class="info-item-1">前言电源方向资料免费开源到QQ群1：280730348和QQ群2：725438563。 嵌入式方向资料免费开源到QQ群1：976387827。 博客地址edadong.com，博文同步发布在知乎、bilibili，其中bilibili主要以视频为主。对开源项目的疑惑请尽量在b站下方留言，其次在群内商讨，所有开源项目均自己设计验证过。 由于个人精力有限，以后不做免费的私聊问题回答，但B站我会做最快的响应回答，群内看到了也会回答。如果确实是想私聊问问题，5-15元一次答疑，避免太多人找我，此初衷主要是想更多人看到问题的解决方法或者开源项目这么做的意义，在B站解答大家都能看得到，私人解答就丢失了开源解答的优势了。 下面是超声波测距驱动的具体电路，更详细的讲解请移步Bilibili：EDAdong。 设计目标和方案1、主控选用STC89C52芯片。 2、屏幕显示用LCD1602屏幕。 3、超声波模块选用HC-SR04模块。 4、电源拟采用5V电源适配器供电。 注意事项没啥可注意的，别接反模块就行。 原理图 PCB及3D实物图   总结通过网盘分享的文件：post18资料合集链接:...</div></div></div></a><a class="pagination-related" href="/2025/06/10/post18/" title="嵌入式-手把手教你制作简易双通道示波器（STM32F4移植，双通道采集）"><img class="cover" src="/images/post18.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-10</div><div class="info-item-2">嵌入式-手把手教你制作简易双通道示波器（STM32F4移植，双通道采集）</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/2025/06/22/post20/" title="嵌入式-手把手教你制作Arduino无线通信系统（ZIGBEE模块、DHT11、光敏、WIFI模块）"><img class="cover" src="/images/post20.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-22</div><div class="info-item-2">嵌入式-手把手教你制作Arduino无线通信系统（ZIGBEE模块、DHT11、光敏、WIFI模块）</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/2025/06/20/post19/" title="嵌入式-手把手教你制作应变信号检测电路（以太网接口，AD数据采集）"><img class="cover" src="/images/post19.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-20</div><div class="info-item-2">嵌入式-手把手教你制作应变信号检测电路（以太网接口，AD数据采集）</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/2025/06/28/post21/" title="嵌入式-手把手教你制作ESP32智能门铃（ESP32-S3、OV2640摄像头、蜂鸣器、舵机）"><img class="cover" src="/images/post21.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-28</div><div class="info-item-2">嵌入式-手把手教你制作ESP32智能门铃（ESP32-S3、OV2640摄像头、蜂鸣器、舵机）</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">EDAdong</div><div class="author-info-description">不积跬步，无以至千里.<br>不积小流，无以成江海.</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">31</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">7</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">4</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/EDAdong"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://www.zhihu.com/people/qi-shi-wo-shi-zuo-jia" target="_blank" title="知乎"><i class="fab fa-zhihu" style="color: #24292e;"></i></a><a class="social-icon" href="https://space.bilibili.com/476184293?spm_id_from=333.1007.0.0" target="_blank" title="哔哩哔哩"><i class="fab fa-bilibili" style="color: #24292e;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章均在BiliBili同步视频分享<br>有疑惑可在b站下方评论区发表或博客评论~<br>欢迎大家讨论电子、热爱电子</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%9A%E6%96%87%E5%86%85%E5%AE%B9"><span class="toc-number">2.</span> <span class="toc-text">博文内容</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%A2%E8%AF%95%E7%BB%8F%E9%AA%8C%EF%BC%9A"><span class="toc-number">3.</span> <span class="toc-text">面试经验：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/10/12/post30/" title="小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）"><img src="/images/post30.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）"/></a><div class="content"><a class="title" href="/2025/10/12/post30/" title="小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）">小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）</a><time datetime="2025-10-12T09:11:21.268Z" title="发表于 2025-10-12 17:11:21">2025-10-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/08/post29/" title="嵌入式-常用跌倒检测及心率监控C语言实现（适用智能健康监测）"><img src="/images/post29.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="嵌入式-常用跌倒检测及心率监控C语言实现（适用智能健康监测）"/></a><div class="content"><a class="title" href="/2025/10/08/post29/" title="嵌入式-常用跌倒检测及心率监控C语言实现（适用智能健康监测）">嵌入式-常用跌倒检测及心率监控C语言实现（适用智能健康监测）</a><time datetime="2025-10-08T15:15:16.100Z" title="发表于 2025-10-08 23:15:16">2025-10-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/07/post28/" title="嵌入式-基于GSM的远程温湿度监控系统设计（DHT11、继电器、蜂鸣器、SIM900A）"><img src="/images/post28.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="嵌入式-基于GSM的远程温湿度监控系统设计（DHT11、继电器、蜂鸣器、SIM900A）"/></a><div class="content"><a class="title" href="/2025/10/07/post28/" title="嵌入式-基于GSM的远程温湿度监控系统设计（DHT11、继电器、蜂鸣器、SIM900A）">嵌入式-基于GSM的远程温湿度监控系统设计（DHT11、继电器、蜂鸣器、SIM900A）</a><time datetime="2025-10-07T09:18:40.670Z" title="发表于 2025-10-07 17:18:40">2025-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/07/post27/" title="嵌入式-基于STM32网约车车载终端系统（GPS定位、直流无刷电机测速、DS1302时钟）"><img src="/images/post27.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="嵌入式-基于STM32网约车车载终端系统（GPS定位、直流无刷电机测速、DS1302时钟）"/></a><div class="content"><a class="title" href="/2025/10/07/post27/" title="嵌入式-基于STM32网约车车载终端系统（GPS定位、直流无刷电机测速、DS1302时钟）">嵌入式-基于STM32网约车车载终端系统（GPS定位、直流无刷电机测速、DS1302时钟）</a><time datetime="2025-10-07T06:35:55.655Z" title="发表于 2025-10-07 14:35:55">2025-10-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/10/01/post26/" title="嵌入式-基于STM32的自动售货机商品管理与交易系统（步进电机、旋转编码器、语音识别、蓝牙）"><img src="/images/post26.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="嵌入式-基于STM32的自动售货机商品管理与交易系统（步进电机、旋转编码器、语音识别、蓝牙）"/></a><div class="content"><a class="title" href="/2025/10/01/post26/" title="嵌入式-基于STM32的自动售货机商品管理与交易系统（步进电机、旋转编码器、语音识别、蓝牙）">嵌入式-基于STM32的自动售货机商品管理与交易系统（步进电机、旋转编码器、语音识别、蓝牙）</a><time datetime="2025-10-01T09:17:57.881Z" title="发表于 2025-10-01 17:17:57">2025-10-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By EDAdong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
