@@ -178,23 +178,6 @@ template {
 [hidden] {
   display: none
 }
-.fontawesomeIcon,
-.custom-hr:before,
-#article-container a.headerlink:after,
-#article-container h1:before,
-#article-container h2:before,
-#article-container h3:before,
-#article-container h4:before,
-#article-container h5:before,
-#article-container h6:before,
-.note:not(.no-icon)::before,
-.search-dialog hr:before {
-  font-family: "Font Awesome 6 Free" !important;
-  font-weight: 900 !important;
-  font-style: normal !important;
-  text-rendering: auto !important;
-  -webkit-font-smoothing: antialiased !important;
-}
 .limit-one-line,
 .container .flink .flink-item-name,
 .container .flink .flink-item-desc,
