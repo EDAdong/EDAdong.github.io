@@ -374,33 +374,41 @@ h6::before {
   font-size: 5rem;
   color: rgba(255, 255, 255, 0.95);
   z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.card-bg.embedded {
-  background-color: #0b1026;
-  background-image:
-    radial-gradient(at 15% 15%, rgba(66, 133, 244, 0.55) 0, transparent 50%),
-    radial-gradient(at 85% 10%, rgba(126, 87, 255, 0.5) 0, transparent 50%),
-    radial-gradient(at 5% 90%, rgba(0, 198, 255, 0.45) 0, transparent 50%),
-    radial-gradient(at 95% 85%, rgba(66, 133, 244, 0.4) 0, transparent 50%);
+.category-card:hover .card-bg {
+  transform: scale(1.08);
 }
 
-.card-bg.power {
-  background-color: #1a0b0b;
-  background-image:
-    radial-gradient(at 15% 15%, rgba(255, 107, 53, 0.55) 0, transparent 50%),
-    radial-gradient(at 85% 10%, rgba(255, 69, 58, 0.5) 0, transparent 50%),
-    radial-gradient(at 5% 90%, rgba(255, 193, 7, 0.4) 0, transparent 50%),
-    radial-gradient(at 95% 85%, rgba(255, 107, 53, 0.45) 0, transparent 50%);
-}
-
+.card-bg.embedded,
+.card-bg.power,
 .card-bg.module {
-  background-color: #051a1a;
-  background-image:
-    radial-gradient(at 15% 15%, rgba(0, 200, 180, 0.5) 0, transparent 50%),
-    radial-gradient(at 85% 10%, rgba(0, 230, 150, 0.45) 0, transparent 50%),
-    radial-gradient(at 5% 90%, rgba(0, 150, 199, 0.45) 0, transparent 50%),
-    radial-gradient(at 95% 85%, rgba(0, 200, 180, 0.4) 0, transparent 50%);
+  background-color: #1a1a2e;
+}
+
+.card-bg i {
+  position: relative;
+  z-index: 2;
+  width: 6.5rem;
+  height: 6.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover .card-bg i {
+  transform: scale(1.1);
 }
 
 .card-info {
