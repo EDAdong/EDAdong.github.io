@@ -89,12 +89,12 @@ h6::before {
 }
 
 /* About页面去除风车图标 */
-.about-page h1::before,
-.about-page h2::before,
-.about-page h3::before,
-.about-page h4::before,
-.about-page h5::before,
-.about-page h6::before {
+#content-inner.layout .about-page h1::before,
+#content-inner.layout .about-page h2::before,
+#content-inner.layout .about-page h3::before,
+#content-inner.layout .about-page h4::before,
+#content-inner.layout .about-page h5::before,
+#content-inner.layout .about-page h6::before {
   content: none !important;
   animation: none !important;
   -webkit-animation: none !important;
