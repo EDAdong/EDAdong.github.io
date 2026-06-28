@@ -386,8 +386,36 @@ h6::before {
 
 .card-bg.embedded,
 .card-bg.power,
-.card-bg.module {
+.card-bg.module,
+.card-bg.thinking {
   background-color: #1a1a2e;
+}
+
+.card-bg.notice-bg {
+  background-color: #1a1200;
+  background-image:
+    radial-gradient(at 15% 15%, rgba(255, 193, 7, 0.5) 0, transparent 50%),
+    radial-gradient(at 85% 10%, rgba(255, 152, 0, 0.45) 0, transparent 50%),
+    radial-gradient(at 5% 90%, rgba(255, 235, 59, 0.4) 0, transparent 50%),
+    radial-gradient(at 95% 85%, rgba(255, 193, 7, 0.35) 0, transparent 50%);
+}
+
+.category-card.notice {
+  grid-column: span 2;
+  border: 2px solid rgba(255, 193, 7, 0.35);
+}
+
+.category-card.notice .card-info h3::after {
+  content: '置顶';
+  display: inline-block;
+  margin-left: 0.6rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #1a1200;
+  background: #ffc107;
+  border-radius: 4px;
+  vertical-align: middle;
 }
 
 .card-bg i {
@@ -466,6 +494,10 @@ h6::before {
 
   .category-card {
     min-height: 260px;
+  }
+
+  .category-card.notice {
+    grid-column: span 1;
   }
 
   .card-bg {
