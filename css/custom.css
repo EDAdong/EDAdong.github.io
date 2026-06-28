@@ -89,12 +89,205 @@ h6::before {
 }
 
 /* About页面去除风车图标 */
-#page-about #content-inner.layout h1::before,
-#page-about #content-inner.layout h2::before,
-#page-about #content-inner.layout h3::before,
-#page-about #content-inner.layout h4::before,
-#page-about #content-inner.layout h5::before,
-#page-about #content-inner.layout h6::before {
+.about-page h1::before,
+.about-page h2::before,
+.about-page h3::before,
+.about-page h4::before,
+.about-page h5::before,
+.about-page h6::before {
   content: none !important;
   animation: none !important;
+  -webkit-animation: none !important;
+  display: none !important;
+}
+
+/* ============================================
+   文章排版专业化优化
+   ============================================ */
+
+/* 正文基础排版 */
+#article-container {
+  font-size: 15.5px;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+}
+
+/* 段落间距 */
+#article-container p {
+  margin: 1.2em 0;
+  text-align: justify;
+}
+
+/* 标题层级优化 */
+#article-container h1 {
+  font-size: 1.9em;
+  margin: 2em 0 0.8em;
+  padding-bottom: 0.4em;
+  border-bottom: 2px solid rgba(73, 177, 245, 0.2);
+}
+
+#article-container h2 {
+  font-size: 1.6em;
+  margin: 1.8em 0 0.7em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid rgba(73, 177, 245, 0.15);
+}
+
+#article-container h3 {
+  font-size: 1.35em;
+  margin: 1.5em 0 0.6em;
+}
+
+#article-container h4 {
+  font-size: 1.15em;
+  margin: 1.3em 0 0.5em;
+}
+
+/* 引用块专业化 */
+#article-container blockquote {
+  margin: 1.5em 0;
+  padding: 1em 1.2em;
+  border-left: 4px solid #49B1F5;
+  background: rgba(73, 177, 245, 0.05);
+  border-radius: 0 8px 8px 0;
+  color: #555;
+  font-style: italic;
+}
+
+#article-container blockquote p {
+  margin: 0.5em 0;
+}
+
+/* 列表优化 */
+#article-container ul,
+#article-container ol {
+  margin: 1em 0;
+  padding-left: 2em;
+}
+
+#article-container li {
+  margin: 0.4em 0;
+  line-height: 1.8;
+}
+
+#article-container ul li {
+  list-style-type: disc;
+}
+
+#article-container ul ul li {
+  list-style-type: circle;
+}
+
+/* 表格专业化 */
+#article-container table {
+  width: 100%;
+  margin: 1.5em 0;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-size: 0.95em;
+}
+
+#article-container th {
+  background: rgba(73, 177, 245, 0.12);
+  color: #333;
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid rgba(73, 177, 245, 0.2);
+}
+
+#article-container td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+#article-container tr:nth-child(even) {
+  background: rgba(73, 177, 245, 0.03);
+}
+
+#article-container tr:hover {
+  background: rgba(73, 177, 245, 0.06);
+}
+
+/* 图片专业化 */
+#article-container img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin: 1em auto;
+  display: block;
+}
+
+#article-container figure {
+  margin: 1.5em 0;
+}
+
+/* 代码块优化 */
+#article-container figure.highlight {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 1.5em 0;
+}
+
+#article-container figure.highlight pre {
+  padding: 1em;
+}
+
+/* 行内代码 */
+#article-container code {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* 分割线 */
+#article-container hr {
+  margin: 2em 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(73, 177, 245, 0.4), transparent);
+}
+
+/* 链接优化 */
+#article-container a {
+  color: #49B1F5;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(73, 177, 245, 0.3);
+  transition: all 0.3s ease;
+}
+
+#article-container a:hover {
+  color: #2c9be0;
+  border-bottom-color: #49B1F5;
+}
+
+/* 首页文章卡片优化 */
+.recent-posts .recent-post-item {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.recent-posts .recent-post-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] #article-container blockquote {
+  background: rgba(73, 177, 245, 0.08);
+  color: #bbb;
+}
+
+[data-theme="dark"] #article-container th {
+  background: rgba(73, 177, 245, 0.18);
+  color: #eee;
+}
+
+[data-theme="dark"] #article-container td {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
