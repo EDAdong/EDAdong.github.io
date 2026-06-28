@@ -411,7 +411,7 @@ h6::before {
   transform: scale(1.1);
 }
 
-.card-info {
+.category-card .card-info {
   position: relative;
   z-index: 2;
   padding: 1.6rem 1.8rem;
@@ -422,7 +422,7 @@ h6::before {
   border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.card-info h3 {
+.category-card .card-info h3 {
   margin: 0 0 0.4rem;
   color: #fff;
   font-size: 1.6rem;
@@ -430,7 +430,7 @@ h6::before {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-.card-info p {
+.category-card .card-info p {
   margin: 0;
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.95rem;
@@ -443,7 +443,7 @@ h6::before {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-[data-theme="dark"] .card-info {
+[data-theme="dark"] .category-card .card-info {
   background: rgba(0, 0, 0, 0.25);
   border-top-color: rgba(255, 255, 255, 0.08);
 }
