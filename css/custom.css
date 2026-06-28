@@ -291,3 +291,105 @@ h6::before {
 [data-theme="dark"] #article-container td {
   border-bottom-color: rgba(255, 255, 255, 0.08);
 }
+
+/* ============================================
+   首页分类卡片
+   ============================================ */
+
+.category-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin: 2rem 0 2.5rem;
+}
+
+.category-card {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg, #fff);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-decoration: none;
+  border: 1px solid rgba(73, 177, 245, 0.08);
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(73, 177, 245, 0.18);
+  border-color: rgba(73, 177, 245, 0.25);
+}
+
+.card-bg {
+  width: 92px;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  color: #fff;
+  flex-shrink: 0;
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+}
+
+.card-bg.embedded {
+  background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+}
+
+.card-bg.power {
+  background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);
+}
+
+.card-bg.module {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.card-info {
+  padding: 0.8rem 1.2rem 0.8rem 1.5rem;
+  flex: 1;
+}
+
+.card-info h3 {
+  margin: 0 0 0.35rem;
+  color: var(--font-color, #333);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-info p {
+  margin: 0;
+  color: var(--font-color, #333);
+  opacity: 0.65;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .category-card {
+  background: rgba(30, 30, 30, 0.85);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .category-card:hover {
+  border-color: rgba(73, 177, 245, 0.3);
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+  .category-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.2rem 0 1.8rem;
+  }
+
+  .card-bg {
+    width: 80px;
+    height: 80px;
+    font-size: 1.8rem;
+  }
+
+  .card-info h3 {
+    font-size: 1.15rem;
+  }
+}
