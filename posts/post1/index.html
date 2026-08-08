@@ -1,0 +1,343 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v7.1.3"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>电源-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向） | EDAdong</title><meta name="description" content="全国大学生电子设计竞赛经验分享。"><meta property="og:title" content="电源-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）"><meta property="og:type" content="article"><meta property="og:url" content="https://edadong.com/posts/post1/"><meta property="og:description" content="全国大学生电子设计竞赛经验分享。"><meta property="og:image" content="/images/post1.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"电源-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）","description":"全国大学生电子设计竞赛经验分享。","datePublished":"2025-02-11T22:00:00.000Z","author":{"@type":"Person","name":"EDAdong","url":"https://edadong.com/about/"},"image":"https://edadong.com/images/post1.webp","url":"https://edadong.com/posts/post1/","publisher":{"@type":"Person","name":"EDAdong"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://edadong.com/"},{"@type":"ListItem","position":2,"name":"文章","item":"https://edadong.com/posts/"},{"@type":"ListItem","position":3,"name":"电源-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）"}]}]}</script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="dns-prefetch" href="https://github.com"><link rel="dns-prefetch" href="https://avatars.githubusercontent.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="/_astro/BaseLayout.FZUuh1sy.css"><link rel="stylesheet" href="/_astro/_slug_.CITvTZpu.css"><link rel="stylesheet" href="/_astro/global.CZGXK5uF.css"></head><body style="background-color: var(--color-bg); color: var(--color-text);"><div style="position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 60% 50% at 20% 30%, rgba(8,145,178,0.25), transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(99,102,241,0.18), transparent 50%),
+      radial-gradient(ellipse 45% 40% at 55% 70%, rgba(8,145,178,0.20), transparent 55%);
+    "></div><!-- Initial loading screen: visible on first load, fades out when page ready --><div id="page-loader" class="page-loader-overlay active"><div class="page-loader-content"><div class="pl-logo">E</div><div class="pl-spinner"><div class="pl-ring"></div></div><div class="pl-text">EDAdong</div></div></div><script>
+  (function(){
+    var loader = document.getElementById('page-loader');
+    if(!loader) return;
+
+    function hide(){ loader.classList.remove('active'); }
+
+    // Hide loader as soon as page is interactive — don't wait for all resources
+    if (document.readyState === 'loading') {
+      // Initial page load: hide shortly after DOM is ready
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(hide, 50); });
+      // Fallback: hide after load event
+      window.addEventListener('load', function() { setTimeout(hide, 300); });
+    } else {
+      // View Transition navigation: DOM already ready, hide immediately
+      hide();
+    }
+    // Safety: always hide after 3s
+    setTimeout(hide, 3000);
+
+    // Show loader when clicking internal links (for View Transition nav)
+    document.addEventListener('click', function(e){
+      var link = e.target.closest('a');
+      if(!link) return;
+      var href = link.getAttribute('href');
+      if(!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('//')) return;
+      if(link.getAttribute('target') === '_blank') return;
+      loader.classList.add('active');
+    });
+  })();
+</script><!-- Adds native lazy loading to all article images --><script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.article-body img:not([loading])').forEach(function(img){
+      img.loading = 'lazy';
+      img.decoding = 'async';
+    });
+  });
+</script><header id="site-header" class="site-header" data-astro-cid-nen7h5rs><div class="container-main w-full flex items-center justify-between" data-astro-cid-nen7h5rs><a href="/" class="flex items-center gap-2 font-bold text-lg no-underline" style="color: var(--color-text);" data-astro-cid-nen7h5rs><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0" style="background: linear-gradient(135deg, var(--color-accent), #6366f1);" data-astro-cid-nen7h5rs>主页</span></a><nav class="flex items-center gap-1" data-astro-cid-nen7h5rs><a href="/posts" class="nav-item" style="color: var(--color-accent)" data-astro-cid-nen7h5rs>文章</a><a href="/search" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>搜索</a><a href="/resources" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>资料</a><a href="/friends" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>友链</a><a href="/about" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>关于</a><button id="theme-btn" class="nav-item border-none cursor-pointer" aria-label="Toggle theme" style="background:transparent; font-size:1rem;" data-astro-cid-nen7h5rs><svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" data-astro-cid-nen7h5rs></path></svg><svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 hidden" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" data-astro-cid-nen7h5rs></path></svg></button></nav></div></header><script>
+(function(){
+  var t=document.getElementById('theme-btn'),s=document.getElementById('sun-icon'),m=document.getElementById('moon-icon');
+  if(!t||!s||!m)return;
+  function u(){var d=document.documentElement.getAttribute('data-theme')==='dark';s.classList.toggle('hidden',d);m.classList.toggle('hidden',!d)}
+  u();t.onclick=function(){var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);u()};
+})();
+</script><main><div class="reading-progress" id="reading-progress-bar"></div><script type="module">var e=document.getElementById(`reading-progress-bar`);e&&window.addEventListener(`scroll`,()=>{let t=window.scrollY,n=document.documentElement.scrollHeight-window.innerHeight;e.style.width=n>0?`${t/n*100}%`:`0%`});</script><div class="article-layout" data-astro-cid-ruv7hgo6><article class="article-main" data-astro-cid-ruv7hgo6><!-- Header --><header class="mb-10" data-astro-cid-ruv7hgo6><h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4" style="color: var(--color-text); letter-spacing: -0.02em;" data-astro-cid-ruv7hgo6>电源-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）</h1><div class="flex flex-wrap items-center gap-3 text-sm mb-4" style="color: var(--color-text-secondary);" data-astro-cid-ruv7hgo6><time datetime="Wed Feb 12 2025 06:00:00 GMT+0800 (中国标准时间)" data-astro-cid-ruv7hgo6>2025年2月12日</time><span style="color: var(--color-text-secondary); opacity: 0.6;" data-astro-cid-ruv7hgo6>· 约 12 分钟</span><span data-astro-cid-ruv7hgo6>· <a href="/categories/电源" class="font-medium transition-colors" style="color: var(--color-accent);" data-astro-cid-ruv7hgo6>#电源</a></span></div><div class="flex flex-wrap gap-1.5" data-astro-cid-ruv7hgo6><span class="tag" data-astro-cid-ruv7hgo6>电源</span><span class="tag" data-astro-cid-ruv7hgo6>新手教程</span></div></header><!-- Article Body --><div class="article-body" data-astro-cid-ruv7hgo6><h1 id="前言">前言</h1>
+<p>博主大三上学期接触全国大学生电子设计竞赛，九月份第一次进入实验室参加2020年湖南省大学生电子设计竞赛，啥都不会，闹了很多笑话。经过一年在校期间的训练学习，在2021年全国大学生电子设计竞赛的电源方向获得全国一等奖，在训练阶段的心路历程和收获的一些东西，分享给大家！（多多包涵！！）另针对电源方向，我建了一个分享交流群，里面有很多做电源的朋友大佬，大家可以进来交流学习学习，QQ群280730348，博客edadong.com，视频同步在哔哩哔哩和知乎。</p>
+<h1 id="电赛是什么">电赛是什么</h1>
+<p>全国大学生电子设计竞赛（National Undergraduate Electronics Design Contest） 是教育部和工业和信息化部共同发起的大学生学科竞赛之一，是面向大学生的群众性科技活动，目的在于推动高等学校促进信息与电子类学科课程体系和课程内容的改革。竞赛的特点是与高等学校相关专业的课程体系和课程内容改革密切结合，以推动其课程教学、教学改革和实验室建设工作。</p>
+<p>在我的理解中，电赛是一类能够检验你在训练期间段所学的，所实践的一个工程类比赛。电赛涵盖的面很广，有做仪器仪表的，有做控制的，有做通信的也有做电源的。所面向的工科专业也很多，门槛也不高，只要你针对某个方向去学习，去训练，网络上也有很多开源的资料以及往年的赛题复现。</p>
+<p>同样，电赛也是国家承认的大学生A类竞赛，含金量很高。无论是在找工作还是在申请保研和考研复试中，都是一个很好的加分项。当然，更重要的是你在电赛训练过程中所学会的知识，所实践得来的东西。</p>
+<p>赛题的质量随着一年一年也变得越来越有技术含量，以后的赛题只会朝着越来越难的趋势发展，如果有想法备战2025年全国大学生电子设计竞赛的同学，可以开始早做准备了。</p>
+<h1 id="电源方向是什么">电源方向是什么</h1>
+<p>通俗一点理解电源方向，就是给定一个电源输入，再获得想要的电源输出。这个电源输入到电源输出的过程，通过各种变换方式来实现。通常四种为DC-DC，DC-AC，AC-DC，AC-AC，其中AC代表的是交流，DC代表的是直流。</p>
+<p>简单说一下四种变换方式会用到什么基础电路</p>
+<p>1、DC-DC</p>
+<p>DC-DC电路最常用的就是boost电路和buck电路，两大基础。顾名思义，boost电路的意思就是输入一个直流电压进来，通过电感储能和MOSFET等作开关，使其能量在微观的层次变化，最终从宏观上得到输出比输入电压更高的电压。buck电路同样如此，与boost电路所用的元器件一致，区别在于拓扑结构的不同。至于电路的工作原理就不在本篇文章里面过多赘述，会在后面分单章进行工作原理的讲解。</p>
+<p>2、DC-AC</p>
+<p>DC-AC电路最常用的就是单相逆变电路。单相逆变电路输入的是直流电压，输出的是频率，幅值均可控的交流电压。具体是通过四个开关器件的瞬时开关状态，使的电压以正弦规律加至负载上，通过多种滤波方式，最终得出正弦交流电的效果。其中涉及到四个MOSFET管的驱动（常用MOSFET管）方式，工作状态，软件如何去发一个SPWM波控制整体电路，通过什么样的滤波方式使得最终的波形平滑好看。</p>
+<p>3、AC-DC</p>
+<p>最经典的就是整流电路了，四个二极管，输入交流电，输出得到直流电压。一般建议整流输出端加电容滤波，感兴趣的朋友可以看看没有加电容和加了电容的整流输出，没加电容的话会对后面电路的直流供电产生很大的负荷。</p>
+<p>4、AC-AC</p>
+<p>AC-AC变换电路在近些年也开始展露獠牙，不过读研后博主的方向并不属于开关电源方向，因此博主对这方面不太了解。有感兴趣的朋友可以去网上搜一下，博主搜到的资料显示一般可以通过变压器绕组实现，若有朋友知道相关知识，可在评论下方留言，感谢！</p>
+<p>当我们了解熟悉了这四种变换方式以后，就可以通过对其组合去实现某些特定的功能。电子设计竞赛有很明显的变化就是，从以前最开始的只是单纯对电能进行变化到后面越来越侧重于功能方面的需求。如15年的锂电池充放电的赛题，17年的微电网模拟系统，19年的不讲也罢，20年的UPS电源，21年的C题最大功率点跟踪（模拟光伏），22年的pfc模拟电子负载，23年的单相逆变器并联运行系统，24年的AC-AC 变换电路并联运行系统越来越接近功能性的设计，难度也在逐渐变大。很多赛题其实就是把以上四种变换方式组合在一起，进行一个最终的输出。对基础能力的要求也越来越多</p>
+<p>以2020年省赛题UPS电源为例。从市电取电，通过自耦变压器和隔离变压器得到较低幅值的交流电压，通过一系列的电能变化后，最终输出稳定的30V交流供电。在其中需要用到AC-DC，将输入较低幅值的交流电压整流成直流电压，得到直流电压后需要用到DC-DC中的boost电路，将整流得到的电压升压成更高的直流电压，最终通过DC-AC单相逆变电路，将较高的直流电压转换为我们想要的交流电压30V。</p>
+<p>不知道大家是否能够理解电源方向到底要做什么？在我的认识之中，最简单粗暴的理解就是，明确输入和输出，明确要进行什么特殊功能的设计，明确可能要用到的基础拓扑结构，然后确认工作状态，组合调参，最终得到理想的输出结果。</p>
+<h1 id="该怎么去学习电源方向的知识">该怎么去学习电源方向的知识</h1>
+<h2 id="博主的建议">博主的建议</h2>
+<p>一定要实践，实践，实践！！！</p>
+<p>电源方向不是短时间就可以入门的，想要真正做出一个优秀的比赛作品，必须得建立在长期的努力坚持实践前提下（此条排除某些天才型选手），若时间充足，对基础电路进行深刻的分析，思考如何在基础电路的基础上做出花儿来！做电源的就是思维开阔一点，特别是在做电路的时候，思路不同可能最终实现比赛电路的难度有很大的区别。所以说，你能抓住时间学的越多，就能够在比赛的时候，想出更多的思路。</p>
+<p>仿真虽然挺有用的，但是电路一定要应用到实际里面！不调你永远不知道炸电容有多么的美丽，呲电火花有多么的好看，变压器嗡嗡的叫有多么的悦耳！当然，朋友们不要害怕，答主调试了一年，目前还没遭遇过什么危险，除了那一次脑袋抽了两只手指同时去摸上下对管的D端，能够明显的感觉电流的流过，有点心悸抽抽的感觉。不过不用担心，比赛方也会人性化一些的，危险的题目也不会让你们去做，毕竟生命安全大于天。</p>
+<h2 id="硬件该准备什么">硬件该准备什么</h2>
+<p>1、基础电路</p>
+<p>比如boost，buck，桥式boost-buck，逆变什么的，基础电路可以都玩一遍，跑出最基础的效果。</p>
+<p>2、检测电路</p>
+<p>比如直流电压检测，直流电流检测（分高端和低端检测，高端就是可以接在电路中的任何位置，让电流流过检测电流，低端就是一侧必须接地。两者的区别在于高端会有共模干扰，低端没有干扰），交流电压检测，交流电流检测，过零检测等等</p>
+<p>3、供电电路</p>
+<p>可以用开关芯片供电，也可以用专门的电源砖供电。比如我用的就是金升阳的电源砖，输入范围大，输出较为稳定，而且是隔离的电源，用了这么久没有烧过供电电源。这个是需要考虑的东西，因为有时候赛题里面会要求所有供电电源必须在实际电路中进行取电，不用采取外部供电的方式。</p>
+<p>4、驱动电路</p>
+<p>通常采用的有IR2104S半桥驱动芯片，或者是光耦驱动，也有隔离驱动</p>
+<p>5、功能性电路</p>
+<p>如EMC，EMI电路，继电器电路，负载开关电路，保险丝保护电路等等</p>
+<h2 id="软件该准备什么">软件该准备什么</h2>
+<p>在这里我推荐用STM32F4系列的单片机，内核采用M4内核，功能强大，主频高特别是还带有DSP库处理函数，关于浮点运算等都在单片机内部优化了，可谓是屡试不爽，很大程度上节省了运算的时间。因为在实际电路的控制中，需要对信号进行检测处理，比如检测交流信号，自己要是写个均方根函数去处理有效值，效率比较低，用dsp库里面的有效值函数一下子就能得到想要的结果，十分推荐。</p>
+<p>1、定时器的使用</p>
+<p>建议学会PWM输出，输入捕获，定时器中断等功能。对高级定时器的互补输出，刹车和死区设计等等。</p>
+<p>2、DMA</p>
+<p>学会将采集到的电压数据通过高速的DMA传输至运算单元进行处理，DMA是越过CPU的，所以速度很快</p>
+<p>3、DSP库</p>
+<p>里面有很多数据处理函数，直接调用即可</p>
+<p>4、PID</p>
+<p>万物皆可PID，网上一堆教程，学会如何去用即可，一般用个P环就能调出较好的效果</p>
+<p>5、ADC</p>
+<p>采集电压就得靠它，学清楚交替采集就好了，可以提高采集的速度</p>
+<p>6、位带操作</p>
+<p>非必须的，但是有时候会对你整体电路的控制起到帮助，用函数也能实现同样的效果</p>
+<h1 id="总结">总结</h1>
+<p>以上就是博主的浅薄认识，后面会针对基础电路发几篇文章出来，给新入门的朋友们以简洁明了的方式带你们去了解电路的工作状态和方式。以后所发的任何文章也不会有什么订阅啥的，全是公益性分享的性质，希望技术方面的学习能带给各位提升，希望大家一起努力，慢慢成长，加油！</p></div><!-- HeadingAnchors: adds clickable anchor links to H2/H3 in .article-body --><script>
+(function() {
+  if (typeof window === 'undefined') return;
+
+  function init() {
+    var headings = document.querySelectorAll('.article-body h2[id], .article-body h3[id]');
+    if (!headings.length) return;
+
+    // Create tooltip element
+    var tooltip = document.createElement('div');
+    tooltip.className = 'anchor-tooltip';
+    tooltip.textContent = '已复制!';
+    document.body.appendChild(tooltip);
+
+    var hideTimer = null;
+
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.className = 'heading-anchor';
+      a.href = '#' + h.id;
+      a.textContent = '#';
+      a.title = '复制链接';
+      a.setAttribute('aria-hidden', 'true');
+
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = window.location.origin + window.location.pathname + '#' + h.id;
+        try {
+          navigator.clipboard.writeText(url).then(function() {
+            tooltip.classList.add('show');
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = (e.clientY - 8) + 'px';
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function() {
+              tooltip.classList.remove('show');
+            }, 1500);
+          });
+        } catch(e) {}
+        // Also update URL bar without scrolling
+        history.replaceState(null, '', url);
+      });
+
+      h.appendChild(a);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><script>
+(function(){
+  try {
+  var LANG_MAP = {c:'C',cpp:'C++',python:'Python',javascript:'JS',typescript:'TS',bash:'Bash',json:'JSON',verilog:'Verilog',html:'HTML',css:'CSS',rust:'Rust',go:'Go',java:'Java',sql:'SQL',yaml:'YAML',xml:'XML',markdown:'MD',matlab:'MATLAB',lua:'Lua',diff:'Diff',dockerfile:'Docker',vim:'Vim',makefile:'Makefile',php:'PHP',ruby:'Ruby',swift:'Swift',kotlin:'Kotlin',scala:'Scala'};
+
+  function init(){
+    var pres = document.querySelectorAll('.article-body pre');
+    for(var i=0;i<pres.length;i++){
+      var pre=pres[i];
+      if(pre.parentElement && pre.parentElement.classList.contains('code-block-wrapper')) continue;
+      if(!pre.parentNode) continue;
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+      var lang = pre.getAttribute('data-language');
+      if(lang){
+        lang = LANG_MAP[lang.toLowerCase()] || lang;
+        var badge = document.createElement('span');
+        badge.className = 'lang-badge'; badge.textContent = lang;
+        wrapper.appendChild(badge);
+      }
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      var code = pre.querySelector('code');
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn'; btn.textContent = '复制';
+      btn.onclick = function(){
+        try { navigator.clipboard.writeText(code?code.textContent||'':'').then(function(){
+          btn.textContent='已复制!'; btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent='复制'; btn.classList.remove('copied'); }, 1500);
+        }).catch(function(){}); } catch(e){}
+      };
+      pre.appendChild(btn);
+    }
+  }
+  // Defer to avoid blocking page render
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){init();setTimeout(init,500);});}
+  else{init();setTimeout(init,500);}
+  } catch(e) { console.log('CopyCode:', e); }
+})();
+</script><nav class="series-nav"><!-- Hidden nav links for keyboard shortcuts --><a href="/posts/post2" data-series-next style="display:none;" aria-hidden="true">下一篇</a><div class="series-nav-title">系列导航</div><table style="width:100%;border-collapse:collapse;margin-top:0.5rem;"><thead><tr><th style="width:4rem;text-align:center;padding:0.5rem 0.5rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);white-space:nowrap;">集数</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">标题</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">内容</th></tr></thead><tbody><tr style="background:color-mix(in srgb,var(--color-accent) 8%,transparent);"><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-accent);">第 0 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><span style="color:var(--color-text);font-weight:600;">电源-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向） <span style="font-size:0.7rem;color:var(--color-accent);">👈 你在这里</span></span></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">全国大学生电子设计竞赛经验分享。</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 1 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post2" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">21年电赛国一之三端口DC-DC变换器</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">博主今天想分享的是在学校期间参加2021年全国大学生电子设计</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 2 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post3" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作高、低端直流电流采样电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对高、低端直流电流采样电路进行了详细介绍，经过本文章你</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 3 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post4" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作直流电压采样电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对直流电压采样电路进行了详细介绍，经过本文章你可以学会</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 4 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post5" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作交流电压检测电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压的检测与直流检测不同，由于我们采集到的交流信号会出现</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 5 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post6" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作交流电流检测电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电流的检测与直流检测不同，由于我们采集到的交流信号会出现</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 6 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post7" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你用STM32F1做交流电压采样</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压检测需要通过单片机ADC分点采集交流电压周期内多点电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 7 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post8" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你用STM32F4做交流电压采样</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压检测需要通过单片机ADC分点采集交流电压周期内多点电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 8 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post9" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作驱动电路（IR2104S半桥/TLP250H光耦）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">今天分享的这篇博文以驱动电路为核心，重点分享两个不同的驱动电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 9 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post10" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作BUCK电路（原理图PCB代码实物）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">单片机输出一路PWM信号，PWM占空比越高，输出电压越高。P</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 10 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post11" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-闭环控制升级之PID调节（附PID源</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">PID其实属于比较常见且通用的闭环调节算法，经典古老但实用。</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 11 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post12" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作BOOST电路（电压电流闭环，PID调节）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 12 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post13" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作单相逆变电路（交流电压闭环，SPWM调制）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 13 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post14" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作双向DC-DC充放电电路（电池恒流充电，恒压放电）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 14 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post15" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作隔离辅助电源（基于金升阳模块）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">电源模块采用金升阳隔离电源砖，能够输出12V电压和±5V电压</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 15 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post22" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控选用STM32F103C8T6，屏幕显示用0.96寸OL</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 16 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post24" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对20年省赛题进行了详细介绍，经过本文章你可以学会怎么</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 17 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/嵌入式-基于stm32的buck电路电感电流闭环控制" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你基于STM32的BUCK电路高端电流采样（同步整流+高端电感电流采样）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">基于STM32F103C8T6的同步整流BUCK降压电源：电</td></tr></tbody></table></nav><!-- Comments --><div class="mt-16" id="comments" data-astro-cid-ruv7hgo6><script src="https://giscus.app/client.js" data-repo="EDAdong/EDAdong.github.io" data-repo-id="R_kgDON01Lrg" data-category="Announcements" data-category-id="DIC_kwDON01Lrs4DCAkU" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script></div><!-- Related Posts --><section class="mt-16" data-astro-cid-ruv7hgo6><h2 class="text-xl font-bold mb-6" style="color: var(--color-text);" data-astro-cid-ruv7hgo6>相关文章</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem" data-astro-cid-ruv7hgo6><a href="/posts/嵌入式-基于stm32的buck电路电感电流闭环控制/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post38.webp" alt="电源-手把手教你基于STM32的BUCK电路高端电流采样（同步整流+高端电感电流采样）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">STM32</span><span class="tag">BUCK</span></div><h3 class="post-card-title">电源-手把手教你基于STM32的BUCK电路高端电流采样（同步整流+高端电感电流采样）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2026-07-15T22:00:00.000Z">2026年7月16日</time><span class="post-card-reading-time">· 约 12 分钟</span></div></div></a><a href="/posts/post24/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post24.webp" alt="电源-20年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">电源</span><span class="tag">实战教程</span></div><h3 class="post-card-title">电源-20年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-07-09T22:08:00.000Z">2025年7月10日</time><span class="post-card-reading-time">· 约 4 分钟</span></div></div></a><a href="/posts/post22/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post22.webp" alt="电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">电源</span><span class="tag">实战教程</span></div><h3 class="post-card-title">电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-06-30T23:18:00.000Z">2025年7月1日</time><span class="post-card-reading-time">· 约 5 分钟</span></div></div></a></div></section></article><!-- Desktop TOC Sidebar --><aside class="article-sidebar" data-astro-cid-ruv7hgo6><nav class="toc-wrapper" id="toc-nav" data-astro-cid-ruv7hgo6><div class="toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#前言" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>前言</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#电赛是什么" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>电赛是什么</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#电源方向是什么" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>电源方向是什么</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#该怎么去学习电源方向的知识" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>该怎么去学习电源方向的知识</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#博主的建议" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>博主的建议</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#硬件该准备什么" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>硬件该准备什么</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#软件该准备什么" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>软件该准备什么</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#总结" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总结</a></li></ol></nav></aside></div><button id="mobile-toc-btn" class="mobile-toc-fab" aria-label="目录" data-astro-cid-ruv7hgo6>📑</button><div id="mobile-toc-overlay" class="mobile-toc-overlay" data-astro-cid-ruv7hgo6></div><div id="mobile-toc-drawer" class="mobile-toc-drawer" data-astro-cid-ruv7hgo6><div class="mobile-toc-handle" data-astro-cid-ruv7hgo6></div><div class="mobile-toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#前言" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>前言</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#电赛是什么" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>电赛是什么</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#电源方向是什么" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>电源方向是什么</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#该怎么去学习电源方向的知识" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>该怎么去学习电源方向的知识</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#博主的建议" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>博主的建议</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#硬件该准备什么" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>硬件该准备什么</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#软件该准备什么" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>软件该准备什么</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#总结" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总结</a></li></ol></div></main><footer style="margin-top: 5rem; padding: 2.5rem 0; border-top: 1px solid var(--color-border); text-align: center;"><div class="container-main"><p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0 0 0.75rem; opacity: 0.8;">&copy; 2025 - 2026 By EDAdong</p><p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0 0 1rem; opacity: 0.6; max-width: 28rem; margin-inline: auto; line-height: 1.7;">做任何事情之前先想清楚事情的价值，动脑袋思考是一件累人的事情，但是带来给你的收益会让你少更多的烦恼，许愿早日年薪百万</p><div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #FF5D01 10%, transparent); color: #FF5D01; border: 1px solid color-mix(in srgb, #FF5D01 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #FF5D01;"></span>Astro</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #06B6D4 10%, transparent); color: #06B6D4; border: 1px solid color-mix(in srgb, #06B6D4 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #06B6D4;"></span>Tailwind</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #333 10%, transparent); color: #333; border: 1px solid color-mix(in srgb, #333 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #333;"></span>GitHub Pages</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #0891b2 10%, transparent); color: #0891b2; border: 1px solid color-mix(in srgb, #0891b2 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0891b2;"></span>STM32</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #8b5cf6 10%, transparent); color: #8b5cf6; border: 1px solid color-mix(in srgb, #8b5cf6 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6;"></span>FPGA</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #10b981 10%, transparent); color: #10b981; border: 1px solid color-mix(in srgb, #10b981 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>嵌入式</span></div></div></footer><div id="music-player" class="music-player" data-astro-cid-hxmsq4xn><button id="music-toggle" class="music-btn" aria-label="Toggle music" title="播放/暂停" data-astro-cid-hxmsq4xn><div class="vinyl" data-astro-cid-hxmsq4xn><div class="vinyl-grooves" data-astro-cid-hxmsq4xn></div><div class="vinyl-label" data-astro-cid-hxmsq4xn></div><div class="vinyl-hole" data-astro-cid-hxmsq4xn></div></div><span class="music-note" data-astro-cid-hxmsq4xn>♪</span></button><span class="music-tip" data-astro-cid-hxmsq4xn>轻音</span></div><script>
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.getElementById('music-toggle');
+  var player = document.getElementById('music-player');
+  if(!btn||!player)return;
+  var playing = false;
+
+  // Load music lazily — only on user interaction. The MP3 is 5MB, preloading
+  // it on every page visit wastes bandwidth and slows page load significantly.
+  var audio = null;
+  function getAudio() {
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = 'none';
+      audio.src = '/music/无损网站背景音乐.mp3';
+      audio.loop = true;
+      audio.volume = 0.12;
+    }
+    return audio;
+  }
+
+  // Save position before navigating away
+  window.addEventListener('beforeunload', function(){
+    if(audio && !audio.paused){
+      sessionStorage.setItem('musicTime', audio.currentTime);
+    }
+  });
+
+  btn.onclick = function(e){ e.preventDefault();
+    var a = getAudio();
+    if(a.paused){
+      var t = sessionStorage.getItem('musicTime');
+      if(t){ a.currentTime = parseFloat(t); sessionStorage.removeItem('musicTime'); }
+      a.play().then(function(){
+        player.classList.add('playing'); localStorage.setItem('music','on');
+      }).catch(function(){});
+    } else {
+      a.pause(); player.classList.remove('playing'); localStorage.setItem('music','off');
+    }
+  };
+});
+</script><!-- KeyboardHints: floating "?" button + shortcuts modal --><div class="kh-wrapper" data-astro-cid-ctlvvxge><button class="kh-btn" id="kh-btn" title="键盘快捷键" aria-label="键盘快捷键" data-astro-cid-ctlvvxge>?</button><div class="kh-overlay" id="kh-overlay" data-astro-cid-ctlvvxge></div><div class="kh-modal" id="kh-modal" data-astro-cid-ctlvvxge><div class="kh-modal-header" data-astro-cid-ctlvvxge><span style="font-weight:700;font-size:0.95rem;" data-astro-cid-ctlvvxge>键盘快捷键</span><button class="kh-close" id="kh-close" title="关闭" data-astro-cid-ctlvvxge>Esc</button></div><div class="kh-modal-body" data-astro-cid-ctlvvxge><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + K</kbd><span data-astro-cid-ctlvvxge>搜索</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>&larr; &rarr;</kbd><span data-astro-cid-ctlvvxge>上一篇 / 下一篇（系列导航时）</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Esc</kbd><span data-astro-cid-ctlvvxge>关闭弹窗</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + Shift + H</kbd><span data-astro-cid-ctlvvxge>回到首页</span></div></div></div></div><script>
+(function() {
+  if (typeof window === 'undefined') return;
+  function init() {
+    var btn = document.getElementById('kh-btn');
+    var overlay = document.getElementById('kh-overlay');
+    var modal = document.getElementById('kh-modal');
+    var close = document.getElementById('kh-close');
+    if (!btn || !overlay || !modal) return;
+
+    function open() {
+      overlay.classList.add('open');
+      modal.classList.add('open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+    }
+
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      overlay.classList.contains('open') ? closeModal() : open();
+    });
+    overlay.addEventListener('click', closeModal);
+    if (close) close.addEventListener('click', closeModal);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+K: focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        var searchInput = document.querySelector('#search-input, [data-search-input]');
+        if (searchInput) {
+          searchInput.focus();
+        } else {
+          // Try opening search modal
+          var searchLink = document.querySelector('a[href="/search"]');
+          if (searchLink) window.location.href = '/search';
+        }
+      }
+      // Ctrl+Shift+H: go home
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'H') {
+        e.preventDefault();
+        window.location.href = '/';
+      }
+      // Esc: close modal
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        e.preventDefault();
+        closeModal();
+      }
+      // Arrow keys for series nav
+      if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !modal.classList.contains('open')) {
+        var prevLink = document.querySelector('[data-series-prev]');
+        var nextLink = document.querySelector('[data-series-next]');
+        if (e.key === 'ArrowLeft' && prevLink) {
+          e.preventDefault();
+          window.location.href = prevLink.getAttribute('href');
+        }
+        if (e.key === 'ArrowRight' && nextLink) {
+          e.preventDefault();
+          window.location.href = nextLink.getAttribute('href');
+        }
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><button id="back-to-top" class="scroll-btn" style="bottom:2rem;" aria-label="回到顶部" title="回到顶部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>TOP</span></button><button id="go-bottom" class="scroll-btn" style="bottom:6.5rem;" aria-label="回到底部" title="回到底部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M6 9l6 6 6-6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>BOT</span></button><script type="module">(function(){var e=document.getElementById(`back-to-top`),t=document.getElementById(`go-bottom`);if(!e||!t)return;var n=!1;function r(){n||(n=!0,requestAnimationFrame(function(){var r=window.scrollY,i=document.documentElement.scrollHeight-window.innerHeight;e.classList.toggle(`visible`,r>400),t.classList.toggle(`visible`,r<i-400),n=!1}))}window.addEventListener(`scroll`,r,{passive:!0}),r(),e.onclick=function(){window.scrollTo({top:0,behavior:`smooth`})},t.onclick=function(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:`smooth`})}})();</script></body></html><script>
+  var theme=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  document.documentElement.setAttribute('data-theme',theme);
+  // Register Service Worker for offline caching
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  }
+</script><script type="module">(function(){function e(){var e=document.querySelectorAll(`[data-toc-link]`);if(e.length){e.forEach(function(e){e.addEventListener(`click`,function(e){e.preventDefault();var t=this.getAttribute(`href`)||``,n=decodeURIComponent(t.replace(/^#/,``)),r=document.getElementById(n);r&&(r.scrollIntoView({behavior:`smooth`,block:`start`}),history.replaceState(null,``,`#`+n))})});var t=new IntersectionObserver(function(e){e.forEach(function(e){var t=CSS.escape(e.target.id),n=document.querySelector(`[data-toc-link][href="#`+t+`"]`);n&&n.classList.toggle(`active`,e.isIntersecting)})},{rootMargin:`-80px 0px -60% 0px`});e.forEach(function(e){var n=e.getAttribute(`href`)||``,r=decodeURIComponent(n.replace(/^#/,``));if(r){var i=document.getElementById(r);i&&t.observe(i)}})}}document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,e):e()})();</script><script>
+  (function() {
+    var btn = document.getElementById('mobile-toc-btn');
+    var overlay = document.getElementById('mobile-toc-overlay');
+    var drawer = document.getElementById('mobile-toc-drawer');
+    if (!btn || !overlay || !drawer) return;
+
+    function open() {
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', function(e) { e.stopPropagation(); open(); });
+    overlay.addEventListener('click', close);
+    // Close when a TOC link is clicked
+    drawer.addEventListener('click', function(e) {
+      if (e.target.closest('[data-toc-link]')) {
+        setTimeout(close, 150); // wait for scroll to start
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) close();
+    });
+  })();
+</script>

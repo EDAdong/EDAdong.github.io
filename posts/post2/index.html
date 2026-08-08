@@ -1,0 +1,377 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v7.1.3"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>电源-2021年电赛国一之三端口DC-DC变换器 | EDAdong</title><meta name="description" content="博主今天想分享的是在学校期间参加2021年全国大学生电子设计竞赛并获得全国一等奖的电源方向作品-三端口DC-DC变换器。"><meta property="og:title" content="电源-2021年电赛国一之三端口DC-DC变换器"><meta property="og:type" content="article"><meta property="og:url" content="https://edadong.com/posts/post2/"><meta property="og:description" content="博主今天想分享的是在学校期间参加2021年全国大学生电子设计竞赛并获得全国一等奖的电源方向作品-三端口DC-DC变换器。"><meta property="og:image" content="/images/post2.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"电源-2021年电赛国一之三端口DC-DC变换器","description":"博主今天想分享的是在学校期间参加2021年全国大学生电子设计竞赛并获得全国一等奖的电源方向作品-三端口DC-DC变换器。","datePublished":"2025-02-11T23:43:00.000Z","author":{"@type":"Person","name":"EDAdong","url":"https://edadong.com/about/"},"image":"https://edadong.com/images/post2.webp","url":"https://edadong.com/posts/post2/","publisher":{"@type":"Person","name":"EDAdong"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://edadong.com/"},{"@type":"ListItem","position":2,"name":"文章","item":"https://edadong.com/posts/"},{"@type":"ListItem","position":3,"name":"电源-2021年电赛国一之三端口DC-DC变换器"}]}]}</script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="dns-prefetch" href="https://github.com"><link rel="dns-prefetch" href="https://avatars.githubusercontent.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="/_astro/BaseLayout.FZUuh1sy.css"><link rel="stylesheet" href="/_astro/_slug_.CITvTZpu.css"><link rel="stylesheet" href="/_astro/global.CZGXK5uF.css"></head><body style="background-color: var(--color-bg); color: var(--color-text);"><div style="position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 60% 50% at 20% 30%, rgba(8,145,178,0.25), transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(99,102,241,0.18), transparent 50%),
+      radial-gradient(ellipse 45% 40% at 55% 70%, rgba(8,145,178,0.20), transparent 55%);
+    "></div><!-- Initial loading screen: visible on first load, fades out when page ready --><div id="page-loader" class="page-loader-overlay active"><div class="page-loader-content"><div class="pl-logo">E</div><div class="pl-spinner"><div class="pl-ring"></div></div><div class="pl-text">EDAdong</div></div></div><script>
+  (function(){
+    var loader = document.getElementById('page-loader');
+    if(!loader) return;
+
+    function hide(){ loader.classList.remove('active'); }
+
+    // Hide loader as soon as page is interactive — don't wait for all resources
+    if (document.readyState === 'loading') {
+      // Initial page load: hide shortly after DOM is ready
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(hide, 50); });
+      // Fallback: hide after load event
+      window.addEventListener('load', function() { setTimeout(hide, 300); });
+    } else {
+      // View Transition navigation: DOM already ready, hide immediately
+      hide();
+    }
+    // Safety: always hide after 3s
+    setTimeout(hide, 3000);
+
+    // Show loader when clicking internal links (for View Transition nav)
+    document.addEventListener('click', function(e){
+      var link = e.target.closest('a');
+      if(!link) return;
+      var href = link.getAttribute('href');
+      if(!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('//')) return;
+      if(link.getAttribute('target') === '_blank') return;
+      loader.classList.add('active');
+    });
+  })();
+</script><!-- Adds native lazy loading to all article images --><script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.article-body img:not([loading])').forEach(function(img){
+      img.loading = 'lazy';
+      img.decoding = 'async';
+    });
+  });
+</script><header id="site-header" class="site-header" data-astro-cid-nen7h5rs><div class="container-main w-full flex items-center justify-between" data-astro-cid-nen7h5rs><a href="/" class="flex items-center gap-2 font-bold text-lg no-underline" style="color: var(--color-text);" data-astro-cid-nen7h5rs><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0" style="background: linear-gradient(135deg, var(--color-accent), #6366f1);" data-astro-cid-nen7h5rs>主页</span></a><nav class="flex items-center gap-1" data-astro-cid-nen7h5rs><a href="/posts" class="nav-item" style="color: var(--color-accent)" data-astro-cid-nen7h5rs>文章</a><a href="/search" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>搜索</a><a href="/resources" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>资料</a><a href="/friends" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>友链</a><a href="/about" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>关于</a><button id="theme-btn" class="nav-item border-none cursor-pointer" aria-label="Toggle theme" style="background:transparent; font-size:1rem;" data-astro-cid-nen7h5rs><svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" data-astro-cid-nen7h5rs></path></svg><svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 hidden" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" data-astro-cid-nen7h5rs></path></svg></button></nav></div></header><script>
+(function(){
+  var t=document.getElementById('theme-btn'),s=document.getElementById('sun-icon'),m=document.getElementById('moon-icon');
+  if(!t||!s||!m)return;
+  function u(){var d=document.documentElement.getAttribute('data-theme')==='dark';s.classList.toggle('hidden',d);m.classList.toggle('hidden',!d)}
+  u();t.onclick=function(){var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);u()};
+})();
+</script><main><div class="reading-progress" id="reading-progress-bar"></div><script type="module">var e=document.getElementById(`reading-progress-bar`);e&&window.addEventListener(`scroll`,()=>{let t=window.scrollY,n=document.documentElement.scrollHeight-window.innerHeight;e.style.width=n>0?`${t/n*100}%`:`0%`});</script><div class="article-layout" data-astro-cid-ruv7hgo6><article class="article-main" data-astro-cid-ruv7hgo6><!-- Header --><header class="mb-10" data-astro-cid-ruv7hgo6><h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4" style="color: var(--color-text); letter-spacing: -0.02em;" data-astro-cid-ruv7hgo6>电源-2021年电赛国一之三端口DC-DC变换器</h1><div class="flex flex-wrap items-center gap-3 text-sm mb-4" style="color: var(--color-text-secondary);" data-astro-cid-ruv7hgo6><time datetime="Wed Feb 12 2025 07:43:00 GMT+0800 (中国标准时间)" data-astro-cid-ruv7hgo6>2025年2月12日</time><span style="color: var(--color-text-secondary); opacity: 0.6;" data-astro-cid-ruv7hgo6>· 约 24 分钟</span><span data-astro-cid-ruv7hgo6>· <a href="/categories/电源" class="font-medium transition-colors" style="color: var(--color-accent);" data-astro-cid-ruv7hgo6>#电源</a></span></div><div class="flex flex-wrap gap-1.5" data-astro-cid-ruv7hgo6><span class="tag" data-astro-cid-ruv7hgo6>电源</span><span class="tag" data-astro-cid-ruv7hgo6>实战教程</span></div></header><!-- Article Body --><div class="article-body" data-astro-cid-ruv7hgo6><h1 id="前言">前言</h1>
+<p>电源方向资料免费开源到QQ群280730348，欢迎进群交流沟通。博客地址edadong.com，博文同步发布在知乎、bilibili，其中bilibili主要以视频为主。</p>
+<p>博主今天想分享的是在学校期间参加2021年全国大学生电子设计竞赛并获得全国一等奖的电源方向作品-三端口DC-DC变换器，感觉时光飞逝，转眼之间就过去了快两年了，之前本来开源过这个作品，后因为整理资料的时候不小心把开源项目删掉了，重新打字比较麻烦，所以一直搁置了，今天好好细说一下这个作品。</p>
+<p>在比赛期间，博主是负责软件调试和硬件电路设计及调试。最大的感受就是时间特别紧急，弄完硬件设计后继续进行软件设计，不过学校的伙食还是给的挺好的哈哈哈，及时给我补充能量。不过不建议大家一个人把硬件设计和软件设计一起弄，还是得分工协作，到忙的时候我基本上顾不上其它事儿了，打板焊接测试基本上就交给我队友了，帮我分担了很多的压力，感谢我的女朋友哈哈哈，就是我的队友！</p>
+<p>伙计们，咱就说打比赛是能找到女朋友的！芜湖起飞~</p>
+<p>话不多说直接上图，证明一下不是乱吹的，分享的电路都是验证过的！believe me</p>
+<p><img alt="image-20250211235418614" loading="lazy" decoding="async" width="1605" height="1051" src="/_astro/image-20250211235418614.DXpkv2jf_1MYinR.webp" srcset=""></p>
+<h1 id="题目">题目</h1>
+<p><img alt="image-20250211235607322" loading="lazy" decoding="async" width="746" height="513" src="/_astro/image-20250211235607322.Dnud0K8X_Z109R5A.webp" srcset=""></p>
+<p><img alt="image-20250211235629260" loading="lazy" decoding="async" width="806" height="579" src="/_astro/image-20250211235629260.DuImmNKo_Z1x4Fjb.webp" srcset=""></p>
+<h1 id="题目分析">题目分析</h1>
+<h2 id="题目要求分析">题目要求分析</h2>
+<p>我认为这是一道比较常规的比赛题目，相较于电源方向另外一道赛题三相PFC明显要简单一些，我本人由于时间问题没能在备赛期间做出来2013年的PFC功率因数校正电路，所以当年在考虑之下就选择了这道题目。说这道题常规就在于只有直流的变化，不需要对交流信号进行处理，因此检测电路只需要对直流信号进行处理，包括驱动方式也是通过PWM直接进行驱动，不需要像交流信号一样需要进行SPWM波模拟之类的。</p>
+<p>仔细分析题目我们可以知道：</p>
+<p>1、输出均要稳定在30V，因此输出要采用电压闭环控制。</p>
+<p>2、题目中有多项电压电流检测要求，故需制作直流电压电流检测板，其中为了检测总电流需制作高端电流检测板。</p>
+<p>3、题目中要求切换工作模式，故要判断输入电压的大小选择合适的工作模式。</p>
+<p>4、题目中要求对电池组进行充电放电，故需制作继电器切换电路，控制工作状态。</p>
+<p>5、需对最大功率进行跟踪，故利用电池组充放电使得输出功率均衡，并利用电压环和电流环双环追踪最终得到最大功率点跟踪的结果。</p>
+<p>我认为其中最重要的点就是在于最大功率点跟踪。在做比赛的第一天我犯了一个错误是我想要做两个电路，一个BOOST电路，一个BUCK电路，通过继电器来切换输入接向BUCK或者是BOOST。会这么想的原因在于，基本要求里面提到了输入是50V，而输出需要稳定在30V，自然而然想到了需要用到BUCK降压电路，使得稳定在30V的输出。而发挥部分里面提到了US由55V减少到25V，其中25V又低于了30V的恒压输出，明显要变成BOOST工作。当时的确步入思维的误区了，觉得这电路不得有两个？后面仔细分析题目，一拍大腿，这尼玛有坑呀！在前面的比赛框图中，模拟光伏电池那一坨里面还有一个电阻，虽说直流稳压电源得调到50V输入，但是电路供电给负载，肯定会产生电流呀，这个电流流经电阻，就会产生电压降，比如1A电流流经10欧姆电阻，就会有10V的压降，2A电流的话就有20V压降，这么一想的话，要是直接电路就有个2A的电流，这变换电路前端的U1不就比UO要小了么？这输入电压一比输出电压低，不就是可以直接用BOOST电路了么？但又有一个问题来了，输出电流才要求1.2A，这明显电流不够用呀，这个时候题目中其实已经隐晦的提醒我们了。</p>
+<p>基本要求第一问里面提到了IB要大于等于0.1A。IB是什么？电池的充电电流呀。整个电路中我们不仅仅可以给负载供电，同时我们还能给电池进行供电，那么电池供电的话就可以加大我们的输出电流，且题目里面要求电流只要大于0.1A即可，即理论上充电电流可以随便由我们设置。那么根据这个条件，BOOST电路当占空比为0的时候输出其实等于输入的（当然，考虑到MOS管的续流二极管，或许会略低一点），那么根据这个条件，此时如果我们如果增大充电电流，电路整体的电流就会增加，在模拟光伏电池的电阻上压降就会越大，因此BOOST电路的输入电压就会越低，在这种情况下随着充电电流的增大，最终BOOST电路将会低于30V，故在此情况下就可以对30V输出电压进行追踪。</p>
+<p>另外由于在要求中存在电池的充放电，所以对电池进行充电或者放电需要通过一个电路来实现，这个电路就是双向DC-DC电路。其实本质上也就是一个BOOST电路或者是BUCK电路，只取决于端口的流向。由于我们采用的是双管结构，故双向DC电路从左往右可视作BOOST升压电路，从右往左又可以作为BUCK降压电路。</p>
+<h2 id="题目方案选定">题目方案选定</h2>
+<p>方案一(使用buck-boost电路＋双向DC-DC电路（前端）)</p>
+<p>双向DC-DC电路接入boost-buck电路前端，光伏电池输出直接给双向DC-DC电路供电。充电状态时，光伏电池通过双向DC-DC电路降压对电池组进行恒流充电，同时切换继电器选择buck或boost电路对输出进行恒压控制。当输入电压大于30V时，采用降压拓扑。当输入电压小于30V时，采用升压拓扑。放电状态时，电池组通过双向DC-DC电路升压对buck-boost电路输入端进行恒流放电。但由于充电电路放在输入端，故存在着电压突变，从而会引起充电电流的突变，增加电路的不稳定因素。并且buck-boost电路在继电器切换时会存在一段真空期，效率低，容易引发电池组过流充电的情况。</p>
+<p>方案二(使用同步整流Boost升压电路＋双向DC-DC电路（前端）)</p>
+<p>采用Boost升压电路输出恒定30V。由于利用电池组对功率进行补偿和跟踪，故输入电压可以限制在12.5V至27.5V之间，满足Boost升压至30V的条件。且Boost升压电路采用同步整流升压拓扑，通过改变死区时长，有效提高升压拓扑效率。本方案虽然输入电压限制在一个较小的区间段，但仍存在双向DC-DC电路恒流充电时的不稳定性。</p>
+<p>方案三(使用同步整流Boost升压电路＋双向DC-DC电路（后端）)</p>
+<p>与方案二不同在于双向DC-DC电路放在了输出端，并联至负载两端。Boost电路对输出进行恒压控制的同时向电池组充放电，通过功率点跟踪和PID控制，实现电池组对整体电路的功率补偿。输出电压波动范围小，提高DC-DC电路充电时的稳定性，且电池组放电时，可通过改变输出电压的大小，进行功率追踪补偿，增加了整个系统的安全性，能够快速的进行最大功率点跟踪。该拓扑结构简单，易于硬件实现，但由于Boost升压电路和双向DC-DC电路均采用同步整流技术，故存在着开关瞬间强制换流的问题，控制相对复杂，电路状态容易波动。</p>
+<p>那么经过仔细考虑以后，最终选择方案三进行控制方案。选择方案三最主要的原因是，输出电压要稳定在30V，那么30V的这个电压可以作为双向DC-DC电路的输入端进行充电，输入电压较稳定也容易控制对电池的充电，且在实际过程中为了减少损耗，电池充电的输入端并不加限流的电阻，所以电压有很大波动的话容易出现电池过流充电的现象，比赛的话还是求稳一点，平时可以疯狂点，比赛的时候找个稳定一点的方案，比赛的时候做得很好结果最后一天炸机的例子比比皆是，电源这个东西说不准的。</p>
+<h2 id="控制方案选定">控制方案选定</h2>
+<p>在上面主电路拓扑结构的基础上，存在如下几种控制方法：</p>
+<p>方案一：利用DSP或者ARM控制器，使用电压环对输出进行稳压，电流环对电池组充放电进行恒流控制。</p>
+<p>方案二：利用DSP或者ARM控制器，电压环对输出进行稳压控制，电池组充电时利用电流环进行功率补偿。电池组放电时，利用电压环对放电电压进行恒压控制，以最大功率点跟踪为目标，进行恒压功率补偿。</p>
+<p>综合比较，方案二能更好地实现题目中要求。</p>
+<h1 id="理论分析与计算">理论分析与计算</h1>
+<h2 id="效率提高的方法">效率提高的方法</h2>
+<p>当时比赛的时候做的比较匆忙，加上考研期间断了三个月左右，所以很多东西都没有准备好，许多都是现场直接打板的板子，做的比较粗糙。现在回想起来，其实有很多可以优化效率改进的地方，在这里我提几点，大家可以按照这个方向去优化。</p>
+<ol>
+<li>屏幕选用OLED屏幕进行显示（我用的LCD屏幕，耗电大）。</li>
+<li>能用集成化的板子就用集成化的板子，我因为时间不足所有的模块基本都是分开的，连线到处绕。</li>
+<li>管子用好一点，毕竟功率电路损耗无非就是开关和导通损耗。</li>
+<li>可以调整死区，尽量让损耗的区域小一点，不过这个用处貌似不大。</li>
+<li>电池组那里大胆点，我当时做的方案其实比较普通了，用个二极管切换防止电流倒灌，其实也损耗了很多充电功率，直接去掉二极管，反正有电池保护，干就完事儿了。</li>
+<li>电源砖辅助电源可以换成芯片辅助供电，提高效率。</li>
+</ol>
+<h2 id="优化提升点">优化提升点</h2>
+<ol>
+<li>可以选用外置的电压基准芯片给最小系统板的ADC参考电压引脚供电，这样采出来会稳定一点。</li>
+<li>用好一点的运放芯片吧，把噪声压下来，也可以多考虑一下滤波的单元，滤除噪声干扰采样。</li>
+<li>稳压控制方法，根据题目要求，输入电压范围为25V-55V，负载电压在任何时刻要稳定在30V，若不采用最大功率点跟踪，则存在输入电压大于或小于30V两种状态，故需要使用两种拓扑电路。但考虑到两种拓扑切换过程中存在着一段真空期，因此采用直接最大功率点跟踪方案，拓扑选择同步整流Boost升压电路，通过最大功率点跟踪将BOOST输入电压限制至30V以下，以实现输出稳压30V。系统的稳压能力主要体现在动态和静态两个方面。为提高系统的动态响应能力，可以通过提高控制器开关频率、输入电压前馈检测、控制器单位延时补偿等方式提高整流器的动态响应能力。在静态稳压能力提高方面可以通过加入积分控制实现系统输出无静态误差，消除稳态误差。</li>
+</ol>
+<h2 id="双向dc-dc的buck模式下的电感参数计算">双向DC-DC的Buck模式下的电感参数计算</h2>
+<p>在Buck模式下，从电感电流连续模式（CCM）进行讨论，根据电感的伏秒平衡原理，在MOS管导通和关断状态下可得：</p>
+<p><img alt="image-20250212000322604" loading="lazy" decoding="async" width="1015" height="397" src="/_astro/image-20250212000322604.3wiHQoxl_ZiqeN6.webp" srcset=""></p>
+<h2 id="双向dc-dc的boost模式下的电感参数计算">双向DC-DC的Boost模式下的电感参数计算</h2>
+<p><img alt="image-20250212000356530" loading="lazy" decoding="async" width="1074" height="566" src="/_astro/image-20250212000356530.BLFBN0uN_1M4MQH.webp" srcset=""></p>
+<h1 id="原理框图">原理框图</h1>
+<p>如图所示，在本题目中光伏电池通过直流稳压源+电阻构成，光伏电池输出口的电压是经过了电阻以后的降压电压，要让这个电压等于输入的一半，才算做最大功率点。电流就是电路输入的总电流。因此在输入端需要通过高端电流检测模块检测输入总电流，从而判断出压降大小，将压降加上此处的输入电压检测以后就可以得到光伏电池的输入电压。后级接一个BOOST电路升压稳定在30V，同时电池组通过双向DC-DC电路实现电池充电和电池放电功能，继电器的功能是为了切换充电和放电的方向，充电状态下通过一个二极管接向电池，一定程度上限制电流，避免电池电流的陡然上升。放电状态下切换继电器通过电池放电，再经过双向DC-DC电路升压，跟BOOST电路争夺功率，实现第二种状态的控制。</p>
+<p><img alt="image-20250212173049511" loading="lazy" decoding="async" width="1080" height="617" src="/_astro/image-20250212173049511.hV5h6_hd_1OKBgQ.webp" srcset=""></p>
+<h2 id="boost电路和双向dc-dc电路">BOOST电路和双向DC-DC电路</h2>
+<p>都是同一个电路，因为BOOST电路反过来看其实就是一个BUCK电路。电路采用的是隔离式的双向DC-DC，使用的是两个IRF540Nmos管，并且利用同步整流控制法来控制MOS管的关断，从左到右是Boost拓扑结构，从右到左是Buck结构，升压时,开关管Q4为主功率元件,决定电路变比；Q3实现同步整流,替代二极管，减小导通损耗。1N4148（D7）、10Ω（R36）、10KΩ（R37）加速IRF540N的栅极、源极之间的寄生电容放电。具体怎么用的请参考我之前的文章，关于BOOST电路的详解。</p>
+<p><img alt="img" loading="lazy" decoding="async" width="692" height="319" src="/_astro/wps3.C3tmrIAc_1uSw3U.webp" srcset=""></p>
+<h2 id="辅助电源电路">辅助电源电路</h2>
+<p>辅助电路用的金升阳的电源砖模块，前文也提到了，这个地方其实是一个效率损耗点。我用的金升阳电源砖是隔离的电源，挺稳定的，用了很久都没有出过问题，所以也就一直用了下去，当时没有仔细去想过效率的问题。建议换成开关电源的芯片供电，供电口是在光伏电池经过电阻降压了以后的地方取电，我记得当时题目好像有个要求是不能从输入取来着，时代久远忘记了，建议好好考证一下。</p>
+<p><img alt="img" loading="lazy" decoding="async" width="692" height="436" src="/_astro/wps4.Cuy1EG8Z_1PDTJo.webp" srcset=""></p>
+<h2 id="高端电流采样电路">高端电流采样电路</h2>
+<p>之前的文章也提过，用的是INA282芯片，实测电流线性度还可以。后面的运放是用的OPA2188，作用是电压跟随，降低阻抗。</p>
+<p><img alt="img" loading="lazy" decoding="async" width="692" height="258" src="/_astro/wps5.lrM25Jnp_1yc0bs.webp" srcset=""></p>
+<h2 id="pwm信号驱动电路">PWM信号驱动电路</h2>
+<p>BOOST电路用的光耦驱动，双向DC-DC用的IR2104，这个其实都可以通用，当时是实在没时间了，手头模块只有单独的几个，所以随便选的，光耦会更保险一点。</p>
+<p><img alt="img" loading="lazy" decoding="async" width="692" height="405" src="/_astro/wps6.Dv6qqGOf_1N7m91.webp" srcset=""></p>
+<p><img alt="img" loading="lazy" decoding="async" width="693" height="464" src="/_astro/wps7.BG0aID2v_1LaHie.webp" srcset=""></p>
+<h2 id="总电路">总电路</h2>
+<p>如图所示，这是根据记忆还原的图，大致的电路结构如图所示。VDC代表的是直流电源输入，经过一个二极管（这个二极管是比赛要求的），再经过降压电阻（10欧姆的大铁壳电阻），然后流经10mΩ采样电阻后（此处主要是采集高端直流电流），然后到达了BOOST输入电路的前端，前端有一个V_In的检测，就是检测BOOST前端输入电压，这个电压我们要让他稳定在输入电压的一半。BOOST电路输出后面跟着电压检测和电流检测，电流检测没啥太多的用处，主要是电压检测，要稳定在30V，此处用电压环去稳定。BOOST电路输出端电压为VOUT，VOUT作为双向DC-DC的输入端，B1是电池，这里没有加入继电器，实际上有继电器的存在。就如我前文所说的一样，我们需要切换充电和放电两种状态，充电状态下VOUT通过右向左降压给电池充电，此时L1电感的左边应该是通过继电器连接一个二极管再连接到B1的1号端口，放电状态下，通过继电器将B1的1号端口直接连接到L1的左端，相当于电池直接做了一个boost升压到负载端口，也就是VOUT口。这样的话既能够保证电池充电的稳定性，有能够保证电池放电的稳定性。</p>
+<p><img alt="image-20250217000909403" loading="lazy" decoding="async" width="1525" height="1164" src="/_astro/image-20250217000909403.Bbj5m6I__RVRiK.webp" srcset=""></p>
+<h1 id="软件思路">软件思路</h1>
+<p>软件中采用了最大功率点跟踪算法，在不同的输入电压范围内，实现电池组充电和放电两种模式的切换。电池充电时，通过采集输入电压，输入电流，得出输入电压。进入PID调节环后，以作为目标值，作为检测值，实现实时跟踪最大功率点。由于充电时所需能量完全由输入提供，故输入功率＝负载功率+电池充电功率，当电池充电电流增大时，输入电流增大，由于电压保持不变，故会降低，输入电流减小时，会升高，通过此类关系，通过调节PID跟踪目标值，即可实现最大功率点的跟踪。同样，放电模式也是如此，电流增大时，输入电流减小，会升高，由此来调节对应的PID，实现追踪最大功率点。</p>
+<p>通过设定不同的电压范围从而实现不同工作模式的切换，并由于硬件检测存在着一定的误差，因此通过软件上面多程度的拟合加软件滤波，增强数据检测的可靠度。设置了校正功能，主要体现在大范围的电压变化而导致的输出电压所含纹波大小的不同，影响到输出电压的检测。</p>
+<h1 id="总结">总结</h1>
+<p>总结一下这个赛题，如果想要复刻，请遵循如下：</p>
+<p>1、首先把我的基础电路解析看了，比如我博文里面提到的采样、基础拓扑结构，了解的基础上再去复现。</p>
+<p>2、新学的建议先从两个方向入手。第一个方向是BOOST升压电路的设计，目标就是稳定在30V附近。第二个方向是先把15年电池双向DC-DC电路打通，我的对电池的充放电就是按照那个来的，只不过是作为我的电路中的一部分实现的。电池充放电就按照15年国赛题来了，这道题的电池作为功率分配的部分就稳了。</p>
+<p>3、此题核心在于功率分配，第一种状态的时候，通过加大或者减小电池充电电流，从而实现输出稳定30V的同时，同时向负载供电。第二种状态的时候就是通过电池放电与BOOST电路输出端直流并网，抢夺输出功率，电池放电电压越大，所占的电流就越大，因此就可以降低BOOST那边的总电流，从而控制BOOST的输入电压接近光伏电池输入电压的一半。</p>
+<p>4、请务必把小模块复现好，这里面的有供电模块、直流电压电流检测，电流检测又包括高端和低端的，驱动电路、继电器电路等等。</p>
+<p>5、电池一定要有保护装置，请务必小心，我这个仅代表我个人方案，有风险，谨慎复刻。</p>
+<p>6、还可以参考西北大学的2021年这道赛题，做得很好。</p></div><!-- HeadingAnchors: adds clickable anchor links to H2/H3 in .article-body --><script>
+(function() {
+  if (typeof window === 'undefined') return;
+
+  function init() {
+    var headings = document.querySelectorAll('.article-body h2[id], .article-body h3[id]');
+    if (!headings.length) return;
+
+    // Create tooltip element
+    var tooltip = document.createElement('div');
+    tooltip.className = 'anchor-tooltip';
+    tooltip.textContent = '已复制!';
+    document.body.appendChild(tooltip);
+
+    var hideTimer = null;
+
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.className = 'heading-anchor';
+      a.href = '#' + h.id;
+      a.textContent = '#';
+      a.title = '复制链接';
+      a.setAttribute('aria-hidden', 'true');
+
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = window.location.origin + window.location.pathname + '#' + h.id;
+        try {
+          navigator.clipboard.writeText(url).then(function() {
+            tooltip.classList.add('show');
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = (e.clientY - 8) + 'px';
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function() {
+              tooltip.classList.remove('show');
+            }, 1500);
+          });
+        } catch(e) {}
+        // Also update URL bar without scrolling
+        history.replaceState(null, '', url);
+      });
+
+      h.appendChild(a);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><script>
+(function(){
+  try {
+  var LANG_MAP = {c:'C',cpp:'C++',python:'Python',javascript:'JS',typescript:'TS',bash:'Bash',json:'JSON',verilog:'Verilog',html:'HTML',css:'CSS',rust:'Rust',go:'Go',java:'Java',sql:'SQL',yaml:'YAML',xml:'XML',markdown:'MD',matlab:'MATLAB',lua:'Lua',diff:'Diff',dockerfile:'Docker',vim:'Vim',makefile:'Makefile',php:'PHP',ruby:'Ruby',swift:'Swift',kotlin:'Kotlin',scala:'Scala'};
+
+  function init(){
+    var pres = document.querySelectorAll('.article-body pre');
+    for(var i=0;i<pres.length;i++){
+      var pre=pres[i];
+      if(pre.parentElement && pre.parentElement.classList.contains('code-block-wrapper')) continue;
+      if(!pre.parentNode) continue;
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+      var lang = pre.getAttribute('data-language');
+      if(lang){
+        lang = LANG_MAP[lang.toLowerCase()] || lang;
+        var badge = document.createElement('span');
+        badge.className = 'lang-badge'; badge.textContent = lang;
+        wrapper.appendChild(badge);
+      }
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      var code = pre.querySelector('code');
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn'; btn.textContent = '复制';
+      btn.onclick = function(){
+        try { navigator.clipboard.writeText(code?code.textContent||'':'').then(function(){
+          btn.textContent='已复制!'; btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent='复制'; btn.classList.remove('copied'); }, 1500);
+        }).catch(function(){}); } catch(e){}
+      };
+      pre.appendChild(btn);
+    }
+  }
+  // Defer to avoid blocking page render
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){init();setTimeout(init,500);});}
+  else{init();setTimeout(init,500);}
+  } catch(e) { console.log('CopyCode:', e); }
+})();
+</script><nav class="series-nav"><!-- Hidden nav links for keyboard shortcuts --><a href="/posts/post1" data-series-prev style="display:none;" aria-hidden="true">上一篇</a><a href="/posts/post3" data-series-next style="display:none;" aria-hidden="true">下一篇</a><div class="series-nav-title">系列导航</div><table style="width:100%;border-collapse:collapse;margin-top:0.5rem;"><thead><tr><th style="width:4rem;text-align:center;padding:0.5rem 0.5rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);white-space:nowrap;">集数</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">标题</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">内容</th></tr></thead><tbody><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 0 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post1" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">全国大学生电子设计竞赛经验分享。</td></tr><tr style="background:color-mix(in srgb,var(--color-accent) 8%,transparent);"><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-accent);">第 1 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><span style="color:var(--color-text);font-weight:600;">21年电赛国一之三端口DC-DC变换器 <span style="font-size:0.7rem;color:var(--color-accent);">👈 你在这里</span></span></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">博主今天想分享的是在学校期间参加2021年全国大学生电子设计</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 2 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post3" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作高、低端直流电流采样电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对高、低端直流电流采样电路进行了详细介绍，经过本文章你</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 3 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post4" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作直流电压采样电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对直流电压采样电路进行了详细介绍，经过本文章你可以学会</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 4 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post5" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作交流电压检测电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压的检测与直流检测不同，由于我们采集到的交流信号会出现</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 5 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post6" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作交流电流检测电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电流的检测与直流检测不同，由于我们采集到的交流信号会出现</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 6 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post7" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你用STM32F1做交流电压采样</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压检测需要通过单片机ADC分点采集交流电压周期内多点电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 7 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post8" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你用STM32F4做交流电压采样</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压检测需要通过单片机ADC分点采集交流电压周期内多点电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 8 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post9" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作驱动电路（IR2104S半桥/TLP250H光耦）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">今天分享的这篇博文以驱动电路为核心，重点分享两个不同的驱动电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 9 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post10" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作BUCK电路（原理图PCB代码实物）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">单片机输出一路PWM信号，PWM占空比越高，输出电压越高。P</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 10 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post11" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-闭环控制升级之PID调节（附PID源</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">PID其实属于比较常见且通用的闭环调节算法，经典古老但实用。</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 11 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post12" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作BOOST电路（电压电流闭环，PID调节）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 12 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post13" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作单相逆变电路（交流电压闭环，SPWM调制）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 13 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post14" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作双向DC-DC充放电电路（电池恒流充电，恒压放电）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 14 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post15" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作隔离辅助电源（基于金升阳模块）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">电源模块采用金升阳隔离电源砖，能够输出12V电压和±5V电压</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 15 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post22" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控选用STM32F103C8T6，屏幕显示用0.96寸OL</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 16 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post24" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对20年省赛题进行了详细介绍，经过本文章你可以学会怎么</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 17 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/嵌入式-基于stm32的buck电路电感电流闭环控制" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你基于STM32的BUCK电路高端电流采样（同步整流+高端电感电流采样）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">基于STM32F103C8T6的同步整流BUCK降压电源：电</td></tr></tbody></table></nav><!-- Comments --><div class="mt-16" id="comments" data-astro-cid-ruv7hgo6><script src="https://giscus.app/client.js" data-repo="EDAdong/EDAdong.github.io" data-repo-id="R_kgDON01Lrg" data-category="Announcements" data-category-id="DIC_kwDON01Lrs4DCAkU" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script></div><!-- Related Posts --><section class="mt-16" data-astro-cid-ruv7hgo6><h2 class="text-xl font-bold mb-6" style="color: var(--color-text);" data-astro-cid-ruv7hgo6>相关文章</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem" data-astro-cid-ruv7hgo6><a href="/posts/post24/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post24.webp" alt="电源-20年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">电源</span><span class="tag">实战教程</span></div><h3 class="post-card-title">电源-20年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-07-09T22:08:00.000Z">2025年7月10日</time><span class="post-card-reading-time">· 约 4 分钟</span></div></div></a><a href="/posts/post22/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post22.webp" alt="电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">电源</span><span class="tag">实战教程</span></div><h3 class="post-card-title">电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-06-30T23:18:00.000Z">2025年7月1日</time><span class="post-card-reading-time">· 约 5 分钟</span></div></div></a><a href="/posts/post15/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post15.webp" alt="电源-手把手教你制作隔离辅助电源（基于金升阳模块）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">电源</span><span class="tag">实战教程</span></div><h3 class="post-card-title">电源-手把手教你制作隔离辅助电源（基于金升阳模块）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-06-04T14:25:00.000Z">2025年6月4日</time><span class="post-card-reading-time">· 约 3 分钟</span></div></div></a></div></section></article><!-- Desktop TOC Sidebar --><aside class="article-sidebar" data-astro-cid-ruv7hgo6><nav class="toc-wrapper" id="toc-nav" data-astro-cid-ruv7hgo6><div class="toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#前言" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>前言</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#题目" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>题目</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#题目分析" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>题目分析</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#题目要求分析" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>题目要求分析</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#题目方案选定" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>题目方案选定</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#控制方案选定" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>控制方案选定</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#理论分析与计算" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>理论分析与计算</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#效率提高的方法" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>效率提高的方法</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#优化提升点" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>优化提升点</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#双向dc-dc的buck模式下的电感参数计算" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>双向DC-DC的Buck模式下的电感参数计算</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#双向dc-dc的boost模式下的电感参数计算" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>双向DC-DC的Boost模式下的电感参数计算</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#原理框图" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>原理框图</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#boost电路和双向dc-dc电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>BOOST电路和双向DC-DC电路</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#辅助电源电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>辅助电源电路</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#高端电流采样电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>高端电流采样电路</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#pwm信号驱动电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>PWM信号驱动电路</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#总电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总电路</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#软件思路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>软件思路</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#总结" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总结</a></li></ol></nav></aside></div><button id="mobile-toc-btn" class="mobile-toc-fab" aria-label="目录" data-astro-cid-ruv7hgo6>📑</button><div id="mobile-toc-overlay" class="mobile-toc-overlay" data-astro-cid-ruv7hgo6></div><div id="mobile-toc-drawer" class="mobile-toc-drawer" data-astro-cid-ruv7hgo6><div class="mobile-toc-handle" data-astro-cid-ruv7hgo6></div><div class="mobile-toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#前言" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>前言</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#题目" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>题目</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#题目分析" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>题目分析</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#题目要求分析" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>题目要求分析</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#题目方案选定" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>题目方案选定</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#控制方案选定" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>控制方案选定</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#理论分析与计算" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>理论分析与计算</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#效率提高的方法" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>效率提高的方法</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#优化提升点" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>优化提升点</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#双向dc-dc的buck模式下的电感参数计算" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>双向DC-DC的Buck模式下的电感参数计算</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#双向dc-dc的boost模式下的电感参数计算" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>双向DC-DC的Boost模式下的电感参数计算</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#原理框图" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>原理框图</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#boost电路和双向dc-dc电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>BOOST电路和双向DC-DC电路</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#辅助电源电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>辅助电源电路</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#高端电流采样电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>高端电流采样电路</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#pwm信号驱动电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>PWM信号驱动电路</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#总电路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总电路</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#软件思路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>软件思路</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#总结" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总结</a></li></ol></div></main><footer style="margin-top: 5rem; padding: 2.5rem 0; border-top: 1px solid var(--color-border); text-align: center;"><div class="container-main"><p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0 0 0.75rem; opacity: 0.8;">&copy; 2025 - 2026 By EDAdong</p><p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0 0 1rem; opacity: 0.6; max-width: 28rem; margin-inline: auto; line-height: 1.7;">做任何事情之前先想清楚事情的价值，动脑袋思考是一件累人的事情，但是带来给你的收益会让你少更多的烦恼，许愿早日年薪百万</p><div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #FF5D01 10%, transparent); color: #FF5D01; border: 1px solid color-mix(in srgb, #FF5D01 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #FF5D01;"></span>Astro</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #06B6D4 10%, transparent); color: #06B6D4; border: 1px solid color-mix(in srgb, #06B6D4 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #06B6D4;"></span>Tailwind</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #333 10%, transparent); color: #333; border: 1px solid color-mix(in srgb, #333 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #333;"></span>GitHub Pages</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #0891b2 10%, transparent); color: #0891b2; border: 1px solid color-mix(in srgb, #0891b2 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0891b2;"></span>STM32</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #8b5cf6 10%, transparent); color: #8b5cf6; border: 1px solid color-mix(in srgb, #8b5cf6 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6;"></span>FPGA</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #10b981 10%, transparent); color: #10b981; border: 1px solid color-mix(in srgb, #10b981 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>嵌入式</span></div></div></footer><div id="music-player" class="music-player" data-astro-cid-hxmsq4xn><button id="music-toggle" class="music-btn" aria-label="Toggle music" title="播放/暂停" data-astro-cid-hxmsq4xn><div class="vinyl" data-astro-cid-hxmsq4xn><div class="vinyl-grooves" data-astro-cid-hxmsq4xn></div><div class="vinyl-label" data-astro-cid-hxmsq4xn></div><div class="vinyl-hole" data-astro-cid-hxmsq4xn></div></div><span class="music-note" data-astro-cid-hxmsq4xn>♪</span></button><span class="music-tip" data-astro-cid-hxmsq4xn>轻音</span></div><script>
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.getElementById('music-toggle');
+  var player = document.getElementById('music-player');
+  if(!btn||!player)return;
+  var playing = false;
+
+  // Load music lazily — only on user interaction. The MP3 is 5MB, preloading
+  // it on every page visit wastes bandwidth and slows page load significantly.
+  var audio = null;
+  function getAudio() {
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = 'none';
+      audio.src = '/music/无损网站背景音乐.mp3';
+      audio.loop = true;
+      audio.volume = 0.12;
+    }
+    return audio;
+  }
+
+  // Save position before navigating away
+  window.addEventListener('beforeunload', function(){
+    if(audio && !audio.paused){
+      sessionStorage.setItem('musicTime', audio.currentTime);
+    }
+  });
+
+  btn.onclick = function(e){ e.preventDefault();
+    var a = getAudio();
+    if(a.paused){
+      var t = sessionStorage.getItem('musicTime');
+      if(t){ a.currentTime = parseFloat(t); sessionStorage.removeItem('musicTime'); }
+      a.play().then(function(){
+        player.classList.add('playing'); localStorage.setItem('music','on');
+      }).catch(function(){});
+    } else {
+      a.pause(); player.classList.remove('playing'); localStorage.setItem('music','off');
+    }
+  };
+});
+</script><!-- KeyboardHints: floating "?" button + shortcuts modal --><div class="kh-wrapper" data-astro-cid-ctlvvxge><button class="kh-btn" id="kh-btn" title="键盘快捷键" aria-label="键盘快捷键" data-astro-cid-ctlvvxge>?</button><div class="kh-overlay" id="kh-overlay" data-astro-cid-ctlvvxge></div><div class="kh-modal" id="kh-modal" data-astro-cid-ctlvvxge><div class="kh-modal-header" data-astro-cid-ctlvvxge><span style="font-weight:700;font-size:0.95rem;" data-astro-cid-ctlvvxge>键盘快捷键</span><button class="kh-close" id="kh-close" title="关闭" data-astro-cid-ctlvvxge>Esc</button></div><div class="kh-modal-body" data-astro-cid-ctlvvxge><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + K</kbd><span data-astro-cid-ctlvvxge>搜索</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>&larr; &rarr;</kbd><span data-astro-cid-ctlvvxge>上一篇 / 下一篇（系列导航时）</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Esc</kbd><span data-astro-cid-ctlvvxge>关闭弹窗</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + Shift + H</kbd><span data-astro-cid-ctlvvxge>回到首页</span></div></div></div></div><script>
+(function() {
+  if (typeof window === 'undefined') return;
+  function init() {
+    var btn = document.getElementById('kh-btn');
+    var overlay = document.getElementById('kh-overlay');
+    var modal = document.getElementById('kh-modal');
+    var close = document.getElementById('kh-close');
+    if (!btn || !overlay || !modal) return;
+
+    function open() {
+      overlay.classList.add('open');
+      modal.classList.add('open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+    }
+
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      overlay.classList.contains('open') ? closeModal() : open();
+    });
+    overlay.addEventListener('click', closeModal);
+    if (close) close.addEventListener('click', closeModal);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+K: focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        var searchInput = document.querySelector('#search-input, [data-search-input]');
+        if (searchInput) {
+          searchInput.focus();
+        } else {
+          // Try opening search modal
+          var searchLink = document.querySelector('a[href="/search"]');
+          if (searchLink) window.location.href = '/search';
+        }
+      }
+      // Ctrl+Shift+H: go home
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'H') {
+        e.preventDefault();
+        window.location.href = '/';
+      }
+      // Esc: close modal
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        e.preventDefault();
+        closeModal();
+      }
+      // Arrow keys for series nav
+      if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !modal.classList.contains('open')) {
+        var prevLink = document.querySelector('[data-series-prev]');
+        var nextLink = document.querySelector('[data-series-next]');
+        if (e.key === 'ArrowLeft' && prevLink) {
+          e.preventDefault();
+          window.location.href = prevLink.getAttribute('href');
+        }
+        if (e.key === 'ArrowRight' && nextLink) {
+          e.preventDefault();
+          window.location.href = nextLink.getAttribute('href');
+        }
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><button id="back-to-top" class="scroll-btn" style="bottom:2rem;" aria-label="回到顶部" title="回到顶部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>TOP</span></button><button id="go-bottom" class="scroll-btn" style="bottom:6.5rem;" aria-label="回到底部" title="回到底部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M6 9l6 6 6-6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>BOT</span></button><script type="module">(function(){var e=document.getElementById(`back-to-top`),t=document.getElementById(`go-bottom`);if(!e||!t)return;var n=!1;function r(){n||(n=!0,requestAnimationFrame(function(){var r=window.scrollY,i=document.documentElement.scrollHeight-window.innerHeight;e.classList.toggle(`visible`,r>400),t.classList.toggle(`visible`,r<i-400),n=!1}))}window.addEventListener(`scroll`,r,{passive:!0}),r(),e.onclick=function(){window.scrollTo({top:0,behavior:`smooth`})},t.onclick=function(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:`smooth`})}})();</script></body></html><script>
+  var theme=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  document.documentElement.setAttribute('data-theme',theme);
+  // Register Service Worker for offline caching
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  }
+</script><script type="module">(function(){function e(){var e=document.querySelectorAll(`[data-toc-link]`);if(e.length){e.forEach(function(e){e.addEventListener(`click`,function(e){e.preventDefault();var t=this.getAttribute(`href`)||``,n=decodeURIComponent(t.replace(/^#/,``)),r=document.getElementById(n);r&&(r.scrollIntoView({behavior:`smooth`,block:`start`}),history.replaceState(null,``,`#`+n))})});var t=new IntersectionObserver(function(e){e.forEach(function(e){var t=CSS.escape(e.target.id),n=document.querySelector(`[data-toc-link][href="#`+t+`"]`);n&&n.classList.toggle(`active`,e.isIntersecting)})},{rootMargin:`-80px 0px -60% 0px`});e.forEach(function(e){var n=e.getAttribute(`href`)||``,r=decodeURIComponent(n.replace(/^#/,``));if(r){var i=document.getElementById(r);i&&t.observe(i)}})}}document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,e):e()})();</script><script>
+  (function() {
+    var btn = document.getElementById('mobile-toc-btn');
+    var overlay = document.getElementById('mobile-toc-overlay');
+    var drawer = document.getElementById('mobile-toc-drawer');
+    if (!btn || !overlay || !drawer) return;
+
+    function open() {
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', function(e) { e.stopPropagation(); open(); });
+    overlay.addEventListener('click', close);
+    // Close when a TOC link is clicked
+    drawer.addEventListener('click', function(e) {
+      if (e.target.closest('[data-toc-link]')) {
+        setTimeout(close, 150); // wait for scroll to start
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) close();
+    });
+  })();
+</script>

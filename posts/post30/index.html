@@ -1,0 +1,424 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v7.1.3"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等） | EDAdong</title><meta name="description" content="25嵌入式秋招多家SSP/SP的OFFER面试内容分享"><meta property="og:title" content="小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）"><meta property="og:type" content="article"><meta property="og:url" content="https://edadong.com/posts/post30/"><meta property="og:description" content="25嵌入式秋招多家SSP/SP的OFFER面试内容分享"><meta property="og:image" content="/images/post30.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）","description":"25嵌入式秋招多家SSP/SP的OFFER面试内容分享","datePublished":"2025-10-12T17:11:00.000Z","author":{"@type":"Person","name":"EDAdong","url":"https://edadong.com/about/"},"image":"https://edadong.com/images/post30.webp","url":"https://edadong.com/posts/post30/","publisher":{"@type":"Person","name":"EDAdong"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://edadong.com/"},{"@type":"ListItem","position":2,"name":"文章","item":"https://edadong.com/posts/"},{"@type":"ListItem","position":3,"name":"小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）"}]}]}</script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="dns-prefetch" href="https://github.com"><link rel="dns-prefetch" href="https://avatars.githubusercontent.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="/_astro/BaseLayout.FZUuh1sy.css"><link rel="stylesheet" href="/_astro/_slug_.CITvTZpu.css"><link rel="stylesheet" href="/_astro/global.CZGXK5uF.css"></head><body style="background-color: var(--color-bg); color: var(--color-text);"><div style="position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 60% 50% at 20% 30%, rgba(8,145,178,0.25), transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(99,102,241,0.18), transparent 50%),
+      radial-gradient(ellipse 45% 40% at 55% 70%, rgba(8,145,178,0.20), transparent 55%);
+    "></div><!-- Initial loading screen: visible on first load, fades out when page ready --><div id="page-loader" class="page-loader-overlay active"><div class="page-loader-content"><div class="pl-logo">E</div><div class="pl-spinner"><div class="pl-ring"></div></div><div class="pl-text">EDAdong</div></div></div><script>
+  (function(){
+    var loader = document.getElementById('page-loader');
+    if(!loader) return;
+
+    function hide(){ loader.classList.remove('active'); }
+
+    // Hide loader as soon as page is interactive — don't wait for all resources
+    if (document.readyState === 'loading') {
+      // Initial page load: hide shortly after DOM is ready
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(hide, 50); });
+      // Fallback: hide after load event
+      window.addEventListener('load', function() { setTimeout(hide, 300); });
+    } else {
+      // View Transition navigation: DOM already ready, hide immediately
+      hide();
+    }
+    // Safety: always hide after 3s
+    setTimeout(hide, 3000);
+
+    // Show loader when clicking internal links (for View Transition nav)
+    document.addEventListener('click', function(e){
+      var link = e.target.closest('a');
+      if(!link) return;
+      var href = link.getAttribute('href');
+      if(!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('//')) return;
+      if(link.getAttribute('target') === '_blank') return;
+      loader.classList.add('active');
+    });
+  })();
+</script><!-- Adds native lazy loading to all article images --><script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.article-body img:not([loading])').forEach(function(img){
+      img.loading = 'lazy';
+      img.decoding = 'async';
+    });
+  });
+</script><header id="site-header" class="site-header" data-astro-cid-nen7h5rs><div class="container-main w-full flex items-center justify-between" data-astro-cid-nen7h5rs><a href="/" class="flex items-center gap-2 font-bold text-lg no-underline" style="color: var(--color-text);" data-astro-cid-nen7h5rs><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0" style="background: linear-gradient(135deg, var(--color-accent), #6366f1);" data-astro-cid-nen7h5rs>主页</span></a><nav class="flex items-center gap-1" data-astro-cid-nen7h5rs><a href="/posts" class="nav-item" style="color: var(--color-accent)" data-astro-cid-nen7h5rs>文章</a><a href="/search" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>搜索</a><a href="/resources" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>资料</a><a href="/friends" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>友链</a><a href="/about" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>关于</a><button id="theme-btn" class="nav-item border-none cursor-pointer" aria-label="Toggle theme" style="background:transparent; font-size:1rem;" data-astro-cid-nen7h5rs><svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" data-astro-cid-nen7h5rs></path></svg><svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 hidden" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" data-astro-cid-nen7h5rs></path></svg></button></nav></div></header><script>
+(function(){
+  var t=document.getElementById('theme-btn'),s=document.getElementById('sun-icon'),m=document.getElementById('moon-icon');
+  if(!t||!s||!m)return;
+  function u(){var d=document.documentElement.getAttribute('data-theme')==='dark';s.classList.toggle('hidden',d);m.classList.toggle('hidden',!d)}
+  u();t.onclick=function(){var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);u()};
+})();
+</script><main><div class="reading-progress" id="reading-progress-bar"></div><script type="module">var e=document.getElementById(`reading-progress-bar`);e&&window.addEventListener(`scroll`,()=>{let t=window.scrollY,n=document.documentElement.scrollHeight-window.innerHeight;e.style.width=n>0?`${t/n*100}%`:`0%`});</script><div class="article-layout" data-astro-cid-ruv7hgo6><article class="article-main" data-astro-cid-ruv7hgo6><!-- Header --><header class="mb-10" data-astro-cid-ruv7hgo6><h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4" style="color: var(--color-text); letter-spacing: -0.02em;" data-astro-cid-ruv7hgo6>小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等）</h1><div class="flex flex-wrap items-center gap-3 text-sm mb-4" style="color: var(--color-text-secondary);" data-astro-cid-ruv7hgo6><time datetime="Mon Oct 13 2025 01:11:00 GMT+0800 (中国标准时间)" data-astro-cid-ruv7hgo6>2025年10月13日</time><span style="color: var(--color-text-secondary); opacity: 0.6;" data-astro-cid-ruv7hgo6>· 约 12 分钟</span><span data-astro-cid-ruv7hgo6>· <a href="/categories/思考与规划" class="font-medium transition-colors" style="color: var(--color-accent);" data-astro-cid-ruv7hgo6>#思考与规划</a></span></div><div class="flex flex-wrap gap-1.5" data-astro-cid-ruv7hgo6><span class="tag" data-astro-cid-ruv7hgo6>嵌入式</span><span class="tag" data-astro-cid-ruv7hgo6>实战教程</span></div></header><!-- Article Body --><div class="article-body" data-astro-cid-ruv7hgo6><h1 id="前言">前言</h1>
+<p><strong>电源方向资料</strong>免费开源到<strong>QQ群1：280730348</strong>、<strong>QQ群2：725438563</strong>、<strong>QQ群3：961600221</strong>、<strong>QQ群4：961951045</strong>、<strong>QQ群5：966375130</strong>、<strong>QQ群6：1065090414</strong></p>
+<p><strong>嵌入式方向资料</strong>免费开源到<strong>QQ群1：976387827</strong>、<strong>QQ群2：418493877</strong>。</p>
+<p>博客地址edadong.com，博文同步发布在知乎、bilibili，其中bilibili主要以视频为主。对开源项目的疑惑请尽量在b站下方留言，其次在群内商讨，所有开源项目均自己设计验证过。</p>
+<p>由于个人精力有限，以后不做私聊问题回答，但B站我会做最快的响应回答，此初衷主要是想更多人看到问题的解决方法或者开源项目这么做的意义，在B站解答大家都能看得到，私人解答就丢失了开源解答的优势了。</p>
+<p>更详细的讲解请移步Bilibili：EDAdong。</p>
+<h1 id="博文内容">博文内容</h1>
+<p>25嵌入式秋招多家SSP/SP的OFFER面试内容分享，更具体的建议移步<strong>牛客猪脚饭超好吃</strong>或者<strong>小红书猪脚饭超好吃</strong></p>
+<p>背景：双非本末流211硕，有竞赛经验+小厂实习</p>
+<p><img alt="image-20251012172916175" loading="lazy" decoding="async" width="2004" height="1045" src="/_astro/image-20251012172916175.DbH34FKe_Z1yFpvW.webp" srcset=""></p>
+<h1 id="面试经验">面试经验：</h1>
+<p>华为：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#E1E4E8">这个不能透露太多，三轮面试大家应该是清楚地。</span></span>
+<span class="line"><span style="color:#E1E4E8">我个人觉得，如果你是硬件岗位的话，对于一些基础电路的设计和原理讲解是比较重要的。</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">当时一面、二面都有手撕电源方向的题目，包括一些常见基础电路的讲解等等，电源方向跟我的简历内容硬相关，因为我之前本科是主做电源电路的，所以常见的那些BUCK、BOOST，逆变什么的都有可能考到。一些常见的基础电路，我觉得集中在模电的BJT及其之前的内容即可，很多模拟八股感觉只会考到这范围内的内容，后面更深层次的模拟电路问题没有怎么考到过。题目都有共通性，在后面的公司进行分享。</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">面试的时候一定要大胆自信，而且可以关注一些行业比较先进的技术（这个在主管面可能会有帮助），不要磕磕巴巴的，一定要刻意养成迅速思考，不结巴的回答问题。要对自己的项目胸有成竹，并且一些项目可以引申一些新的东西出来，能讲的尽量都讲出来。</span></span>
+<span class="line"><span style="color:#E1E4E8">    </span></span>
+<span class="line"><span style="color:#E1E4E8">抗压、团队协作、沟通交流这三点比较重要！！！也要提前想好对华为的印象等等</span></span></code></pre>
+<p>小米：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#E1E4E8">🤔 面试感受</span></span>
+<span class="line"><span style="color:#E1E4E8">一面技术面55min，感觉很好，面试官除了声音比较小，全程都是很好的面试体验。</span></span>
+<span class="line"><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">、自我介绍。</span></span>
+<span class="line"><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">、BUCK</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">BOOST电路的区别以及具体的工作原理。</span></span>
+<span class="line"><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">、电感的选型，怎么样去考虑功耗问题。</span></span>
+<span class="line"><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">、项目的介绍和设计流程。</span></span>
+<span class="line"><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">、PCB采用的叠层结构。</span></span>
+<span class="line"><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">、PCB是什么孔（他的意思是直接全过孔还是其中比如1</span><span style="color:#F97583">-</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">层有过孔这样的）。</span></span>
+<span class="line"><span style="color:#79B8FF">7</span><span style="color:#E1E4E8">、剩下的就是针对项目细节追问，问的很细很全面。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">二面技术面90min，突破面试时长极限了，面试官是真深挖，汗流浃背，但是确实也很感谢面试官。</span></span>
+<span class="line"><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">、自我介绍。</span></span>
+<span class="line"><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">、选择一个项目进行介绍。</span></span>
+<span class="line"><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">、从头系统介绍一遍核心板设计的电路原理图（期间掺杂八股）。</span></span>
+<span class="line"><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">、介绍一下走线的方式以及走线的规范。</span></span>
+<span class="line"><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">、电源怎么设计的，上电的时序如何。</span></span>
+<span class="line"><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">、你是怎么选择电源芯片的，电源输出变化对整体内核的影响。</span></span>
+<span class="line"><span style="color:#79B8FF">7</span><span style="color:#E1E4E8">、我看你这个功率电感值都一样，你怎么进行选型的。</span></span>
+<span class="line"><span style="color:#79B8FF">8</span><span style="color:#E1E4E8">、开关电源的损耗点在哪里？</span></span>
+<span class="line"><span style="color:#79B8FF">9</span><span style="color:#E1E4E8">、讲解一下你的PCB怎么设计的，为什么这么设计。</span></span>
+<span class="line"><span style="color:#79B8FF">10</span><span style="color:#E1E4E8">、你说你花了很长时间在器件布局上，你是怎么安排这个布局的。</span></span>
+<span class="line"><span style="color:#79B8FF">11</span><span style="color:#E1E4E8">、介绍一下你怎么去带团队的，遇到困难怎么解决的。</span></span>
+<span class="line"><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">、你对手机工程师的认识，跟其他工程师的区别。</span></span>
+<span class="line"><span style="color:#E1E4E8">反问环节：</span></span>
+<span class="line"><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">、公司的培养方案。</span></span>
+<span class="line"><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">、后续的环节。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">压力拉满，但是感觉面试官确实人很好，没有给太多的压力，后续的话听说是技术就结束了，问我对小米的意愿如何，等后面hr之类的。</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">三面HR面20min，主要是聊一些基本情况之类的。</span></span>
+<span class="line"><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">、是哪里人，听口音有点像南方人。</span></span>
+<span class="line"><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">、目标的工作地点，为什么选择投递小米。</span></span>
+<span class="line"><span style="color:#79B8FF">3</span><span style="color:#E1E4E8">、对于自己未来的规划，以及对于电路工程师这个岗位的看法。</span></span>
+<span class="line"><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">、个人情况的询问（成绩、手头的offer等等）。</span></span>
+<span class="line"><span style="color:#E1E4E8">反问：</span></span>
+<span class="line"><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">、后续的环节（说是这就是最后一面，后续就是国庆节以后陆陆续续开奖）</span></span></code></pre>
+<p>VIVO：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>🤔 面试感受</span></span>
+<span class="line"><span>一面技术面55min，技术面试官很和蔼，感觉跟网上的面经感觉一样，vivo这面试官确实不错。</span></span>
+<span class="line"><span>1、自我介绍。</span></span>
+<span class="line"><span>2、根据项目进行电路结构的展现。</span></span>
+<span class="line"><span>3、面试官给一个图，让你去判断电路。</span></span>
+<span class="line"><span>4、做的大功率LED光源的驱动系统框图（期间掺杂八股）。</span></span>
+<span class="line"><span>5、你团队经验比较丰富，系统性的讲述一下你怎么带团队打比赛的。</span></span>
+<span class="line"><span>6、高速PCB的一些问题。</span></span>
+<span class="line"><span>7、对于信号完整性的一些问题。</span></span>
+<span class="line"><span>反问环节：</span></span>
+<span class="line"><span>1、入职培养模式。</span></span>
+<span class="line"><span>2、后续环节。</span></span>
+<span class="line"><span>总体来说面试官很好，公司也很好，他们问的问题更侧重于你的系统本身，所以大家要对自己的系统有了解，才能应对面试官，都是根据项目来的。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>二面HR面30min，HR小姐姐很温柔。</span></span>
+<span class="line"><span>1、自我介绍。</span></span>
+<span class="line"><span>2、选择一个印象最深的比赛进行介绍。</span></span>
+<span class="line"><span>3、你研究生期间做的东西对你的提升。</span></span>
+<span class="line"><span>4、你对未来工作的规划和认知。</span></span>
+<span class="line"><span>5、家庭问题和女朋友问题。</span></span>
+<span class="line"><span>6、有没有收到其它offer，预期的薪资。</span></span>
+<span class="line"><span>反问环节：</span></span>
+<span class="line"><span>1、大概多久会有offer消息通知（统一十月中旬左右）。</span></span></code></pre>
+<p>格力：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>🤔 面试感受</span></span>
+<span class="line"><span>一面25min，首先是个人介绍，介绍自己的本科和研究生阶段的经历。接着就开始进行项目的介绍，针对这个岗位我展现出来的项目主要是开关电源电力电子这一块儿的，所以有很多本科电赛时候做的一些电路。第一个问的电路是单相全桥逆变并网系统，主要回答的技术点就是逆变工作原理，怎么并网的。接着是MPPT电路，问的用什么拓扑结构，用的什么驱动电路，用到了电流环和电压环没有。然后问了PFC电路，我当时回答无桥PFC，画了一下拓扑结构，问了一下工作状态。差不多项目这一块儿就结束了。后面问了我的目标工作地点，珠海能接受么，家是哪里的，能够快速上手设计么？有接触过110kw级别的变频电源么？</span></span>
+<span class="line"><span>反问环节：1、公司除了单相PFC还有做过三相PFC么？2、是纯硬件电路还是软件硬件结合？</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>二面20min，首先是个人介绍，跟一面差不多。应该属于人力资源部的HR面试，有个小小的问题就是面试的时候HR是在工位上面面试的，旁边都是人，有点嘈杂，耳朵有点听不太清楚。第一个问题就是说一段对自己意义最重要的经历，我选的是本科期间做电赛的经历，重点突出学到了什么，得到了什么样的提升。第二个是怎么开展团队合作的，我说我主要是跟其它做电源的同学沟通交流。第三个问题是未来的规划。第四个问题是家庭情况。最后一个问题就是考虑薪资多少？我说薪资不重要，重要的是有发展前景。这些问题问完了以后就是核对一些资料，其实就是身高体重啥的。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>总结：还好，没什么压力，一面八股有点，二面没啥压力。</span></span></code></pre>
+<p>景嘉微：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>一面技术面50min，两个面试官，很久没面FPGA了，感觉讲起来都有点磕磕巴巴的。</span></span>
+<span class="line"><span>1、自我介绍。</span></span>
+<span class="line"><span>2、选择一个最有印象的项目进行介绍。</span></span>
+<span class="line"><span>3、你负责系统的哪一部分。</span></span>
+<span class="line"><span>4、图像清晰度评价你是怎么去实现。</span></span>
+<span class="line"><span>5、详细介绍一下FPGA的架构，你整体是怎么设计的。</span></span>
+<span class="line"><span>6、DDR用的是什么系列的，多高工作频率。</span></span>
+<span class="line"><span>7、ZYNQ的程序加载流程。</span></span>
+<span class="line"><span>8、你用的高斯滤波怎么实现的。</span></span>
+<span class="line"><span>9、你说对图像算法进行加速，它相对于CPU的优势在哪里。</span></span>
+<span class="line"><span>10、聊一下AXI总线的工作协议。</span></span>
+<span class="line"><span>11、HDMI是用芯片还是直接IO口进行驱动。</span></span>
+<span class="line"><span>12、你在做这个项目过程中印象最深刻的错误在哪里。</span></span>
+<span class="line"><span>13、你做的方向很全面，那你未来是想要走哪个方向呢。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>反问环节：</span></span>
+<span class="line"><span>1、进去的部门大概是什么方向。</span></span>
+<span class="line"><span>2、部门的FPGA开发规模。</span></span>
+<span class="line"><span>3、公司用国外还是国内芯片多一点。</span></span>
+<span class="line"><span>4、后续的流程（还有部门一面，HR一面）</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>二面部门主管面20min，两个面试官。</span></span>
+<span class="line"><span>1、自我介绍。</span></span>
+<span class="line"><span>2、家庭情况，手上的offer情况。</span></span>
+<span class="line"><span>3、对于自己的职业规划安排，遇到难题怎么解决的。</span></span>
+<span class="line"><span>4、期望的薪资情况，大概是多少。</span></span>
+<span class="line"><span>5、了解过景嘉微么？对他的印象是什么。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>反问环节：</span></span>
+<span class="line"><span>1、公司的新人培养方案。</span></span>
+<span class="line"><span>2、公司的晋升流程。</span></span>
+<span class="line"><span>3、公司的加班情况，出差情况。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>三面HR面25min，一个面试官，</span></span>
+<span class="line"><span>1、自我介绍。</span></span>
+<span class="line"><span>2、实验室经历介绍一下。</span></span>
+<span class="line"><span>3、事业部的选择。</span></span>
+<span class="line"><span>4、你选择企业的标准是什么。</span></span>
+<span class="line"><span>5、家庭情况询问。</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>反问环节：</span></span>
+<span class="line"><span>1、后续的流程（一到两周offer审批下发）</span></span></code></pre>
+<h1 id="总结">总结</h1>
+<p>加油，祝秋招顺利！</p></div><!-- HeadingAnchors: adds clickable anchor links to H2/H3 in .article-body --><script>
+(function() {
+  if (typeof window === 'undefined') return;
+
+  function init() {
+    var headings = document.querySelectorAll('.article-body h2[id], .article-body h3[id]');
+    if (!headings.length) return;
+
+    // Create tooltip element
+    var tooltip = document.createElement('div');
+    tooltip.className = 'anchor-tooltip';
+    tooltip.textContent = '已复制!';
+    document.body.appendChild(tooltip);
+
+    var hideTimer = null;
+
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.className = 'heading-anchor';
+      a.href = '#' + h.id;
+      a.textContent = '#';
+      a.title = '复制链接';
+      a.setAttribute('aria-hidden', 'true');
+
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = window.location.origin + window.location.pathname + '#' + h.id;
+        try {
+          navigator.clipboard.writeText(url).then(function() {
+            tooltip.classList.add('show');
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = (e.clientY - 8) + 'px';
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function() {
+              tooltip.classList.remove('show');
+            }, 1500);
+          });
+        } catch(e) {}
+        // Also update URL bar without scrolling
+        history.replaceState(null, '', url);
+      });
+
+      h.appendChild(a);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><script>
+(function(){
+  try {
+  var LANG_MAP = {c:'C',cpp:'C++',python:'Python',javascript:'JS',typescript:'TS',bash:'Bash',json:'JSON',verilog:'Verilog',html:'HTML',css:'CSS',rust:'Rust',go:'Go',java:'Java',sql:'SQL',yaml:'YAML',xml:'XML',markdown:'MD',matlab:'MATLAB',lua:'Lua',diff:'Diff',dockerfile:'Docker',vim:'Vim',makefile:'Makefile',php:'PHP',ruby:'Ruby',swift:'Swift',kotlin:'Kotlin',scala:'Scala'};
+
+  function init(){
+    var pres = document.querySelectorAll('.article-body pre');
+    for(var i=0;i<pres.length;i++){
+      var pre=pres[i];
+      if(pre.parentElement && pre.parentElement.classList.contains('code-block-wrapper')) continue;
+      if(!pre.parentNode) continue;
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+      var lang = pre.getAttribute('data-language');
+      if(lang){
+        lang = LANG_MAP[lang.toLowerCase()] || lang;
+        var badge = document.createElement('span');
+        badge.className = 'lang-badge'; badge.textContent = lang;
+        wrapper.appendChild(badge);
+      }
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      var code = pre.querySelector('code');
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn'; btn.textContent = '复制';
+      btn.onclick = function(){
+        try { navigator.clipboard.writeText(code?code.textContent||'':'').then(function(){
+          btn.textContent='已复制!'; btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent='复制'; btn.classList.remove('copied'); }, 1500);
+        }).catch(function(){}); } catch(e){}
+      };
+      pre.appendChild(btn);
+    }
+  }
+  // Defer to avoid blocking page render
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){init();setTimeout(init,500);});}
+  else{init();setTimeout(init,500);}
+  } catch(e) { console.log('CopyCode:', e); }
+})();
+</script><nav class="series-nav"><!-- Hidden nav links for keyboard shortcuts --><a href="/posts/资料获取需知" data-series-next style="display:none;" aria-hidden="true">下一篇</a><div class="series-nav-title">系列导航</div><table style="width:100%;border-collapse:collapse;margin-top:0.5rem;"><thead><tr><th style="width:4rem;text-align:center;padding:0.5rem 0.5rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);white-space:nowrap;">集数</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">标题</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">内容</th></tr></thead><tbody><tr style="background:color-mix(in srgb,var(--color-accent) 8%,transparent);"><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-accent);">第 0 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><span style="color:var(--color-text);font-weight:600;">小董杂谈-25嵌入式秋招多家SSP/SP的OFFER面试内容分享（小米/VIVO/格力/华为/景嘉微等） <span style="font-size:0.7rem;color:var(--color-accent);">👈 你在这里</span></span></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">25嵌入式秋招多家SSP/SP的OFFER面试内容分享</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 1 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/资料获取需知" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">资料获取需知</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">EDAdong博客资料获取指南：开源项目汇总、B站/QQ群交</td></tr></tbody></table></nav><!-- Comments --><div class="mt-16" id="comments" data-astro-cid-ruv7hgo6><script src="https://giscus.app/client.js" data-repo="EDAdong/EDAdong.github.io" data-repo-id="R_kgDON01Lrg" data-category="Announcements" data-category-id="DIC_kwDON01Lrs4DCAkU" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script></div><!-- Related Posts --><section class="mt-16" data-astro-cid-ruv7hgo6><h2 class="text-xl font-bold mb-6" style="color: var(--color-text);" data-astro-cid-ruv7hgo6>相关文章</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem" data-astro-cid-ruv7hgo6><a href="/posts/post35/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post35.webp" alt="嵌入式-手把手教你基于NBIOT的停车场车位管理系统（NBIOT、超声波、舵机、蜂鸣器）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(268, 60%, 18%), hsl(298, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">嵌</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">嵌入式</span><span class="tag">实战教程</span></div><h3 class="post-card-title">嵌入式-手把手教你基于NBIOT的停车场车位管理系统（NBIOT、超声波、舵机、蜂鸣器）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2026-01-11T13:32:00.000Z">2026年1月11日</time><span class="post-card-reading-time">· 约 4 分钟</span></div></div></a><a href="/posts/post34/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post34.webp" alt="嵌入式-手把手教你用STM32实现智能家居安全监测（DHT11、MQ5、门磁、阿里云、矩阵键盘）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(268, 60%, 18%), hsl(298, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">嵌</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">嵌入式</span><span class="tag">实战教程</span></div><h3 class="post-card-title">嵌入式-手把手教你用STM32实现智能家居安全监测（DHT11、MQ5、门磁、阿里云、矩阵键盘）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-11-08T20:47:00.000Z">2025年11月9日</time><span class="post-card-reading-time">· 约 4 分钟</span></div></div></a><a href="/posts/post33/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post33.webp" alt="嵌入式-手把手教你STM32实现家用厨房电子秤（HX711称重，语音合成，蓝牙）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(268, 60%, 18%), hsl(298, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">嵌</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">嵌入式</span><span class="tag">实战教程</span></div><h3 class="post-card-title">嵌入式-手把手教你STM32实现家用厨房电子秤（HX711称重，语音合成，蓝牙）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-11-01T12:55:00.000Z">2025年11月1日</time><span class="post-card-reading-time">· 约 5 分钟</span></div></div></a></div></section></article><!-- Desktop TOC Sidebar --><aside class="article-sidebar" data-astro-cid-ruv7hgo6><nav class="toc-wrapper" id="toc-nav" data-astro-cid-ruv7hgo6><div class="toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#前言" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>前言</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#博文内容" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>博文内容</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#面试经验" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>面试经验：</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#总结" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总结</a></li></ol></nav></aside></div><button id="mobile-toc-btn" class="mobile-toc-fab" aria-label="目录" data-astro-cid-ruv7hgo6>📑</button><div id="mobile-toc-overlay" class="mobile-toc-overlay" data-astro-cid-ruv7hgo6></div><div id="mobile-toc-drawer" class="mobile-toc-drawer" data-astro-cid-ruv7hgo6><div class="mobile-toc-handle" data-astro-cid-ruv7hgo6></div><div class="mobile-toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#前言" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>前言</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#博文内容" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>博文内容</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#面试经验" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>面试经验：</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#总结" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总结</a></li></ol></div></main><footer style="margin-top: 5rem; padding: 2.5rem 0; border-top: 1px solid var(--color-border); text-align: center;"><div class="container-main"><p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0 0 0.75rem; opacity: 0.8;">&copy; 2025 - 2026 By EDAdong</p><p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0 0 1rem; opacity: 0.6; max-width: 28rem; margin-inline: auto; line-height: 1.7;">做任何事情之前先想清楚事情的价值，动脑袋思考是一件累人的事情，但是带来给你的收益会让你少更多的烦恼，许愿早日年薪百万</p><div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #FF5D01 10%, transparent); color: #FF5D01; border: 1px solid color-mix(in srgb, #FF5D01 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #FF5D01;"></span>Astro</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #06B6D4 10%, transparent); color: #06B6D4; border: 1px solid color-mix(in srgb, #06B6D4 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #06B6D4;"></span>Tailwind</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #333 10%, transparent); color: #333; border: 1px solid color-mix(in srgb, #333 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #333;"></span>GitHub Pages</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #0891b2 10%, transparent); color: #0891b2; border: 1px solid color-mix(in srgb, #0891b2 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0891b2;"></span>STM32</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #8b5cf6 10%, transparent); color: #8b5cf6; border: 1px solid color-mix(in srgb, #8b5cf6 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6;"></span>FPGA</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #10b981 10%, transparent); color: #10b981; border: 1px solid color-mix(in srgb, #10b981 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>嵌入式</span></div></div></footer><div id="music-player" class="music-player" data-astro-cid-hxmsq4xn><button id="music-toggle" class="music-btn" aria-label="Toggle music" title="播放/暂停" data-astro-cid-hxmsq4xn><div class="vinyl" data-astro-cid-hxmsq4xn><div class="vinyl-grooves" data-astro-cid-hxmsq4xn></div><div class="vinyl-label" data-astro-cid-hxmsq4xn></div><div class="vinyl-hole" data-astro-cid-hxmsq4xn></div></div><span class="music-note" data-astro-cid-hxmsq4xn>♪</span></button><span class="music-tip" data-astro-cid-hxmsq4xn>轻音</span></div><script>
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.getElementById('music-toggle');
+  var player = document.getElementById('music-player');
+  if(!btn||!player)return;
+  var playing = false;
+
+  // Load music lazily — only on user interaction. The MP3 is 5MB, preloading
+  // it on every page visit wastes bandwidth and slows page load significantly.
+  var audio = null;
+  function getAudio() {
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = 'none';
+      audio.src = '/music/无损网站背景音乐.mp3';
+      audio.loop = true;
+      audio.volume = 0.12;
+    }
+    return audio;
+  }
+
+  // Save position before navigating away
+  window.addEventListener('beforeunload', function(){
+    if(audio && !audio.paused){
+      sessionStorage.setItem('musicTime', audio.currentTime);
+    }
+  });
+
+  btn.onclick = function(e){ e.preventDefault();
+    var a = getAudio();
+    if(a.paused){
+      var t = sessionStorage.getItem('musicTime');
+      if(t){ a.currentTime = parseFloat(t); sessionStorage.removeItem('musicTime'); }
+      a.play().then(function(){
+        player.classList.add('playing'); localStorage.setItem('music','on');
+      }).catch(function(){});
+    } else {
+      a.pause(); player.classList.remove('playing'); localStorage.setItem('music','off');
+    }
+  };
+});
+</script><!-- KeyboardHints: floating "?" button + shortcuts modal --><div class="kh-wrapper" data-astro-cid-ctlvvxge><button class="kh-btn" id="kh-btn" title="键盘快捷键" aria-label="键盘快捷键" data-astro-cid-ctlvvxge>?</button><div class="kh-overlay" id="kh-overlay" data-astro-cid-ctlvvxge></div><div class="kh-modal" id="kh-modal" data-astro-cid-ctlvvxge><div class="kh-modal-header" data-astro-cid-ctlvvxge><span style="font-weight:700;font-size:0.95rem;" data-astro-cid-ctlvvxge>键盘快捷键</span><button class="kh-close" id="kh-close" title="关闭" data-astro-cid-ctlvvxge>Esc</button></div><div class="kh-modal-body" data-astro-cid-ctlvvxge><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + K</kbd><span data-astro-cid-ctlvvxge>搜索</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>&larr; &rarr;</kbd><span data-astro-cid-ctlvvxge>上一篇 / 下一篇（系列导航时）</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Esc</kbd><span data-astro-cid-ctlvvxge>关闭弹窗</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + Shift + H</kbd><span data-astro-cid-ctlvvxge>回到首页</span></div></div></div></div><script>
+(function() {
+  if (typeof window === 'undefined') return;
+  function init() {
+    var btn = document.getElementById('kh-btn');
+    var overlay = document.getElementById('kh-overlay');
+    var modal = document.getElementById('kh-modal');
+    var close = document.getElementById('kh-close');
+    if (!btn || !overlay || !modal) return;
+
+    function open() {
+      overlay.classList.add('open');
+      modal.classList.add('open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+    }
+
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      overlay.classList.contains('open') ? closeModal() : open();
+    });
+    overlay.addEventListener('click', closeModal);
+    if (close) close.addEventListener('click', closeModal);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+K: focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        var searchInput = document.querySelector('#search-input, [data-search-input]');
+        if (searchInput) {
+          searchInput.focus();
+        } else {
+          // Try opening search modal
+          var searchLink = document.querySelector('a[href="/search"]');
+          if (searchLink) window.location.href = '/search';
+        }
+      }
+      // Ctrl+Shift+H: go home
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'H') {
+        e.preventDefault();
+        window.location.href = '/';
+      }
+      // Esc: close modal
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        e.preventDefault();
+        closeModal();
+      }
+      // Arrow keys for series nav
+      if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !modal.classList.contains('open')) {
+        var prevLink = document.querySelector('[data-series-prev]');
+        var nextLink = document.querySelector('[data-series-next]');
+        if (e.key === 'ArrowLeft' && prevLink) {
+          e.preventDefault();
+          window.location.href = prevLink.getAttribute('href');
+        }
+        if (e.key === 'ArrowRight' && nextLink) {
+          e.preventDefault();
+          window.location.href = nextLink.getAttribute('href');
+        }
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><button id="back-to-top" class="scroll-btn" style="bottom:2rem;" aria-label="回到顶部" title="回到顶部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>TOP</span></button><button id="go-bottom" class="scroll-btn" style="bottom:6.5rem;" aria-label="回到底部" title="回到底部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M6 9l6 6 6-6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>BOT</span></button><script type="module">(function(){var e=document.getElementById(`back-to-top`),t=document.getElementById(`go-bottom`);if(!e||!t)return;var n=!1;function r(){n||(n=!0,requestAnimationFrame(function(){var r=window.scrollY,i=document.documentElement.scrollHeight-window.innerHeight;e.classList.toggle(`visible`,r>400),t.classList.toggle(`visible`,r<i-400),n=!1}))}window.addEventListener(`scroll`,r,{passive:!0}),r(),e.onclick=function(){window.scrollTo({top:0,behavior:`smooth`})},t.onclick=function(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:`smooth`})}})();</script></body></html><script>
+  var theme=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  document.documentElement.setAttribute('data-theme',theme);
+  // Register Service Worker for offline caching
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  }
+</script><script type="module">(function(){function e(){var e=document.querySelectorAll(`[data-toc-link]`);if(e.length){e.forEach(function(e){e.addEventListener(`click`,function(e){e.preventDefault();var t=this.getAttribute(`href`)||``,n=decodeURIComponent(t.replace(/^#/,``)),r=document.getElementById(n);r&&(r.scrollIntoView({behavior:`smooth`,block:`start`}),history.replaceState(null,``,`#`+n))})});var t=new IntersectionObserver(function(e){e.forEach(function(e){var t=CSS.escape(e.target.id),n=document.querySelector(`[data-toc-link][href="#`+t+`"]`);n&&n.classList.toggle(`active`,e.isIntersecting)})},{rootMargin:`-80px 0px -60% 0px`});e.forEach(function(e){var n=e.getAttribute(`href`)||``,r=decodeURIComponent(n.replace(/^#/,``));if(r){var i=document.getElementById(r);i&&t.observe(i)}})}}document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,e):e()})();</script><script>
+  (function() {
+    var btn = document.getElementById('mobile-toc-btn');
+    var overlay = document.getElementById('mobile-toc-overlay');
+    var drawer = document.getElementById('mobile-toc-drawer');
+    if (!btn || !overlay || !drawer) return;
+
+    function open() {
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', function(e) { e.stopPropagation(); open(); });
+    overlay.addEventListener('click', close);
+    // Close when a TOC link is clicked
+    drawer.addEventListener('click', function(e) {
+      if (e.target.closest('[data-toc-link]')) {
+        setTimeout(close, 150); // wait for scroll to start
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) close();
+    });
+  })();
+</script>

@@ -1,0 +1,539 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v7.1.3"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>电源-闭环控制升级之PID调节（附PID源 | EDAdong</title><meta name="description" content="PID其实属于比较常见且通用的闭环调节算法，经典古老但实用。在一般的单环或者双环闭环控制环节，拥有较为不错的效果。"><meta property="og:title" content="电源-闭环控制升级之PID调节（附PID源"><meta property="og:type" content="article"><meta property="og:url" content="https://edadong.com/posts/post11/"><meta property="og:description" content="PID其实属于比较常见且通用的闭环调节算法，经典古老但实用。在一般的单环或者双环闭环控制环节，拥有较为不错的效果。"><meta property="og:image" content="/images/post10.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"电源-闭环控制升级之PID调节（附PID源","description":"PID其实属于比较常见且通用的闭环调节算法，经典古老但实用。在一般的单环或者双环闭环控制环节，拥有较为不错的效果。","datePublished":"2025-03-23T11:47:00.000Z","author":{"@type":"Person","name":"EDAdong","url":"https://edadong.com/about/"},"image":"https://edadong.com/images/post10.webp","url":"https://edadong.com/posts/post11/","publisher":{"@type":"Person","name":"EDAdong"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://edadong.com/"},{"@type":"ListItem","position":2,"name":"文章","item":"https://edadong.com/posts/"},{"@type":"ListItem","position":3,"name":"电源-闭环控制升级之PID调节（附PID源"}]}]}</script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="dns-prefetch" href="https://github.com"><link rel="dns-prefetch" href="https://avatars.githubusercontent.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="/_astro/BaseLayout.FZUuh1sy.css"><link rel="stylesheet" href="/_astro/_slug_.CITvTZpu.css"><link rel="stylesheet" href="/_astro/global.CZGXK5uF.css"></head><body style="background-color: var(--color-bg); color: var(--color-text);"><div style="position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 60% 50% at 20% 30%, rgba(8,145,178,0.25), transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(99,102,241,0.18), transparent 50%),
+      radial-gradient(ellipse 45% 40% at 55% 70%, rgba(8,145,178,0.20), transparent 55%);
+    "></div><!-- Initial loading screen: visible on first load, fades out when page ready --><div id="page-loader" class="page-loader-overlay active"><div class="page-loader-content"><div class="pl-logo">E</div><div class="pl-spinner"><div class="pl-ring"></div></div><div class="pl-text">EDAdong</div></div></div><script>
+  (function(){
+    var loader = document.getElementById('page-loader');
+    if(!loader) return;
+
+    function hide(){ loader.classList.remove('active'); }
+
+    // Hide loader as soon as page is interactive — don't wait for all resources
+    if (document.readyState === 'loading') {
+      // Initial page load: hide shortly after DOM is ready
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(hide, 50); });
+      // Fallback: hide after load event
+      window.addEventListener('load', function() { setTimeout(hide, 300); });
+    } else {
+      // View Transition navigation: DOM already ready, hide immediately
+      hide();
+    }
+    // Safety: always hide after 3s
+    setTimeout(hide, 3000);
+
+    // Show loader when clicking internal links (for View Transition nav)
+    document.addEventListener('click', function(e){
+      var link = e.target.closest('a');
+      if(!link) return;
+      var href = link.getAttribute('href');
+      if(!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('//')) return;
+      if(link.getAttribute('target') === '_blank') return;
+      loader.classList.add('active');
+    });
+  })();
+</script><!-- Adds native lazy loading to all article images --><script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.article-body img:not([loading])').forEach(function(img){
+      img.loading = 'lazy';
+      img.decoding = 'async';
+    });
+  });
+</script><header id="site-header" class="site-header" data-astro-cid-nen7h5rs><div class="container-main w-full flex items-center justify-between" data-astro-cid-nen7h5rs><a href="/" class="flex items-center gap-2 font-bold text-lg no-underline" style="color: var(--color-text);" data-astro-cid-nen7h5rs><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0" style="background: linear-gradient(135deg, var(--color-accent), #6366f1);" data-astro-cid-nen7h5rs>主页</span></a><nav class="flex items-center gap-1" data-astro-cid-nen7h5rs><a href="/posts" class="nav-item" style="color: var(--color-accent)" data-astro-cid-nen7h5rs>文章</a><a href="/search" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>搜索</a><a href="/resources" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>资料</a><a href="/friends" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>友链</a><a href="/about" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>关于</a><button id="theme-btn" class="nav-item border-none cursor-pointer" aria-label="Toggle theme" style="background:transparent; font-size:1rem;" data-astro-cid-nen7h5rs><svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" data-astro-cid-nen7h5rs></path></svg><svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 hidden" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" data-astro-cid-nen7h5rs></path></svg></button></nav></div></header><script>
+(function(){
+  var t=document.getElementById('theme-btn'),s=document.getElementById('sun-icon'),m=document.getElementById('moon-icon');
+  if(!t||!s||!m)return;
+  function u(){var d=document.documentElement.getAttribute('data-theme')==='dark';s.classList.toggle('hidden',d);m.classList.toggle('hidden',!d)}
+  u();t.onclick=function(){var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);u()};
+})();
+</script><main><div class="reading-progress" id="reading-progress-bar"></div><script type="module">var e=document.getElementById(`reading-progress-bar`);e&&window.addEventListener(`scroll`,()=>{let t=window.scrollY,n=document.documentElement.scrollHeight-window.innerHeight;e.style.width=n>0?`${t/n*100}%`:`0%`});</script><div class="article-layout" data-astro-cid-ruv7hgo6><article class="article-main" data-astro-cid-ruv7hgo6><!-- Header --><header class="mb-10" data-astro-cid-ruv7hgo6><h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4" style="color: var(--color-text); letter-spacing: -0.02em;" data-astro-cid-ruv7hgo6>电源-闭环控制升级之PID调节（附PID源</h1><div class="flex flex-wrap items-center gap-3 text-sm mb-4" style="color: var(--color-text-secondary);" data-astro-cid-ruv7hgo6><time datetime="Sun Mar 23 2025 19:47:00 GMT+0800 (中国标准时间)" data-astro-cid-ruv7hgo6>2025年3月23日</time><span style="color: var(--color-text-secondary); opacity: 0.6;" data-astro-cid-ruv7hgo6>· 约 22 分钟</span><span data-astro-cid-ruv7hgo6>· <a href="/categories/电源" class="font-medium transition-colors" style="color: var(--color-accent);" data-astro-cid-ruv7hgo6>#电源</a></span></div><div class="flex flex-wrap gap-1.5" data-astro-cid-ruv7hgo6><span class="tag" data-astro-cid-ruv7hgo6>电源</span><span class="tag" data-astro-cid-ruv7hgo6>实战教程</span></div></header><!-- Article Body --><div class="article-body" data-astro-cid-ruv7hgo6><h1 id="前言">前言</h1>
+<p><strong>电源方向资料</strong>免费开源到<strong>QQ群1：280730348</strong>和<strong>QQ群2：725438563</strong>。</p>
+<p><strong>嵌入式方向资料</strong>免费开源到<strong>QQ群1：976387827</strong>。</p>
+<p>博客地址edadong.com，博文同步发布在知乎、bilibili，其中bilibili主要以视频为主。对开源项目的疑惑请尽量在b站下方留言，其次在群内商讨，目前BUCK和BOOST电路均有群友复刻成功，逆变电路、双向DC充放电电路我也验证过。</p>
+<p>下面是BUCK电路的PID控制方案和具体电路，更详细的讲解请移步Bilibili：EDAdong。</p>
+<h1 id="软件思路">软件思路</h1>
+<p>PID其实属于比较常见且通用的闭环调节算法，经典古老但实用。在一般的单环或者双环闭环控制环节，拥有较为不错的效果。本次分享的PID属于增量式PID，大家可以去了解一下增量式PID和位置式PID的区别，一般来说在电源设计里面增量式PID会用的比较多一点。传统PID中，P环是根据当前误差量输出反馈量，I环是根据当前误差和上一次误差之差输出反馈量，D环是根据上次I环误差量和此次I环误差量进行刹车反馈，通过上一次误差量抑制当前误差。P环比较通俗易懂一点，所以传统PID里面P环会用的比较多一点。放在增量式PID中，传统PID的P环其实跟增量式的I环一样，所以这一点有所区分，大家需要注意。我通常是P环和I环一起调，以I环为主导。</p>
+<p><img alt="image-20250323142231953" loading="lazy" decoding="async" width="1518" height="439" src="/_astro/image-20250323142231953.C0AQjA3e_ZidcKt.webp" srcset=""></p>
+<p>本次PID代码在基于BUCK的实战演练项目中修改，直接可用，话不多说直接上代码</p>
+<p>在PID.c文件中，可以看到buck_pid的调节函数，第一个参量NOW代表的是你当前采集到的数据（比如在本设计中就是电压所转换成的ADC值，范围0-4096）。第二个参量Target代表你要追踪的目标值（比如在本设计里面把目标电压转换成对应ADC值）。第三个参量SIGNLE_ADD_NUM_LIMIT代表单次增加量，每次PID调节的增量范围，这个值不能太大，否则系统就容易震荡起来。程序中设定的PID周期为1ms，每秒能执行1000次，每次如果拉满的话，那么1s理论上就能调节5000，但我们重装载值也就3600，而且越接近目标值，增量就会越小，所以这个参数你可以根据自己的系统去调节，目前我用的5基本跑单环速度和精度都没问题。第四个参量SUM_OUTPUT_NUM_LIMIT代表输出限制，比如我们重装载值为3600，那么这个值就可以设置成3599，确保占空比不会继续递增。后面的两个参量kp和ki分别代表增量式PID里面的积分调节和比例调节。</p>
+<p>pid.c</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "pid.h"</span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "main.h"</span></span>
+<span class="line"><span style="color:#E1E4E8">PID_Struct pid1;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#E1E4E8"> OUT</span><span style="color:#F97583">=</span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#B392F0"> buck_pid</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> NOW</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> Target</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> SIGNLE_ADD_NUM_LIMIT</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> SUM_OUTPUT_NUM_LIMIT</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> kp</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> ki</span><span style="color:#E1E4E8">)</span><span style="color:#6A737D">//SIGNLE_ADD_NUM_LIMIT是单次增加最大值 如100即为单次转换输出不能超过+-100</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#6A737D">	//SUM_OUTPUT_NUM_LIMIT 是总输出限位 如100 即总输出不能超出+-100的范围 防止长时间低于或高于 对于突变反应不及时</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Pv</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">NOW;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Ek</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Target</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">pid1.Pv;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Pout</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">kp</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">(pid1.Ek</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">pid1.Ek_1);</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Iout</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">ki</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">pid1.Ek</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">pid1.T</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">pid1.Ti;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Dout</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">pid1.Kp_D</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">pid1.Td</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">(pid1.Ek</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">pid1.Ek_1</span><span style="color:#F97583">-</span><span style="color:#E1E4E8">pid1.Ek_1</span><span style="color:#F97583">+</span><span style="color:#E1E4E8">pid1.Ek_2)</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">pid1.T;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.OUT_Single</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">pid1.Pout</span><span style="color:#F97583">+</span><span style="color:#E1E4E8">pid1.Iout</span><span style="color:#F97583">+</span><span style="color:#E1E4E8">pid1.Dout;</span></span>
+<span class="line"><span style="color:#F97583">	if</span><span style="color:#E1E4E8">(pid1.OUT_Single</span><span style="color:#F97583">></span><span style="color:#E1E4E8">SIGNLE_ADD_NUM_LIMIT)pid1.OUT_Single</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">SIGNLE_ADD_NUM_LIMIT;</span></span>
+<span class="line"><span style="color:#F97583">	else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8">(pid1.OUT_Single</span><span style="color:#F97583">&#x3C;-</span><span style="color:#E1E4E8">SIGNLE_ADD_NUM_LIMIT)pid1.OUT_Single</span><span style="color:#F97583">=-</span><span style="color:#E1E4E8">SIGNLE_ADD_NUM_LIMIT;</span></span>
+<span class="line"><span style="color:#E1E4E8">	OUT</span><span style="color:#F97583">+=</span><span style="color:#E1E4E8">pid1.OUT_Single;</span></span>
+<span class="line"><span style="color:#F97583">	if</span><span style="color:#E1E4E8">(OUT</span><span style="color:#F97583">></span><span style="color:#E1E4E8">SUM_OUTPUT_NUM_LIMIT)OUT</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">SUM_OUTPUT_NUM_LIMIT;</span></span>
+<span class="line"><span style="color:#F97583">	else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8">(OUT</span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)OUT</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Ek_2</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">pid1.Ek_1;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Ek_1</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">pid1.Ek;</span></span>
+<span class="line"><span style="color:#F97583">	return</span><span style="color:#E1E4E8"> OUT;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> init_buck_PID</span><span style="color:#E1E4E8">()</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Kp_P</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Kp_I</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Kp_D</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.T</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//Ms</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Td</span><span style="color:#F97583">=</span><span style="color:#79B8FF">2.5</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Ti</span><span style="color:#F97583">=</span><span style="color:#79B8FF">150</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Pv</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Ek_2</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Ek_1</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid1.Ek</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>pid.h</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#F97583">#ifndef</span><span style="color:#B392F0"> _PID_H</span></span>
+<span class="line"><span style="color:#F97583">#define</span><span style="color:#B392F0"> _PID_H</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">typedef</span><span style="color:#F97583"> struct</span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Sv;</span><span style="color:#6A737D">//期望值</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Pv;</span><span style="color:#6A737D">//实际值</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Ek_1;</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Ek_2;</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Ek;</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> T;</span><span style="color:#6A737D">//采样周期</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Ti;</span><span style="color:#6A737D">//积分常数</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Td;</span><span style="color:#6A737D">//微分常数</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Kp_P;</span><span style="color:#6A737D">//系数</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Kp_I;</span><span style="color:#6A737D">//系数</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Kp_D;</span><span style="color:#6A737D">//系数</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> OUT_Single;</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Pout;</span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Iout; </span></span>
+<span class="line"><span style="color:#F97583">	float</span><span style="color:#E1E4E8"> Dout;</span></span>
+<span class="line"><span style="color:#E1E4E8">}PID_Struct;</span></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#B392F0"> buck_pid</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> NOW</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> Target</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> SIGNLE_ADD_NUM_LIMIT</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> SUM_OUTPUT_NUM_LIMIT</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> kp</span><span style="color:#E1E4E8">,</span><span style="color:#F97583">float</span><span style="color:#FFAB70"> ki</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> init_buck_PID</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">void</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">extern</span><span style="color:#F97583"> float</span><span style="color:#E1E4E8"> OUT;</span></span>
+<span class="line"><span style="color:#F97583">#endif</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<p>在定时器中断中（20KHz）每进入20次进行一次PID调节，也就是单次调节时间为1ms。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#6A737D">//中断服务函数</span></span>
+<span class="line"><span style="color:#F97583">void</span><span style="color:#B392F0"> TIM1_UP_IRQHandler</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">void</span><span style="color:#E1E4E8">)   </span></span>
+<span class="line"><span style="color:#E1E4E8">{</span></span>
+<span class="line"><span style="color:#F97583">	static</span><span style="color:#E1E4E8"> u16 pid_count;</span></span>
+<span class="line"><span style="color:#F97583">	if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">TIM_GetITStatus</span><span style="color:#E1E4E8">(TIM1, TIM_IT_Update) </span><span style="color:#F97583">!=</span><span style="color:#E1E4E8"> RESET)</span><span style="color:#6A737D">  //检查更新中断发生与否</span></span>
+<span class="line"><span style="color:#E1E4E8">	{</span></span>
+<span class="line"><span style="color:#E1E4E8">		pid_count</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">		//PID调节</span></span>
+<span class="line"><span style="color:#F97583">		if</span><span style="color:#E1E4E8">(pid_count</span><span style="color:#F97583">==</span><span style="color:#79B8FF">20</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#E1E4E8">		  pid_count</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">		    if</span><span style="color:#E1E4E8">(pid_mode</span><span style="color:#F97583">==</span><span style="color:#79B8FF">1</span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8">protect_status</span><span style="color:#F97583">==</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">		    {</span></span>
+<span class="line"><span style="color:#E1E4E8">				buck_pwm </span><span style="color:#F97583">=</span><span style="color:#B392F0"> buck_pid</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">ADC_ConvertedValue</span><span style="color:#E1E4E8">[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">],(Target_V</span><span style="color:#F97583">/</span><span style="color:#79B8FF">3.3</span><span style="color:#F97583">*</span><span style="color:#79B8FF">4096</span><span style="color:#F97583">/</span><span style="color:#E1E4E8">V_xishu),</span><span style="color:#79B8FF">5</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">3599</span><span style="color:#E1E4E8">,kp,ki);</span></span>
+<span class="line"><span style="color:#B392F0">                set_pwm</span><span style="color:#E1E4E8">(TIM1,</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,buck_pwm,</span><span style="color:#79B8FF">3599</span><span style="color:#E1E4E8">);					</span></span>
+<span class="line"><span style="color:#E1E4E8">			}</span></span>
+<span class="line"><span style="color:#F97583">			else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8">(pid_mode</span><span style="color:#F97583">==</span><span style="color:#79B8FF">0</span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8">protect_status</span><span style="color:#F97583">==</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">			{</span></span>
+<span class="line"><span style="color:#E1E4E8">				buck_pwm</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#B392F0">				set_pwm</span><span style="color:#E1E4E8">(TIM1,</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,buck_pwm,</span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">);		</span></span>
+<span class="line"><span style="color:#E1E4E8">			}</span></span>
+<span class="line"><span style="color:#F97583">			else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8">(protect_status</span><span style="color:#F97583">==</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">			{</span></span>
+<span class="line"><span style="color:#E1E4E8">				buck_pwm</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#B392F0">				set_pwm</span><span style="color:#E1E4E8">(TIM1,</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">,buck_pwm,</span><span style="color:#79B8FF">1000</span><span style="color:#E1E4E8">);		</span></span>
+<span class="line"><span style="color:#E1E4E8">			}</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#B392F0">		TIM_ClearITPendingBit</span><span style="color:#E1E4E8">(TIM1, TIM_IT_Update);</span><span style="color:#6A737D">  //清除TIMx更新中断标志 </span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>主函数中只需要定义float kp和float ki两个参量，extern到main.h里面，再在main函数中初始化init_buck_PID();即可</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="c"><code><span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "stm32f10x.h"</span><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "main.h"</span><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "delay.h"</span><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "timer.h"</span><span style="color:#E1E4E8">     </span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "timer3.h"</span><span style="color:#E1E4E8">         </span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "oled.h"</span><span style="color:#E1E4E8">      </span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "show.h"</span><span style="color:#E1E4E8">         </span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "adc.h"</span><span style="color:#E1E4E8">            </span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "sw.h"</span></span>
+<span class="line"><span style="color:#F97583">#include</span><span style="color:#9ECBFF"> "key.h"</span></span>
+<span class="line"><span style="color:#E1E4E8"> </span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">u8 pid_mode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//=0不工作，=1工作</span></span>
+<span class="line"><span style="color:#E1E4E8">u8 pid_status</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//=0为电压环，=1为电流环</span></span>
+<span class="line"><span style="color:#E1E4E8">u16 buck_pwm</span><span style="color:#F97583">=</span><span style="color:#79B8FF">500</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//BOOST电路的PWM</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#E1E4E8"> DC_V</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0.0</span><span style="color:#F97583">f</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//电压数据</span></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#E1E4E8"> Target_V</span><span style="color:#F97583">=</span><span style="color:#79B8FF">10.00</span><span style="color:#F97583">f</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//追踪的电压数据</span></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#E1E4E8"> DC_I</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0.0</span><span style="color:#F97583">f</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//电流数据</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#E1E4E8"> V_yuzhi</span><span style="color:#F97583">=</span><span style="color:#79B8FF">13.00</span><span style="color:#F97583">f</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//保护的电压阈值</span></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#E1E4E8"> I_yuzhi</span><span style="color:#F97583">=</span><span style="color:#79B8FF">3.00</span><span style="color:#F97583">f</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//保护的电流阈值</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">u8 protect_status</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//保护状态</span></span>
+<span class="line"><span style="color:#E1E4E8">u8 sw_status</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//开关状态</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#E1E4E8"> kp</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0.01</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">float</span><span style="color:#E1E4E8"> ki</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">/************************************************************</span></span>
+<span class="line"><span style="color:#6A737D">电压电流检测:电压PA0，电流PA1</span></span>
+<span class="line"><span style="color:#6A737D">PWM波驱动引脚:PA8</span></span>
+<span class="line"><span style="color:#6A737D">芯片使能引脚:PA9</span></span>
+<span class="line"><span style="color:#6A737D">OLED屏幕:</span><span style="color:#F97583">SCL:</span><span style="color:#6A737D">PB1,</span><span style="color:#F97583">SDA:</span><span style="color:#6A737D">PB0</span></span>
+<span class="line"><span style="color:#6A737D">继电器控制位:PA10</span></span>
+<span class="line"><span style="color:#6A737D">按键:</span><span style="color:#F97583">ADD:</span><span style="color:#6A737D">PB12 </span><span style="color:#F97583">REDUCE:</span><span style="color:#6A737D">PB13 </span><span style="color:#F97583">SET:</span><span style="color:#6A737D">PB14 </span><span style="color:#F97583">MODE:</span><span style="color:#6A737D">PB15</span></span>
+<span class="line"><span style="color:#6A737D">************************************************************/</span></span>
+<span class="line"><span style="color:#F97583">int</span><span style="color:#B392F0"> main</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">void</span><span style="color:#E1E4E8">) </span></span>
+<span class="line"><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  u8 key;	   </span></span>
+<span class="line"><span style="color:#B392F0">	Delay_Init</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">                   //延时功能初始化           </span></span>
+<span class="line"><span style="color:#B392F0">  NVIC_PriorityGroupConfig</span><span style="color:#E1E4E8">(NVIC_PriorityGroup_2);</span><span style="color:#6A737D">	 //设置NVIC中断分组2:2位抢占优先级，2位响应优先级	</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">	BUCK_PWM_Init</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">                //BUCK电路初始化，20KHz工作频率，带中断。</span></span>
+<span class="line"><span style="color:#B392F0">	Init_adc</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">                     //ADC初始化	 </span></span>
+<span class="line"><span style="color:#B392F0">	SW_Init</span><span style="color:#E1E4E8">( );</span><span style="color:#6A737D">                     //继电器初始化</span></span>
+<span class="line"><span style="color:#B392F0">	KEY_Init</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">                     //按键初始化</span></span>
+<span class="line"><span style="color:#E1E4E8"> </span></span>
+<span class="line"><span style="color:#B392F0">	TIM3_ENABLE_30S</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">	            //开启定时器3工作，实现电压电流数据采集</span></span>
+<span class="line"><span style="color:#B392F0">	OLED_Init</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">			              //初始化OLED  </span></span>
+<span class="line"><span style="color:#E1E4E8">	 </span></span>
+<span class="line"><span style="color:#E1E4E8">	loop:</span></span>
+<span class="line"><span style="color:#E1E4E8">	SW_OFF;</span></span>
+<span class="line"><span style="color:#E1E4E8">	SD_OFF;</span></span>
+<span class="line"><span style="color:#E1E4E8">	sw_status</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	pid_mode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//失能PID</span></span>
+<span class="line"><span style="color:#B392F0">	OLED_Clear</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">                   //OLED清零 </span></span>
+<span class="line"><span style="color:#B392F0">	canshu_view</span><span style="color:#E1E4E8">();</span><span style="color:#6A737D">                  //启动界面	</span></span>
+<span class="line"><span style="color:#F97583">	while</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">	{	</span></span>
+<span class="line"><span style="color:#E1E4E8">		key</span><span style="color:#F97583">=</span><span style="color:#B392F0">KEY_Scan</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span><span style="color:#6A737D">              //扫描按键</span></span>
+<span class="line"><span style="color:#F97583">		if</span><span style="color:#E1E4E8">(key</span><span style="color:#F97583">==</span><span style="color:#E1E4E8">SW_PRES)</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#E1E4E8">			SD_ON;</span><span style="color:#6A737D">                      //打开芯片引脚使能</span></span>
+<span class="line"><span style="color:#E1E4E8">	        SW_ON;</span><span style="color:#6A737D">                      //打开继电器电路准备工作 </span></span>
+<span class="line"><span style="color:#B392F0">            Delay_Ms</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">500</span><span style="color:#E1E4E8">);			</span></span>
+<span class="line"><span style="color:#F97583">			break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">72</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,DC_V,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">96</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,(u16)(DC_V</span><span style="color:#F97583">*</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">%</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);	</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">72</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,DC_I,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">96</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,(u16)(DC_I</span><span style="color:#F97583">*</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">%</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);	</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">72</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">,Target_V,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">96</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">,(u16)(Target_V</span><span style="color:#F97583">*</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">%</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">		if</span><span style="color:#E1E4E8">(sw_status</span><span style="color:#F97583">==</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#B392F0">			OLED_ShowCHinese</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">84</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">13</span><span style="color:#E1E4E8">);</span><span style="color:#B392F0">OLED_ShowCHinese</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">14</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#F97583">		else</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#B392F0">			OLED_ShowCHinese</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">84</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">11</span><span style="color:#E1E4E8">);</span><span style="color:#B392F0">OLED_ShowCHinese</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">);			</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#B392F0">		Delay_Ms</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">50</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">	}	</span></span>
+<span class="line"><span style="color:#F97583">	while</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">	{</span></span>
+<span class="line"><span style="color:#E1E4E8">	  key</span><span style="color:#F97583">=</span><span style="color:#B392F0">KEY_Scan</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">72</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,DC_V,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">96</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">,(u16)(DC_V</span><span style="color:#F97583">*</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">%</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);	</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">72</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,DC_I,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">96</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,(u16)(DC_I</span><span style="color:#F97583">*</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">%</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);	</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">72</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">,Target_V,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">	  OLED_ShowNum</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">96</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">,(u16)(Target_V</span><span style="color:#F97583">*</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">%</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">16</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">		if</span><span style="color:#E1E4E8">(sw_status</span><span style="color:#F97583">==</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#B392F0">			OLED_ShowCHinese</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">84</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">13</span><span style="color:#E1E4E8">);</span><span style="color:#B392F0">OLED_ShowCHinese</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">14</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#F97583">		else</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#B392F0">			OLED_ShowCHinese</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">84</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">11</span><span style="color:#E1E4E8">);</span><span style="color:#B392F0">OLED_ShowCHinese</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">100</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">6</span><span style="color:#E1E4E8">,</span><span style="color:#79B8FF">12</span><span style="color:#E1E4E8">);			</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8">(key</span><span style="color:#F97583">==</span><span style="color:#E1E4E8">SW_PRES)</span></span>
+<span class="line"><span style="color:#E1E4E8">	  {</span></span>
+<span class="line"><span style="color:#E1E4E8">	  	pid_mode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">			sw_status</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	  }</span></span>
+<span class="line"><span style="color:#F97583">    else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8">(key</span><span style="color:#F97583">==</span><span style="color:#E1E4E8">ADD_PRES)</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#E1E4E8">			Target_V</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Target_V</span><span style="color:#F97583">+</span><span style="color:#79B8FF">0.100001</span><span style="color:#F97583">f</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">		}		</span></span>
+<span class="line"><span style="color:#F97583">    else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8">(key</span><span style="color:#F97583">==</span><span style="color:#E1E4E8">REDUCE_PRES)</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#E1E4E8">			Target_V</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Target_V</span><span style="color:#F97583">-</span><span style="color:#79B8FF">0.099999</span><span style="color:#F97583">f</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">		}			</span></span>
+<span class="line"><span style="color:#F97583">		else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8">(key</span><span style="color:#F97583">==</span><span style="color:#E1E4E8">CHOICE_PRES)</span></span>
+<span class="line"><span style="color:#E1E4E8">		{</span></span>
+<span class="line"><span style="color:#E1E4E8">	    SW_OFF;</span></span>
+<span class="line"><span style="color:#E1E4E8">			SD_OFF;</span></span>
+<span class="line"><span style="color:#E1E4E8">	    sw_status</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	    pid_mode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//失能PID</span></span>
+<span class="line"><span style="color:#F97583">	    goto</span><span style="color:#E1E4E8"> loop;			</span></span>
+<span class="line"><span style="color:#E1E4E8">		}</span></span>
+<span class="line"><span style="color:#E1E4E8">		</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8">((DC_V</span><span style="color:#F97583">></span><span style="color:#E1E4E8">V_yuzhi)</span><span style="color:#F97583">||</span><span style="color:#E1E4E8">(DC_I</span><span style="color:#F97583">></span><span style="color:#E1E4E8">I_yuzhi))</span></span>
+<span class="line"><span style="color:#E1E4E8">	  {</span></span>
+<span class="line"><span style="color:#E1E4E8">	    SW_OFF;</span></span>
+<span class="line"><span style="color:#E1E4E8">			SD_OFF;</span></span>
+<span class="line"><span style="color:#E1E4E8">	    protect_status</span><span style="color:#F97583">=</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	    sw_status</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">	    pid_mode</span><span style="color:#F97583">=</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">;</span><span style="color:#6A737D">//失能PID</span></span>
+<span class="line"><span style="color:#F97583">	    goto</span><span style="color:#E1E4E8"> loop;</span></span>
+<span class="line"><span style="color:#E1E4E8">	  }				</span></span>
+<span class="line"><span style="color:#E1E4E8">	}</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"></span></code></pre>
+<p>资料放百度网盘链接了：</p>
+<p>通过网盘分享的文件：post12资料合集
+链接: <a href="https://pan.baidu.com/s/1O4975ZoDPHOWwQN88SApsA?pwd=fvay">https://pan.baidu.com/s/1O4975ZoDPHOWwQN88SApsA?pwd=fvay</a> 提取码: fvay
+—来自百度网盘超级会员v6的分享</p></div><!-- HeadingAnchors: adds clickable anchor links to H2/H3 in .article-body --><script>
+(function() {
+  if (typeof window === 'undefined') return;
+
+  function init() {
+    var headings = document.querySelectorAll('.article-body h2[id], .article-body h3[id]');
+    if (!headings.length) return;
+
+    // Create tooltip element
+    var tooltip = document.createElement('div');
+    tooltip.className = 'anchor-tooltip';
+    tooltip.textContent = '已复制!';
+    document.body.appendChild(tooltip);
+
+    var hideTimer = null;
+
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.className = 'heading-anchor';
+      a.href = '#' + h.id;
+      a.textContent = '#';
+      a.title = '复制链接';
+      a.setAttribute('aria-hidden', 'true');
+
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = window.location.origin + window.location.pathname + '#' + h.id;
+        try {
+          navigator.clipboard.writeText(url).then(function() {
+            tooltip.classList.add('show');
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = (e.clientY - 8) + 'px';
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function() {
+              tooltip.classList.remove('show');
+            }, 1500);
+          });
+        } catch(e) {}
+        // Also update URL bar without scrolling
+        history.replaceState(null, '', url);
+      });
+
+      h.appendChild(a);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><script>
+(function(){
+  try {
+  var LANG_MAP = {c:'C',cpp:'C++',python:'Python',javascript:'JS',typescript:'TS',bash:'Bash',json:'JSON',verilog:'Verilog',html:'HTML',css:'CSS',rust:'Rust',go:'Go',java:'Java',sql:'SQL',yaml:'YAML',xml:'XML',markdown:'MD',matlab:'MATLAB',lua:'Lua',diff:'Diff',dockerfile:'Docker',vim:'Vim',makefile:'Makefile',php:'PHP',ruby:'Ruby',swift:'Swift',kotlin:'Kotlin',scala:'Scala'};
+
+  function init(){
+    var pres = document.querySelectorAll('.article-body pre');
+    for(var i=0;i<pres.length;i++){
+      var pre=pres[i];
+      if(pre.parentElement && pre.parentElement.classList.contains('code-block-wrapper')) continue;
+      if(!pre.parentNode) continue;
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+      var lang = pre.getAttribute('data-language');
+      if(lang){
+        lang = LANG_MAP[lang.toLowerCase()] || lang;
+        var badge = document.createElement('span');
+        badge.className = 'lang-badge'; badge.textContent = lang;
+        wrapper.appendChild(badge);
+      }
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      var code = pre.querySelector('code');
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn'; btn.textContent = '复制';
+      btn.onclick = function(){
+        try { navigator.clipboard.writeText(code?code.textContent||'':'').then(function(){
+          btn.textContent='已复制!'; btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent='复制'; btn.classList.remove('copied'); }, 1500);
+        }).catch(function(){}); } catch(e){}
+      };
+      pre.appendChild(btn);
+    }
+  }
+  // Defer to avoid blocking page render
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){init();setTimeout(init,500);});}
+  else{init();setTimeout(init,500);}
+  } catch(e) { console.log('CopyCode:', e); }
+})();
+</script><nav class="series-nav"><!-- Hidden nav links for keyboard shortcuts --><a href="/posts/post10" data-series-prev style="display:none;" aria-hidden="true">上一篇</a><a href="/posts/post12" data-series-next style="display:none;" aria-hidden="true">下一篇</a><div class="series-nav-title">系列导航</div><table style="width:100%;border-collapse:collapse;margin-top:0.5rem;"><thead><tr><th style="width:4rem;text-align:center;padding:0.5rem 0.5rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);white-space:nowrap;">集数</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">标题</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">内容</th></tr></thead><tbody><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 0 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post1" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-怎么样从零开始准备全国大学生电子设计竞赛（电赛电源方向）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">全国大学生电子设计竞赛经验分享。</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 1 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post2" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">21年电赛国一之三端口DC-DC变换器</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">博主今天想分享的是在学校期间参加2021年全国大学生电子设计</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 2 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post3" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作高、低端直流电流采样电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对高、低端直流电流采样电路进行了详细介绍，经过本文章你</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 3 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post4" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作直流电压采样电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对直流电压采样电路进行了详细介绍，经过本文章你可以学会</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 4 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post5" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作交流电压检测电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压的检测与直流检测不同，由于我们采集到的交流信号会出现</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 5 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post6" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作交流电流检测电路</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电流的检测与直流检测不同，由于我们采集到的交流信号会出现</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 6 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post7" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你用STM32F1做交流电压采样</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压检测需要通过单片机ADC分点采集交流电压周期内多点电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 7 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post8" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你用STM32F4做交流电压采样</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">交流电压检测需要通过单片机ADC分点采集交流电压周期内多点电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 8 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post9" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作驱动电路（IR2104S半桥/TLP250H光耦）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">今天分享的这篇博文以驱动电路为核心，重点分享两个不同的驱动电</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 9 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post10" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作BUCK电路（原理图PCB代码实物）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">单片机输出一路PWM信号，PWM占空比越高，输出电压越高。P</td></tr><tr style="background:color-mix(in srgb,var(--color-accent) 8%,transparent);"><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-accent);">第 10 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><span style="color:var(--color-text);font-weight:600;">电源-闭环控制升级之PID调节（附PID源 <span style="font-size:0.7rem;color:var(--color-accent);">👈 你在这里</span></span></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">PID其实属于比较常见且通用的闭环调节算法，经典古老但实用。</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 11 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post12" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作BOOST电路（电压电流闭环，PID调节）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 12 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post13" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作单相逆变电路（交流电压闭环，SPWM调制）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 13 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post14" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作双向DC-DC充放电电路（电池恒流充电，恒压放电）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控器件为STM32F103C8T6，参数显示通过0.96寸</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 14 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post15" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作隔离辅助电源（基于金升阳模块）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">电源模块采用金升阳隔离电源砖，能够输出12V电压和±5V电压</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 15 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post22" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">主控选用STM32F103C8T6，屏幕显示用0.96寸OL</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 16 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/post24" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">本文章对20年省赛题进行了详细介绍，经过本文章你可以学会怎么</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 17 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/嵌入式-基于stm32的buck电路电感电流闭环控制" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">电源-手把手教你基于STM32的BUCK电路高端电流采样（同步整流+高端电感电流采样）</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">基于STM32F103C8T6的同步整流BUCK降压电源：电</td></tr></tbody></table></nav><!-- Comments --><div class="mt-16" id="comments" data-astro-cid-ruv7hgo6><script src="https://giscus.app/client.js" data-repo="EDAdong/EDAdong.github.io" data-repo-id="R_kgDON01Lrg" data-category="Announcements" data-category-id="DIC_kwDON01Lrs4DCAkU" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script></div><!-- Related Posts --><section class="mt-16" data-astro-cid-ruv7hgo6><h2 class="text-xl font-bold mb-6" style="color: var(--color-text);" data-astro-cid-ruv7hgo6>相关文章</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem" data-astro-cid-ruv7hgo6><a href="/posts/post24/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post24.webp" alt="电源-20年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">电源</span><span class="tag">实战教程</span></div><h3 class="post-card-title">电源-20年电赛省赛题满分方案+软件代码分享（单相在线式不间断式电源）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-07-09T22:08:00.000Z">2025年7月10日</time><span class="post-card-reading-time">· 约 4 分钟</span></div></div></a><a href="/posts/post22/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post22.webp" alt="电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">电源</span><span class="tag">实战教程</span></div><h3 class="post-card-title">电源-手把手教你制作多路交流电压电流电路（ZMPT101B电压互感、ACS712霍尔电流）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-06-30T23:18:00.000Z">2025年7月1日</time><span class="post-card-reading-time">· 约 5 分钟</span></div></div></a><a href="/posts/post15/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/post15.webp" alt="电源-手把手教你制作隔离辅助电源（基于金升阳模块）" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(305, 60%, 18%), hsl(335, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">电</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">电源</span><span class="tag">实战教程</span></div><h3 class="post-card-title">电源-手把手教你制作隔离辅助电源（基于金升阳模块）</h3><div class="post-card-meta"><time class="post-card-date" datetime="2025-06-04T14:25:00.000Z">2025年6月4日</time><span class="post-card-reading-time">· 约 3 分钟</span></div></div></a></div></section></article><!-- Desktop TOC Sidebar --><aside class="article-sidebar" data-astro-cid-ruv7hgo6><nav class="toc-wrapper" id="toc-nav" data-astro-cid-ruv7hgo6><div class="toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#前言" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>前言</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#软件思路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>软件思路</a></li></ol></nav></aside></div><button id="mobile-toc-btn" class="mobile-toc-fab" aria-label="目录" data-astro-cid-ruv7hgo6>📑</button><div id="mobile-toc-overlay" class="mobile-toc-overlay" data-astro-cid-ruv7hgo6></div><div id="mobile-toc-drawer" class="mobile-toc-drawer" data-astro-cid-ruv7hgo6><div class="mobile-toc-handle" data-astro-cid-ruv7hgo6></div><div class="mobile-toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#前言" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>前言</a></li><li class="toc-item toc-depth-1" data-astro-cid-ruv7hgo6><a href="#软件思路" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>软件思路</a></li></ol></div></main><footer style="margin-top: 5rem; padding: 2.5rem 0; border-top: 1px solid var(--color-border); text-align: center;"><div class="container-main"><p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0 0 0.75rem; opacity: 0.8;">&copy; 2025 - 2026 By EDAdong</p><p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0 0 1rem; opacity: 0.6; max-width: 28rem; margin-inline: auto; line-height: 1.7;">做任何事情之前先想清楚事情的价值，动脑袋思考是一件累人的事情，但是带来给你的收益会让你少更多的烦恼，许愿早日年薪百万</p><div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #FF5D01 10%, transparent); color: #FF5D01; border: 1px solid color-mix(in srgb, #FF5D01 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #FF5D01;"></span>Astro</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #06B6D4 10%, transparent); color: #06B6D4; border: 1px solid color-mix(in srgb, #06B6D4 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #06B6D4;"></span>Tailwind</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #333 10%, transparent); color: #333; border: 1px solid color-mix(in srgb, #333 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #333;"></span>GitHub Pages</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #0891b2 10%, transparent); color: #0891b2; border: 1px solid color-mix(in srgb, #0891b2 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0891b2;"></span>STM32</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #8b5cf6 10%, transparent); color: #8b5cf6; border: 1px solid color-mix(in srgb, #8b5cf6 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6;"></span>FPGA</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #10b981 10%, transparent); color: #10b981; border: 1px solid color-mix(in srgb, #10b981 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>嵌入式</span></div></div></footer><div id="music-player" class="music-player" data-astro-cid-hxmsq4xn><button id="music-toggle" class="music-btn" aria-label="Toggle music" title="播放/暂停" data-astro-cid-hxmsq4xn><div class="vinyl" data-astro-cid-hxmsq4xn><div class="vinyl-grooves" data-astro-cid-hxmsq4xn></div><div class="vinyl-label" data-astro-cid-hxmsq4xn></div><div class="vinyl-hole" data-astro-cid-hxmsq4xn></div></div><span class="music-note" data-astro-cid-hxmsq4xn>♪</span></button><span class="music-tip" data-astro-cid-hxmsq4xn>轻音</span></div><script>
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.getElementById('music-toggle');
+  var player = document.getElementById('music-player');
+  if(!btn||!player)return;
+  var playing = false;
+
+  // Load music lazily — only on user interaction. The MP3 is 5MB, preloading
+  // it on every page visit wastes bandwidth and slows page load significantly.
+  var audio = null;
+  function getAudio() {
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = 'none';
+      audio.src = '/music/无损网站背景音乐.mp3';
+      audio.loop = true;
+      audio.volume = 0.12;
+    }
+    return audio;
+  }
+
+  // Save position before navigating away
+  window.addEventListener('beforeunload', function(){
+    if(audio && !audio.paused){
+      sessionStorage.setItem('musicTime', audio.currentTime);
+    }
+  });
+
+  btn.onclick = function(e){ e.preventDefault();
+    var a = getAudio();
+    if(a.paused){
+      var t = sessionStorage.getItem('musicTime');
+      if(t){ a.currentTime = parseFloat(t); sessionStorage.removeItem('musicTime'); }
+      a.play().then(function(){
+        player.classList.add('playing'); localStorage.setItem('music','on');
+      }).catch(function(){});
+    } else {
+      a.pause(); player.classList.remove('playing'); localStorage.setItem('music','off');
+    }
+  };
+});
+</script><!-- KeyboardHints: floating "?" button + shortcuts modal --><div class="kh-wrapper" data-astro-cid-ctlvvxge><button class="kh-btn" id="kh-btn" title="键盘快捷键" aria-label="键盘快捷键" data-astro-cid-ctlvvxge>?</button><div class="kh-overlay" id="kh-overlay" data-astro-cid-ctlvvxge></div><div class="kh-modal" id="kh-modal" data-astro-cid-ctlvvxge><div class="kh-modal-header" data-astro-cid-ctlvvxge><span style="font-weight:700;font-size:0.95rem;" data-astro-cid-ctlvvxge>键盘快捷键</span><button class="kh-close" id="kh-close" title="关闭" data-astro-cid-ctlvvxge>Esc</button></div><div class="kh-modal-body" data-astro-cid-ctlvvxge><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + K</kbd><span data-astro-cid-ctlvvxge>搜索</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>&larr; &rarr;</kbd><span data-astro-cid-ctlvvxge>上一篇 / 下一篇（系列导航时）</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Esc</kbd><span data-astro-cid-ctlvvxge>关闭弹窗</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + Shift + H</kbd><span data-astro-cid-ctlvvxge>回到首页</span></div></div></div></div><script>
+(function() {
+  if (typeof window === 'undefined') return;
+  function init() {
+    var btn = document.getElementById('kh-btn');
+    var overlay = document.getElementById('kh-overlay');
+    var modal = document.getElementById('kh-modal');
+    var close = document.getElementById('kh-close');
+    if (!btn || !overlay || !modal) return;
+
+    function open() {
+      overlay.classList.add('open');
+      modal.classList.add('open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+    }
+
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      overlay.classList.contains('open') ? closeModal() : open();
+    });
+    overlay.addEventListener('click', closeModal);
+    if (close) close.addEventListener('click', closeModal);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+K: focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        var searchInput = document.querySelector('#search-input, [data-search-input]');
+        if (searchInput) {
+          searchInput.focus();
+        } else {
+          // Try opening search modal
+          var searchLink = document.querySelector('a[href="/search"]');
+          if (searchLink) window.location.href = '/search';
+        }
+      }
+      // Ctrl+Shift+H: go home
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'H') {
+        e.preventDefault();
+        window.location.href = '/';
+      }
+      // Esc: close modal
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        e.preventDefault();
+        closeModal();
+      }
+      // Arrow keys for series nav
+      if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !modal.classList.contains('open')) {
+        var prevLink = document.querySelector('[data-series-prev]');
+        var nextLink = document.querySelector('[data-series-next]');
+        if (e.key === 'ArrowLeft' && prevLink) {
+          e.preventDefault();
+          window.location.href = prevLink.getAttribute('href');
+        }
+        if (e.key === 'ArrowRight' && nextLink) {
+          e.preventDefault();
+          window.location.href = nextLink.getAttribute('href');
+        }
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><button id="back-to-top" class="scroll-btn" style="bottom:2rem;" aria-label="回到顶部" title="回到顶部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>TOP</span></button><button id="go-bottom" class="scroll-btn" style="bottom:6.5rem;" aria-label="回到底部" title="回到底部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M6 9l6 6 6-6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>BOT</span></button><script type="module">(function(){var e=document.getElementById(`back-to-top`),t=document.getElementById(`go-bottom`);if(!e||!t)return;var n=!1;function r(){n||(n=!0,requestAnimationFrame(function(){var r=window.scrollY,i=document.documentElement.scrollHeight-window.innerHeight;e.classList.toggle(`visible`,r>400),t.classList.toggle(`visible`,r<i-400),n=!1}))}window.addEventListener(`scroll`,r,{passive:!0}),r(),e.onclick=function(){window.scrollTo({top:0,behavior:`smooth`})},t.onclick=function(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:`smooth`})}})();</script></body></html><script>
+  var theme=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  document.documentElement.setAttribute('data-theme',theme);
+  // Register Service Worker for offline caching
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  }
+</script><script type="module">(function(){function e(){var e=document.querySelectorAll(`[data-toc-link]`);if(e.length){e.forEach(function(e){e.addEventListener(`click`,function(e){e.preventDefault();var t=this.getAttribute(`href`)||``,n=decodeURIComponent(t.replace(/^#/,``)),r=document.getElementById(n);r&&(r.scrollIntoView({behavior:`smooth`,block:`start`}),history.replaceState(null,``,`#`+n))})});var t=new IntersectionObserver(function(e){e.forEach(function(e){var t=CSS.escape(e.target.id),n=document.querySelector(`[data-toc-link][href="#`+t+`"]`);n&&n.classList.toggle(`active`,e.isIntersecting)})},{rootMargin:`-80px 0px -60% 0px`});e.forEach(function(e){var n=e.getAttribute(`href`)||``,r=decodeURIComponent(n.replace(/^#/,``));if(r){var i=document.getElementById(r);i&&t.observe(i)}})}}document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,e):e()})();</script><script>
+  (function() {
+    var btn = document.getElementById('mobile-toc-btn');
+    var overlay = document.getElementById('mobile-toc-overlay');
+    var drawer = document.getElementById('mobile-toc-drawer');
+    if (!btn || !overlay || !drawer) return;
+
+    function open() {
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', function(e) { e.stopPropagation(); open(); });
+    overlay.addEventListener('click', close);
+    // Close when a TOC link is clicked
+    drawer.addEventListener('click', function(e) {
+      if (e.target.closest('[data-toc-link]')) {
+        setTimeout(close, 150); // wait for scroll to start
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) close();
+    });
+  })();
+</script>

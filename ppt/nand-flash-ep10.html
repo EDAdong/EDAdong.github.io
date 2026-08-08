@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAND 闪存芯片 · Dong哥教你学存储 EP10</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Noto+Sans+SC:wght@200;300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fafaf8; --paper-rgb:250,250,248; --ink:#0a0a0a; --ink-rgb:10,10,10;
+  --grey-1:#f0f0ee; --grey-2:#d4d4d2; --grey-3:#737373;
+  --accent:#002FA7; --accent-rgb:0,47,167; --accent-on:#fff; --accent-bright:#5B7BFF;
+  --text-primary:#0a0a0a; --text-secondary:#525252; --text-helper:#737373;
+  --text-placeholder:#a3a3a3; --border-subtle:#e0e0e0;
+  --sans:"Inter","Helvetica Neue","Helvetica",system-ui,sans-serif;
+  --sans-zh:"PingFang SC","Noto Sans SC","Microsoft YaHei UI","微软雅黑",sans-serif;
+  --mono:"JetBrains Mono","Consolas",monospace;
+  --sp-4:12px; --sp-5:16px; --sp-6:24px; --sp-7:32px; --sp-8:40px; --sp-9:48px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:var(--sans),var(--sans-zh)}
+.slide{width:100%;height:100%;display:flex;flex-direction:column;position:absolute;top:0;left:0;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.slide.active{opacity:1;pointer-events:auto;position:relative}
+.slide.accent{background:var(--accent);color:#fff}
+.slide.dark{background:var(--ink);color:#fff}
+.slide.light{background:var(--paper);color:var(--ink)}
+.chrome{display:flex;justify-content:space-between;padding:1.2vh 2.5vw;font-size:13px;color:inherit;opacity:.55;letter-spacing:.08em;font-weight:500;flex-shrink:0}
+.accent .chrome,.dark .chrome{color:rgba(255,255,255,.55)}
+.slide-body{flex:1;display:flex;flex-direction:column;padding:0 3.5vw 2.5vh;overflow-y:auto}
+.split-body{flex:1;display:grid;grid-template-columns:1fr 1fr}
+.split-left,.split-right{display:flex;flex-direction:column;padding:4vh 3vw;overflow-y:auto}
+.split-left.b-accent{background:var(--accent);color:#fff}
+.split-right.b-white{background:var(--paper)}
+h1{font-weight:200;font-size:min(5.8vw,10vh);line-height:1.05;letter-spacing:-.025em}
+h2{font-weight:200;font-size:min(3.6vw,6.5vh);line-height:1.1;letter-spacing:-.015em;margin-bottom:var(--sp-6)}
+h3{font-weight:500;font-size:20px;margin-bottom:4px}
+.accent h1,.accent h2,.dark h1,.dark h2{color:#fff}
+.card{background:var(--grey-1);border-radius:0;padding:var(--sp-6)}
+.accent .card,.dark .card{background:rgba(255,255,255,.06)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5)}
+.grid-6{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}
+.tag{display:inline-block;padding:4px 10px;font-size:12px;font-weight:600;letter-spacing:.06em}
+.tag-accent{background:var(--accent);color:#fff}
+.tag-outline{border:1px solid var(--accent);color:var(--accent)}
+.bar-track{flex:1;background:rgba(255,255,255,.08);height:8px;position:relative}
+.bar-fill{position:absolute;left:0;top:0;height:100%;background:var(--accent-bright)}
+.num-big{font-size:min(6vw,12vh);font-weight:200;line-height:1}
+.text-muted{font-size:15px;color:var(--text-helper)}
+.accent .text-muted,.dark .text-muted{color:rgba(255,255,255,.45)}
+.nav-hint{position:fixed;bottom:2vh;right:3vw;font-size:12px;color:var(--text-placeholder);z-index:10;letter-spacing:.05em}
+i{font-style:italic}
+b{font-weight:600}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ S01 封面 ═══════════════════════ -->
+<section class="slide accent active" id="s1">
+  <div class="chrome"><span>Dong哥教你学存储 · 第10集</span><span>EDAdong · edadong.com</span></div>
+  <div class="slide-body" style="justify-content:center;padding-top:6vh">
+    <div style="margin-bottom:var(--sp-7);font-size:14px;letter-spacing:.22em;opacity:.7">NAND FLASH DEEP DIVE</div>
+    <h1 style="margin-bottom:var(--sp-6)">NAND 闪存芯片<br><i style="font-weight:300">存储数据的真正物理载体</i></h1>
+    <p style="font-size:20px;max-width:56ch;opacity:.82;margin-bottom:var(--sp-9);line-height:1.6">从浮栅晶体管到 GC 垃圾回收<br>一次讲透 NAND 的核心工作原理</p>
+    <div style="display:flex;gap:var(--sp-5);flex-wrap:wrap">
+      <span class="tag tag-accent">浮栅晶体管</span>
+      <span class="tag tag-accent">层级结构</span>
+      <span class="tag tag-accent">GC 垃圾回收</span>
+      <span class="tag tag-accent">写放大</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S02 本集定位 ═══════════════════════ -->
+<section class="slide light" id="s2">
+  <div class="chrome"><span>CONTEXT · 本集定位</span><span>02 / 12</span></div>
+  <div class="slide-body">
+    <h2>你的照片、APP、系统文件<br>最终都存<span style="color:var(--accent)">在哪里</span>？</h2>
+    <div class="grid-2">
+      <div class="card" style="display:flex;flex-direction:column;gap:var(--sp-4)">
+        <span class="tag tag-outline" style="align-self:start">存储介质回顾</span>
+        <p style="font-size:18px;color:var(--text-secondary);line-height:1.7">
+          UFS / eMMC / SSD 的内部，真正存储数据的是 <b>NAND 闪存芯片</b>。
+          它不是抽象的"存储空间"，而是由数十亿个<b>浮栅晶体管</b>组成的物理阵列。
+        </p>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:var(--sp-4)">
+        <span class="tag tag-outline" style="align-self:start">本集目标</span>
+        <p style="font-size:18px;color:var(--text-secondary);line-height:1.7">
+          从最小存储单元讲起，逐层拆解：<br>
+          <b>浮栅晶体管</b> → <b>页/块/平面/晶圆</b> → 为什么不能直接覆写 → <b>GC 与写放大</b>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S03 浮栅晶体管 ═══════════════════════ -->
+<section class="slide dark" id="s3">
+  <div class="chrome"><span>LAYER 1 · FLOATING GATE TRANSISTOR</span><span>03 / 12</span></div>
+  <div class="slide-body">
+    <h2>最小存储单元：<span style="color:var(--accent-bright)">浮栅晶体管</span></h2>
+    <div class="card" style="padding:var(--sp-7);margin-bottom:var(--sp-6)">
+      <h3 style="color:var(--accent-bright);font-size:16px;letter-spacing:.06em;margin-bottom:var(--sp-4)">工作原理</h3>
+      <p style="font-size:18px;line-height:1.75;opacity:.85">在普通 MOS 管的栅极中嵌入一个被<b style="color:#fff">绝缘层完全包裹</b>的"浮栅"。电荷一旦注入就难以逃逸——<b style="color:var(--accent-bright)">断电后数据依然保存</b>。</p>
+    </div>
+    <div class="grid-2">
+      <div class="card" style="border-left:3px solid var(--accent-bright)">
+        <h3 style="color:var(--accent-bright);font-size:16px;letter-spacing:.06em;margin-bottom:var(--sp-4)">写入 Program</h3>
+        <p style="font-size:17px;line-height:1.6;opacity:.8">向浮栅<b style="color:#fff">注入电子</b> → 阈值电压升高 → 代表逻辑 <b style="color:var(--accent-bright)">"0"</b></p>
+      </div>
+      <div class="card" style="border-left:3px solid #ff6b6b">
+        <h3 style="color:#ff6b6b;font-size:16px;letter-spacing:.06em;margin-bottom:var(--sp-4)">擦除 Erase</h3>
+        <p style="font-size:17px;line-height:1.6;opacity:.8">从浮栅<b style="color:#fff">移除电子</b> → 阈值电压降低 → 代表逻辑 <b style="color:#ff6b6b">"1"</b></p>
+      </div>
+    </div>
+    <p style="margin-top:var(--sp-5);font-size:15px;opacity:.4">📌 浮栅被高质量氧化物绝缘层完全包裹，注入的电子几乎无法泄漏——这就是 NAND 非易失性存储的物理基础。</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S04 层级结构 ═══════════════════════ -->
+<section class="slide light" id="s4">
+  <div class="chrome"><span>LAYER 2 · HIERARCHY</span><span>04 / 12</span></div>
+  <div class="slide-body">
+    <h2>从 Cell 到 Wafer 的<span style="color:var(--accent)">六层嵌套</span></h2>
+    <div class="grid-6">
+      <div class="card" style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em">Cell · 单元</div>
+        <div style="font-size:17px;font-weight:500">最小存储单元</div>
+        <div class="text-muted">存放 1-4 bit</div>
+        <div style="font-size:13px;opacity:.5">SLC/MLC/TLC/QLC</div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em">Page · 页</div>
+        <div style="font-size:17px;font-weight:500">读写最小单位</div>
+        <div class="text-muted">2KB / 4KB / 16KB</div>
+        <div style="font-size:13px;opacity:.5">一次读写至少一个页</div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em">Block · 块</div>
+        <div style="font-size:17px;font-weight:500">擦除最小单位</div>
+        <div class="text-muted">含数百~数千 Page</div>
+        <div style="font-size:13px;opacity:.5">只能整块擦除</div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em">Plane · 平面</div>
+        <div style="font-size:17px;font-weight:500">Block 集合</div>
+        <div class="text-muted">独立并行操作</div>
+        <div style="font-size:13px;opacity:.5">提升并发性能</div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em">Die · 晶粒</div>
+        <div style="font-size:17px;font-weight:500">独立芯片单元</div>
+        <div class="text-muted">多个 Plane 组成</div>
+        <div style="font-size:13px;opacity:.5">可堆叠封装</div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:4px">
+        <div style="font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.04em">Wafer · 晶圆</div>
+        <div style="font-size:17px;font-weight:500">多个 Die 组成</div>
+        <div class="text-muted">最终切割封装</div>
+        <div style="font-size:13px;opacity:.5">一片=数百颗芯片</div>
+      </div>
+    </div>
+    <p style="margin-top:var(--sp-6);font-size:15px;color:var(--text-helper);text-align:right">💡 读写按页、擦除按块——这是理解 NAND 一切"怪癖"的起点</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S05 读写擦对比 ═══════════════════════ -->
+<section class="slide dark" id="s5">
+  <div class="chrome"><span>OPERATIONS · 读写擦</span><span>05 / 12</span></div>
+  <div class="slide-body">
+    <h2>为什么读/写按<span style="color:var(--accent-bright)">页</span>，擦除按<span style="color:var(--accent-bright)">块</span>？</h2>
+    <div class="grid-2">
+      <div class="card" style="padding:var(--sp-7);border:1px solid rgba(255,255,255,.1)">
+        <div class="tag tag-accent" style="align-self:start;margin-bottom:var(--sp-4)">读 / 写 → 按页</div>
+        <p style="font-size:18px;line-height:1.7;opacity:.82">
+          每次读写以 <b style="color:#fff">2KB / 4KB / 16KB</b> 为单位<br>
+          速度快（微秒级）<br>
+          页是 NAND 内部最小的可寻址读写单元
+        </p>
+        <div style="margin-top:var(--sp-5);padding:var(--sp-4);background:rgba(91,123,255,.1);font-size:15px;opacity:.7">⚡ 读 ~50μs / 写 ~500μs</div>
+      </div>
+      <div class="card" style="padding:var(--sp-7);border:1px solid rgba(255,255,255,.1)">
+        <div class="tag" style="align-self:start;margin-bottom:var(--sp-4);background:#ff6b6b;color:#fff">擦除 → 按块</div>
+        <p style="font-size:18px;line-height:1.7;opacity:.82">
+          只能以 <b style="color:#ff6b6b">整个 Block</b> 为单位<br>
+          速度慢（毫秒级）<br>
+          包含数百~数千个 Page
+        </p>
+        <div style="margin-top:var(--sp-5);padding:var(--sp-4);background:rgba(255,107,107,.1);font-size:15px;opacity:.7">🐢 擦除 ~2-5ms（慢 10 倍）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S06 不能直接覆写 ═══════════════════════ -->
+<section class="slide light" id="s6">
+  <div class="chrome"><span>KEY CONSTRAINT · 核心限制</span><span>06 / 12</span></div>
+  <div class="slide-body">
+    <h2>关键限制：<span style="color:var(--accent)">不能直接覆盖写入</span></h2>
+    <div class="grid-2">
+      <div class="card" style="padding:var(--sp-7);display:flex;flex-direction:column;gap:var(--sp-4)">
+        <span class="tag tag-outline" style="align-self:start">❌ 直观想法（但做不到）</span>
+        <p style="font-size:17px;color:var(--text-secondary);line-height:1.65">找到旧数据的位置 → 原地写入新数据</p>
+        <div style="padding:var(--sp-4);background:rgba(0,0,0,.02);font-size:15px;color:var(--text-helper)">问题：NAND 物理上做不到<br>必须先擦除整个 Block</div>
+      </div>
+      <div class="card" style="padding:var(--sp-7);border-left:3px solid var(--accent);display:flex;flex-direction:column;gap:var(--sp-4)">
+        <span class="tag tag-accent" style="align-self:start">✅ 实际流程</span>
+        <p style="font-size:17px;color:var(--text-secondary);line-height:1.65">新数据 → 已擦除的空 Page → 旧 Page 标记"无效" → 后台 GC 回收</p>
+        <div style="padding:var(--sp-4);background:rgba(0,47,167,.04);font-size:15px;color:var(--text-helper)">这就是"越用越慢"的物理根源<br>无效页越积越多，直到触发 GC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S07 GC ═══════════════════════ -->
+<section class="slide dark" id="s7">
+  <div class="chrome"><span>GARBAGE COLLECTION</span><span>07 / 12</span></div>
+  <div class="slide-body">
+    <h2>垃圾回收 GC：<span style="color:var(--accent-bright)">NAND 的"清洁工"</span></h2>
+    <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
+      <div style="display:flex;align-items:stretch;gap:var(--sp-5)">
+        <div style="flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;font-size:18px;font-weight:200">1</div>
+        <div class="card" style="flex:1;padding:var(--sp-5);border:1px solid rgba(255,255,255,.08)"><b style="color:#fff">选择目标</b> · 选一个"脏"Block——含大量已标记无效的 Page</div>
+      </div>
+      <div style="display:flex;align-items:stretch;gap:var(--sp-5)">
+        <div style="flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;font-size:18px;font-weight:200">2</div>
+        <div class="card" style="flex:1;padding:var(--sp-5);border:1px solid rgba(255,255,255,.08)"><b style="color:#fff">数据迁移</b> · 把 Block 中仍然有效的 Page 搬到一个新 Block</div>
+      </div>
+      <div style="display:flex;align-items:stretch;gap:var(--sp-5)">
+        <div style="flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;font-size:18px;font-weight:200">3</div>
+        <div class="card" style="flex:1;padding:var(--sp-5);border:1px solid rgba(255,255,255,.08)"><b style="color:#fff">整块擦除</b> · 旧 Block 全部擦除，恢复为空闲空间</div>
+      </div>
+      <div style="display:flex;align-items:stretch;gap:var(--sp-5)">
+        <div style="flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:#ff6b6b;color:#fff;font-size:18px;font-weight:200">!</div>
+        <div class="card" style="flex:1;padding:var(--sp-5);border:1px solid rgba(255,255,255,.08)"><b style="color:#ff6b6b">代价</b> · 消耗一次 P/E Cycle + 搬移有效数据产生额外写入 → <b style="color:var(--accent-bright)">写放大</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S08 写放大 ═══════════════════════ -->
+<section class="slide light" id="s8">
+  <div class="chrome"><span>WRITE AMPLIFICATION</span><span>08 / 12</span></div>
+  <div class="slide-body">
+    <h2>写放大 WA = <span style="color:var(--accent)">NAND 实际写入</span> ÷ 主机请求写入</h2>
+    <p style="font-size:18px;color:var(--text-secondary);margin-bottom:var(--sp-7)">WA 总是 > 1。GC 搬移有效数据产生额外写入——WA 越大，P/E Cycle 消耗越快，寿命越短。</p>
+    <div class="grid-3" style="margin-bottom:var(--sp-6)">
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-3);padding:var(--sp-7)">
+        <div style="font-size:32px">⚡</div>
+        <div style="font-size:15px;font-weight:600;color:var(--accent)">顺序大文件</div>
+        <div class="num-big" style="font-size:52px;color:var(--ink)">1.0-1.2×</div>
+        <div class="text-muted">接近理想值</div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-3);padding:var(--sp-7)">
+        <div style="font-size:32px">⚠️</div>
+        <div style="font-size:15px;font-weight:600;color:var(--accent)">随机小文件</div>
+        <div class="num-big" style="font-size:52px;color:var(--ink)">1.5-3.0×</div>
+        <div class="text-muted">GC 开销大</div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--sp-3);padding:var(--sp-7)">
+        <div style="font-size:32px">🔴</div>
+        <div style="font-size:15px;font-weight:600;color:var(--accent)">盘满时随机写</div>
+        <div class="num-big" style="font-size:52px;color:var(--ink)">3.0-10+×</div>
+        <div class="text-muted">空间越少越糟</div>
+      </div>
+    </div>
+    <p style="font-size:15px;color:var(--text-helper);text-align:right">💡 减少写放大的关键：保留足够的空闲空间（Over-Provisioning）让 GC 有周转余地</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S09 P/E Cycle ═══════════════════════ -->
+<section class="slide dark" id="s9">
+  <div class="chrome"><span>P/E CYCLE · 擦写寿命</span><span>09 / 12</span></div>
+  <div class="slide-body">
+    <div class="grid-2" style="align-items:center;flex:1">
+      <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
+        <h2 style="margin-bottom:0">P/E Cycle<br><span style="color:var(--accent-bright)">擦写寿命</span></h2>
+        <p style="font-size:18px;opacity:.75;line-height:1.7">每个 Block 的擦写次数有限。氧化层逐渐退化，电子保持能力下降。</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
+        <div style="display:flex;align-items:center;gap:var(--sp-4)">
+          <div style="width:60px;font-size:15px;font-weight:500;color:#fff">SLC</div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+          <div style="font-size:14px;opacity:.5;white-space:nowrap">~100,000 次</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--sp-4)">
+          <div style="width:60px;font-size:15px;font-weight:500;color:#fff">MLC</div>
+          <div class="bar-track"><div class="bar-fill" style="width:10%"></div></div>
+          <div style="font-size:14px;opacity:.5;white-space:nowrap">~10,000 次</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--sp-4)">
+          <div style="width:60px;font-size:15px;font-weight:500;color:#fff">TLC</div>
+          <div class="bar-track"><div class="bar-fill" style="width:3%"></div></div>
+          <div style="font-size:14px;opacity:.5;white-space:nowrap">~3,000 次</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:var(--sp-4)">
+          <div style="width:60px;font-size:15px;font-weight:500;color:#fff">QLC</div>
+          <div class="bar-track"><div class="bar-fill" style="width:1%"></div></div>
+          <div style="font-size:14px;opacity:.5;white-space:nowrap">~1,000 次</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S10 三大机制总结 ═══════════════════════ -->
+<section class="slide light" id="s10">
+  <div class="chrome"><span>THE BIG THREE · 三大机制</span><span>10 / 12</span></div>
+  <div class="slide-body">
+    <h2>NAND 闪存的<span style="color:var(--accent)">三大核心机制</span></h2>
+    <div class="grid-3">
+      <div class="card" style="padding:var(--sp-7);background:var(--accent);color:#fff;display:flex;flex-direction:column;gap:var(--sp-4)">
+        <div style="font-size:44px;font-weight:200;line-height:1">01</div>
+        <h3 style="color:#fff;font-size:18px">不能直接覆写</h3>
+        <p style="font-size:15px;opacity:.8;line-height:1.6">新数据→空Page→旧Page标记无效。物理限制是一切衍生机制的根源。</p>
+      </div>
+      <div class="card" style="padding:var(--sp-7);background:var(--accent);color:#fff;display:flex;flex-direction:column;gap:var(--sp-4)">
+        <div style="font-size:44px;font-weight:200;line-height:1">02</div>
+        <h3 style="color:#fff;font-size:18px">GC 垃圾回收</h3>
+        <p style="font-size:15px;opacity:.8;line-height:1.6">搬移有效页→擦除旧Block→回收空间。后台自动运行，消耗P/E Cycle。</p>
+      </div>
+      <div class="card" style="padding:var(--sp-7);background:var(--accent);color:#fff;display:flex;flex-direction:column;gap:var(--sp-4)">
+        <div style="font-size:44px;font-weight:200;line-height:1">03</div>
+        <h3 style="color:#fff;font-size:18px">写放大 WA</h3>
+        <p style="font-size:15px;opacity:.8;line-height:1.6">WA=NAND实际写入÷主机请求。越大越伤寿命，盘满时严重恶化。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S11 金句总结 ═══════════════════════ -->
+<section class="slide dark" id="s11">
+  <div class="chrome"><span>TAKEAWAY</span><span>11 / 12</span></div>
+  <div class="slide-body" style="justify-content:center;align-items:center;text-align:center;padding-top:4vh">
+    <h2 style="max-width:36ch;margin-bottom:var(--sp-8)">NAND 是<span style="color:var(--accent-bright)">物理规律的妥协</span><br>不是完美的设计</h2>
+    <div style="max-width:52ch;display:flex;flex-direction:column;gap:var(--sp-6);font-size:19px;opacity:.82;line-height:1.75">
+      <p>高密度、低成本、非易失性 → <b style="color:#fff">优势</b></p>
+      <p>不能直接覆写、擦除次数有限、需要 GC → <b style="color:#ff6b6b">代价</b></p>
+      <p style="margin-top:var(--sp-5);font-size:17px">理解这些底层机制，才真正理解了存储为什么<b style="color:#fff">"越用越慢"</b>、为什么<b style="color:#fff">"参数不等于体验"</b>。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ S12 结尾 ═══════════════════════ -->
+<section class="slide" id="s12" style="background:var(--accent);color:#fff">
+  <div class="chrome" style="color:rgba(255,255,255,.55)"><span>NEXT · 下集预告</span><span>12 / 12</span></div>
+  <div class="split-body">
+    <div class="split-left b-accent" style="justify-content:center;gap:var(--sp-6)">
+      <h2 style="margin-bottom:0;font-size:min(4vw,7vh)">下集预告</h2>
+      <p style="font-size:22px;opacity:.85;line-height:1.6">
+        主控芯片<br>存储的"大脑"有多重要？<br><br>
+        FTL 算法、磨损均衡、坏块管理<br>一次讲透
+      </p>
+    </div>
+    <div class="split-right b-white" style="justify-content:center;gap:var(--sp-7)">
+      <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+        <p style="font-size:19px;line-height:1.6">📺 <b>B站关注 EDAdong</b></p>
+        <p class="text-muted" style="font-size:16px">全部课程免费观看 · 源码见视频简介</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+        <p style="font-size:19px;line-height:1.6">📖 <b>博客 edadong.com</b></p>
+        <p class="text-muted" style="font-size:16px">50+ 篇技术文章 · 存储底层系列持续更新</p>
+      </div>
+      <p style="font-size:14px;opacity:.35;margin-top:var(--sp-5)">纯技术爱好，非商业用途</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ 翻页 JS ═══════════════════════ -->
+<div class="nav-hint">← → 方向键翻页 · 01/12</div>
+<script>
+(function(){
+  var slides = document.querySelectorAll('.slide');
+  var hint = document.querySelector('.nav-hint');
+  var current = 0;
+  function show(i){
+    slides.forEach(function(s){s.classList.remove('active')});
+    slides[i].classList.add('active');
+    current = i;
+    hint.textContent = '← → 方向键翻页 · ' + String(i+1).padStart(2,'0') + '/' + slides.length;
+  }
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){
+      e.preventDefault(); if(current<slides.length-1) show(current+1);
+    } else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){
+      e.preventDefault(); if(current>0) show(current-1);
+    }
+  });
+  document.addEventListener('wheel',function(e){
+    if(e.deltaY>0 && current<slides.length-1) show(current+1);
+    else if(e.deltaY<0 && current>0) show(current-1);
+  });
+  var startX=0;
+  document.addEventListener('touchstart',function(e){startX=e.touches[0].clientX});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-startX;
+    if(dx<-50 && current<slides.length-1) show(current+1);
+    if(dx>50 && current>0) show(current-1);
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

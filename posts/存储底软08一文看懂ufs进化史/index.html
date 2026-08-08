@@ -1,0 +1,493 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v7.1.3"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>存储底软-08一文看懂 UFS 进化史：从 UFS2.0 到 UFS4.1 的技术迭代 | EDAdong</title><meta name="description" content="从 UFS 2.0 到 UFS 4.1，每次大版本升级的带宽都翻倍——1000→2000→4000 MB/s。这篇文章按时间线梳理 UFS 十年进化史，讲清每一代的核心技术变化。"><meta property="og:title" content="存储底软-08一文看懂 UFS 进化史：从 UFS2.0 到 UFS4.1 的技术迭代"><meta property="og:type" content="article"><meta property="og:url" content="https://edadong.com/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF08%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82ufs%E8%BF%9B%E5%8C%96%E5%8F%B2/"><meta property="og:description" content="从 UFS 2.0 到 UFS 4.1，每次大版本升级的带宽都翻倍——1000→2000→4000 MB/s。这篇文章按时间线梳理 UFS 十年进化史，讲清每一代的核心技术变化。"><meta property="og:image" content="/images/storage-08封面.webp"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Article","headline":"存储底软-08一文看懂 UFS 进化史：从 UFS2.0 到 UFS4.1 的技术迭代","description":"从 UFS 2.0 到 UFS 4.1，每次大版本升级的带宽都翻倍——1000→2000→4000 MB/s。这篇文章按时间线梳理 UFS 十年进化史，讲清每一代的核心技术变化。","datePublished":"2026-08-04T22:00:00.000Z","author":{"@type":"Person","name":"EDAdong","url":"https://edadong.com/about/"},"image":"https://edadong.com/images/storage-08封面.webp","url":"https://edadong.com/posts/存储底软08一文看懂ufs进化史/","publisher":{"@type":"Person","name":"EDAdong"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"首页","item":"https://edadong.com/"},{"@type":"ListItem","position":2,"name":"文章","item":"https://edadong.com/posts/"},{"@type":"ListItem","position":3,"name":"存储底软-08一文看懂 UFS 进化史：从 UFS2.0 到 UFS4.1 的技术迭代"}]}]}</script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="dns-prefetch" href="https://github.com"><link rel="dns-prefetch" href="https://avatars.githubusercontent.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="/_astro/BaseLayout.FZUuh1sy.css"><link rel="stylesheet" href="/_astro/_slug_.CITvTZpu.css"><link rel="stylesheet" href="/_astro/global.CZGXK5uF.css"></head><body style="background-color: var(--color-bg); color: var(--color-text);"><div style="position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 60% 50% at 20% 30%, rgba(8,145,178,0.25), transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(99,102,241,0.18), transparent 50%),
+      radial-gradient(ellipse 45% 40% at 55% 70%, rgba(8,145,178,0.20), transparent 55%);
+    "></div><!-- Initial loading screen: visible on first load, fades out when page ready --><div id="page-loader" class="page-loader-overlay active"><div class="page-loader-content"><div class="pl-logo">E</div><div class="pl-spinner"><div class="pl-ring"></div></div><div class="pl-text">EDAdong</div></div></div><script>
+  (function(){
+    var loader = document.getElementById('page-loader');
+    if(!loader) return;
+
+    function hide(){ loader.classList.remove('active'); }
+
+    // Hide loader as soon as page is interactive — don't wait for all resources
+    if (document.readyState === 'loading') {
+      // Initial page load: hide shortly after DOM is ready
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(hide, 50); });
+      // Fallback: hide after load event
+      window.addEventListener('load', function() { setTimeout(hide, 300); });
+    } else {
+      // View Transition navigation: DOM already ready, hide immediately
+      hide();
+    }
+    // Safety: always hide after 3s
+    setTimeout(hide, 3000);
+
+    // Show loader when clicking internal links (for View Transition nav)
+    document.addEventListener('click', function(e){
+      var link = e.target.closest('a');
+      if(!link) return;
+      var href = link.getAttribute('href');
+      if(!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('//')) return;
+      if(link.getAttribute('target') === '_blank') return;
+      loader.classList.add('active');
+    });
+  })();
+</script><!-- Adds native lazy loading to all article images --><script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.article-body img:not([loading])').forEach(function(img){
+      img.loading = 'lazy';
+      img.decoding = 'async';
+    });
+  });
+</script><header id="site-header" class="site-header" data-astro-cid-nen7h5rs><div class="container-main w-full flex items-center justify-between" data-astro-cid-nen7h5rs><a href="/" class="flex items-center gap-2 font-bold text-lg no-underline" style="color: var(--color-text);" data-astro-cid-nen7h5rs><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0" style="background: linear-gradient(135deg, var(--color-accent), #6366f1);" data-astro-cid-nen7h5rs>主页</span></a><nav class="flex items-center gap-1" data-astro-cid-nen7h5rs><a href="/posts" class="nav-item" style="color: var(--color-accent)" data-astro-cid-nen7h5rs>文章</a><a href="/search" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>搜索</a><a href="/resources" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>资料</a><a href="/friends" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>友链</a><a href="/about" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>关于</a><button id="theme-btn" class="nav-item border-none cursor-pointer" aria-label="Toggle theme" style="background:transparent; font-size:1rem;" data-astro-cid-nen7h5rs><svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" data-astro-cid-nen7h5rs></path></svg><svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 hidden" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" data-astro-cid-nen7h5rs></path></svg></button></nav></div></header><script>
+(function(){
+  var t=document.getElementById('theme-btn'),s=document.getElementById('sun-icon'),m=document.getElementById('moon-icon');
+  if(!t||!s||!m)return;
+  function u(){var d=document.documentElement.getAttribute('data-theme')==='dark';s.classList.toggle('hidden',d);m.classList.toggle('hidden',!d)}
+  u();t.onclick=function(){var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);u()};
+})();
+</script><main><div class="reading-progress" id="reading-progress-bar"></div><script type="module">var e=document.getElementById(`reading-progress-bar`);e&&window.addEventListener(`scroll`,()=>{let t=window.scrollY,n=document.documentElement.scrollHeight-window.innerHeight;e.style.width=n>0?`${t/n*100}%`:`0%`});</script><div class="article-layout" data-astro-cid-ruv7hgo6><article class="article-main" data-astro-cid-ruv7hgo6><!-- Header --><header class="mb-10" data-astro-cid-ruv7hgo6><h1 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4" style="color: var(--color-text); letter-spacing: -0.02em;" data-astro-cid-ruv7hgo6>存储底软-08一文看懂 UFS 进化史：从 UFS2.0 到 UFS4.1 的技术迭代</h1><div class="flex flex-wrap items-center gap-3 text-sm mb-4" style="color: var(--color-text-secondary);" data-astro-cid-ruv7hgo6><time datetime="Wed Aug 05 2026 06:00:00 GMT+0800 (中国标准时间)" data-astro-cid-ruv7hgo6>2026年8月5日</time><span style="color: var(--color-text-secondary); opacity: 0.6;" data-astro-cid-ruv7hgo6>· 约 9 分钟</span><span data-astro-cid-ruv7hgo6>· <a href="/categories/存储底软" class="font-medium transition-colors" style="color: var(--color-accent);" data-astro-cid-ruv7hgo6>#存储底软</a></span></div><div class="flex flex-wrap gap-1.5" data-astro-cid-ruv7hgo6><span class="tag" data-astro-cid-ruv7hgo6>存储</span><span class="tag" data-astro-cid-ruv7hgo6>UFS</span><span class="tag" data-astro-cid-ruv7hgo6>UFS2.0</span><span class="tag" data-astro-cid-ruv7hgo6>UFS3.1</span><span class="tag" data-astro-cid-ruv7hgo6>UFS4.1</span></div></header><!-- Article Body --><div class="article-body" data-astro-cid-ruv7hgo6><blockquote>
+<p>UFS 从 2015 年首次大规模商用至今，已经迭代了十几个年头。每一代大版本升级，理论带宽都会翻倍。本文顺着时间线，把 UFS 2.0 到 UFS 4.1 的关键技术进步一次讲清楚。</p>
+</blockquote>
+<h2 id="ufs-版本演进全景">UFS 版本演进全景</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">版本</th><th align="left">发布时间</th><th align="left">理论带宽</th><th align="left">核心升级</th></tr></thead><tbody><tr><td align="left"><strong>UFS 2.0/2.1</strong></td><td align="left">2015-2016</td><td align="left">~1000 MB/s</td><td align="left">CMDQ 命令队列，大规模商用起点</td></tr><tr><td align="left"><strong>UFS 3.0/3.1</strong></td><td align="left">2019-2020</td><td align="left">~2000 MB/s</td><td align="left">HS-Gear4，Write Booster，深度睡眠</td></tr><tr><td align="left"><strong>UFS 4.0/4.1</strong></td><td align="left">2022-2023</td><td align="left">~4000 MB/s</td><td align="left">HS-Gear5，功耗优化，可靠性增强</td></tr></tbody></table>
+<blockquote>
+<p>实际应用到手机上的 UFS 版本，通常比标准发布晚一代左右。目前旗舰机标配 UFS 3.1/UFS 4.0。</p>
+</blockquote>
+<hr>
+<h2 id="ufs-20--21普及时代的起点2015-2016">UFS 2.0 / 2.1：普及时代的起点（2015-2016）</h2>
+<h3 id="首批大规模商用">首批大规模商用</h3>
+<p>2015-2016 年，UFS 开始在旗舰机型上大规模普及，取代 eMMC 成为高端手机的标准配置。</p>
+<h3 id="关键引入cmdq-命令队列">关键引入：CMDQ 命令队列</h3>
+<p>UFS 2.1 引入了**命令队列（CMDQ）**机制，支持多条读写命令并行调度。这个特性让日常 APP 启动、多任务切换的流畅度相比 eMMC 有了质的飞跃。</p>
+<h3 id="历史意义">历史意义</h3>
+<p>从 eMMC 到 UFS 2.1，是一次”能用”到”好用”的跨越。这个时期的 UFS，速度相比 eMMC 已经有了数倍的提升，成为高端旗舰的标配。</p>
+<hr>
+<h2 id="ufs-30--31速度翻倍时代2019-2020">UFS 3.0 / 3.1：速度翻倍时代（2019-2020）</h2>
+<h3 id="hs-gear4-登场">HS-Gear4 登场</h3>
+<p>2019-2020 年推出的 UFS 3.0，引入 HS-Gear4 物理层标准，理论带宽直接翻倍，达到 <strong>2000 MB/s</strong> 以上。</p>
+<h3 id="ufs-31-的三大增强">UFS 3.1 的三大增强</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left">特性</th><th align="left">说明</th></tr></thead><tbody><tr><td align="left"><strong>Write Booster</strong></td><td align="left">写加速技术，利用 SLC 缓存提升突发写入性能</td></tr><tr><td align="left"><strong>深度睡眠模式</strong></td><td align="left">进一步降低待机功耗，延长设备续航</td></tr><tr><td align="left"><strong>性能稳定性</strong></td><td align="left">改善了长时间高负载下的性能一致性</td></tr></tbody></table>
+<h3 id="市场影响">市场影响</h3>
+<p>UFS 3.1 成为 Android 旗舰的标配，大量中端机型开始从 eMMC 切换到 UFS 2.x，UFS 的全面普及由此开始。</p>
+<hr>
+<h2 id="ufs-40--41当前旗舰标杆2022-2023">UFS 4.0 / 4.1：当前旗舰标杆（2022-2023）</h2>
+<h3 id="hs-gear5再翻一倍">HS-Gear5：再翻一倍</h3>
+<p>2022-2023 年推出的 UFS 4.0，引入 HS-Gear5 物理层，理论带宽再次翻倍，达到 <strong>4000 MB/s</strong> 以上——这个速度已经接近早期 PCIe SSD 的水平。</p>
+<h3 id="不只是快">不只是快</h3>
+<p>UFS 4.1 在提升带宽的同时，重点优化了三个方面：</p>
+<ul>
+<li><strong>功耗</strong>：更精细的电源管理，待机功耗进一步降低</li>
+<li><strong>可靠性</strong>：增强了数据校验和纠错机制</li>
+<li><strong>安全性</strong>：硬件级安全特性，支持更完善的数据保护</li>
+</ul>
+<h3 id="当前市场格局">当前市场格局</h3>
+<p>目前 Android 旗舰机型清一色配备 UFS 4.0/4.1，移动存储的速度已经正式迈入 GB/s 时代。</p>
+<hr>
+<h2 id="三代的代际对比">三代的代际对比</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th align="left"></th><th align="left">UFS 2.1</th><th align="left">UFS 3.1</th><th align="left">UFS 4.1</th></tr></thead><tbody><tr><td align="left"><strong>发布年份</strong></td><td align="left">2016</td><td align="left">2019</td><td align="left">2022</td></tr><tr><td align="left"><strong>物理层</strong></td><td align="left">HS-Gear3</td><td align="left">HS-Gear4</td><td align="left"><strong>HS-Gear5</strong></td></tr><tr><td align="left"><strong>理论带宽</strong></td><td align="left">~1000 MB/s</td><td align="left">~2000 MB/s</td><td align="left"><strong>~4000 MB/s</strong></td></tr><tr><td align="left"><strong>代表特性</strong></td><td align="left">CMDQ 引入</td><td align="left">Write Booster</td><td align="left">功耗+可靠性全面优化</td></tr><tr><td align="left"><strong>市场定位</strong></td><td align="left">高端旗舰起步</td><td align="left">旗舰标配</td><td align="left"><strong>当前旗舰标杆</strong></td></tr></tbody></table>
+<blockquote>
+<p>每代约三年一个周期，带宽翻倍，同时持续优化功耗和可靠性。这就是 UFS 十年迭代的核心逻辑。</p>
+</blockquote>
+<hr>
+<h2 id="总结">总结</h2>
+<ol>
+<li><strong>UFS 2.1</strong>：奠定架构基础，CMDQ 让日常体验飞跃</li>
+<li><strong>UFS 3.1</strong>：带宽翻倍 + Write Booster + 深度睡眠，性能和功耗双提升</li>
+<li><strong>UFS 4.1</strong>：再翻倍到 4000 MB/s，移动存储进入 GB/s 时代</li>
+</ol>
+<blockquote>
+<p>UFS 每一代迭代的核心逻辑都是相同的：带宽翻倍、功耗降低、可靠性增强。不是某一项的突飞猛进，而是全方位的持续进化。</p>
+</blockquote>
+<hr>
+<h2 id="系列导航">系列导航</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>集数</th><th>标题</th><th>内容</th></tr></thead><tbody><tr><td>第 0 集</td><td><a href="/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF00%E5%AD%98%E5%82%A8%E8%AF%BE%E7%A8%8B%E6%80%BB%E8%A7%88">存储课程总览</a></td><td>四大模块介绍</td></tr><tr><td>第 1 集</td><td><a href="/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF01%E5%88%B0%E5%BA%95%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%98%E5%82%A8">到底什么是存储？</a></td><td>内存与存储的本质区别</td></tr><tr><td>第 2 集</td><td><a href="/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF02%E5%AD%98%E5%82%A8%E7%B1%BB%E5%9E%8B%E5%A4%A7%E7%9B%98%E7%82%B9">存储类型大盘点</a></td><td>HDD/SSD/eMMC/UFS 全解析</td></tr><tr><td>第 3 集</td><td><a href="/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF03%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AD%98%E5%82%A8%E8%B6%8A%E7%94%A8%E8%B6%8A%E6%85%A2">为什么存储越用越慢？</a></td><td>碎片、GC、SLC 缓存</td></tr><tr><td>第 4 集</td><td><a href="/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF04%E4%B8%89%E5%A4%A7%E5%AD%98%E5%82%A8%E4%BB%8B%E8%B4%A8">三大存储介质</a></td><td>DRAM/NOR Flash/NAND Flash</td></tr><tr><td>第 5 集</td><td><a href="/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF05SLCMLCTLCQLC%E5%85%A8%E8%A7%A3%E6%9E%90">SLC/MLC/TLC/QLC 全解析</a></td><td>速度、寿命、成本取舍</td></tr><tr><td>第 6 集</td><td><a href="/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF06%E5%AD%98%E5%82%A8%E5%8F%82%E6%95%B0%E6%80%8E%E4%B9%88%E7%9C%8B">存储参数怎么看？</a></td><td>顺序读写与随机读写</td></tr><tr><td>第 7 集</td><td><a href="/posts/%E5%AD%98%E5%82%A8%E5%BA%95%E8%BD%AF07UFS%E5%87%AD%E4%BB%80%E4%B9%88%E5%85%A8%E9%9D%A2%E5%8F%96%E4%BB%A3eMMC">UFS 凭什么全面取代 eMMC？</a></td><td>三大核心优势</td></tr><tr><td>第 8 集</td><td>一文看懂 UFS 进化史</td><td>👈 你在这里</td></tr></tbody></table>
+<p><strong>下一集：UFS 内部到底长啥样？</strong> 控制器、NAND 闪存、DRAM 缓存——三大核心组成一次拆解。敬请期待！</p></div><!-- HeadingAnchors: adds clickable anchor links to H2/H3 in .article-body --><script>
+(function() {
+  if (typeof window === 'undefined') return;
+
+  function init() {
+    var headings = document.querySelectorAll('.article-body h2[id], .article-body h3[id]');
+    if (!headings.length) return;
+
+    // Create tooltip element
+    var tooltip = document.createElement('div');
+    tooltip.className = 'anchor-tooltip';
+    tooltip.textContent = '已复制!';
+    document.body.appendChild(tooltip);
+
+    var hideTimer = null;
+
+    headings.forEach(function(h) {
+      var a = document.createElement('a');
+      a.className = 'heading-anchor';
+      a.href = '#' + h.id;
+      a.textContent = '#';
+      a.title = '复制链接';
+      a.setAttribute('aria-hidden', 'true');
+
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var url = window.location.origin + window.location.pathname + '#' + h.id;
+        try {
+          navigator.clipboard.writeText(url).then(function() {
+            tooltip.classList.add('show');
+            tooltip.style.left = e.clientX + 'px';
+            tooltip.style.top = (e.clientY - 8) + 'px';
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(function() {
+              tooltip.classList.remove('show');
+            }, 1500);
+          });
+        } catch(e) {}
+        // Also update URL bar without scrolling
+        history.replaceState(null, '', url);
+      });
+
+      h.appendChild(a);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><script>
+(function(){
+  try {
+  var LANG_MAP = {c:'C',cpp:'C++',python:'Python',javascript:'JS',typescript:'TS',bash:'Bash',json:'JSON',verilog:'Verilog',html:'HTML',css:'CSS',rust:'Rust',go:'Go',java:'Java',sql:'SQL',yaml:'YAML',xml:'XML',markdown:'MD',matlab:'MATLAB',lua:'Lua',diff:'Diff',dockerfile:'Docker',vim:'Vim',makefile:'Makefile',php:'PHP',ruby:'Ruby',swift:'Swift',kotlin:'Kotlin',scala:'Scala'};
+
+  function init(){
+    var pres = document.querySelectorAll('.article-body pre');
+    for(var i=0;i<pres.length;i++){
+      var pre=pres[i];
+      if(pre.parentElement && pre.parentElement.classList.contains('code-block-wrapper')) continue;
+      if(!pre.parentNode) continue;
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrapper';
+      var lang = pre.getAttribute('data-language');
+      if(lang){
+        lang = LANG_MAP[lang.toLowerCase()] || lang;
+        var badge = document.createElement('span');
+        badge.className = 'lang-badge'; badge.textContent = lang;
+        wrapper.appendChild(badge);
+      }
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      var code = pre.querySelector('code');
+      var btn = document.createElement('button');
+      btn.className = 'copy-btn'; btn.textContent = '复制';
+      btn.onclick = function(){
+        try { navigator.clipboard.writeText(code?code.textContent||'':'').then(function(){
+          btn.textContent='已复制!'; btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent='复制'; btn.classList.remove('copied'); }, 1500);
+        }).catch(function(){}); } catch(e){}
+      };
+      pre.appendChild(btn);
+    }
+  }
+  // Defer to avoid blocking page render
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){init();setTimeout(init,500);});}
+  else{init();setTimeout(init,500);}
+  } catch(e) { console.log('CopyCode:', e); }
+})();
+</script><nav class="series-nav"><!-- Hidden nav links for keyboard shortcuts --><a href="/posts/存储底软07ufs凭什么全面取代emmc" data-series-prev style="display:none;" aria-hidden="true">上一篇</a><a href="/posts/存储底软09ufs内部三大核心组成" data-series-next style="display:none;" aria-hidden="true">下一篇</a><div class="series-nav-title">系列导航</div><table style="width:100%;border-collapse:collapse;margin-top:0.5rem;"><thead><tr><th style="width:4rem;text-align:center;padding:0.5rem 0.5rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);white-space:nowrap;">集数</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">标题</th><th style="text-align:left;padding:0.5rem 0.3rem;font-size:0.75rem;color:var(--color-text-secondary);border-bottom:1px solid var(--color-border);">内容</th></tr></thead><tbody><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 0 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软00存储课程总览" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">存储课程总览</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">Dong哥教你学存储系列课程总览：四大模块从零基础到UFS底</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 1 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软01到底什么是存储" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">到底什么是存储</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">内存和存储到底有什么区别？从DRAM运行内存到NAND外存，</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 2 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软03为什么存储越用越慢" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">为什么存储越用越慢</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">新手机秒开应用，两年后频频卡顿？三大元凶：碎片化、GC垃圾回</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 3 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软02存储类型大盘点" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">存储类型大盘点</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">从HDD到SSD，从eMMC到UFS——一次性理清可移动存储</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 4 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软04三大存储介质" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">三大存储介质</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">DRAM、NOR Flash、NAND Flash三大半导体</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 5 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软05slcmlctlcqlc全解析" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">SLC/MLC/TLC/QLC 全解析</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">同为NAND闪存，SLC/MLC/TLC/QLC到底差在哪？</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 6 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软06存储参数怎么看" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">存储参数怎么看？顺序读写和随机读写谁更影响体验</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">顺序读写和随机读写谁更影响日常体验？跑分参数到底怎么看？90</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 7 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软07ufs凭什么全面取代emmc" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">UFS 凭什么全面取代 eMMC？核心优势全解析</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">UFS 凭什么全面取代 eMMC？从并行总线到串行接口，从半</td></tr><tr style="background:color-mix(in srgb,var(--color-accent) 8%,transparent);"><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-accent);">第 8 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><span style="color:var(--color-text);font-weight:600;">一文看懂 UFS 进化史：从 UFS2.0 到 UFS4.1 的技术迭代 <span style="font-size:0.7rem;color:var(--color-accent);">👈 你在这里</span></span></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">从 UFS 2.0 到 UFS 4.1，每次大版本升级的带宽</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 9 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软09ufs内部三大核心组成" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">UFS 内部到底长啥样？三大核心组成一次拆解</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">一颗 UFS 芯片内部到底有什么？控制器、NAND 闪存、D</td></tr><tr style><td style="text-align:center;padding:0.45rem 0.5rem;font-size:0.8rem;font-weight:600;white-space:nowrap;color:var(--color-text-secondary);">第 10 集</td><td style="padding:0.45rem 0.3rem;font-size:0.82rem;"><a href="/posts/存储底软10nand闪存芯片深度解析" style="color:var(--color-text-secondary);text-decoration:none;" onmouseenter="this.style.color='var(--color-accent)'" onmouseleave="this.style.color='var(--color-text-secondary)'">NAND 闪存芯片：存储数据的真正物理载体</a></td><td style="padding:0.45rem 0.3rem;font-size:0.78rem;color:var(--color-text-secondary);opacity:0.7;">NAND 闪存芯片是数据存储的真正物理载体。从浮栅晶体管到六</td></tr></tbody></table></nav><!-- Comments --><div class="mt-16" id="comments" data-astro-cid-ruv7hgo6><script src="https://giscus.app/client.js" data-repo="EDAdong/EDAdong.github.io" data-repo-id="R_kgDON01Lrg" data-category="Announcements" data-category-id="DIC_kwDON01Lrs4DCAkU" data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+        </script></div><!-- Related Posts --><section class="mt-16" data-astro-cid-ruv7hgo6><h2 class="text-xl font-bold mb-6" style="color: var(--color-text);" data-astro-cid-ruv7hgo6>相关文章</h2><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem" data-astro-cid-ruv7hgo6><a href="/posts/存储底软09ufs内部三大核心组成/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/storage-09封面.webp" alt="存储底软-09UFS 内部到底长啥样？三大核心组成一次拆解" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(128, 60%, 18%), hsl(158, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">存</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">存储</span><span class="tag">UFS</span></div><h3 class="post-card-title">存储底软-09UFS 内部到底长啥样？三大核心组成一次拆解</h3><div class="post-card-meta"><time class="post-card-date" datetime="2026-08-05T22:00:00.000Z">2026年8月6日</time><span class="post-card-reading-time">· 约 8 分钟</span></div></div></a><a href="/posts/存储底软07ufs凭什么全面取代emmc/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/storage-07封面.webp" alt="存储底软-07UFS 凭什么全面取代 eMMC？核心优势全解析" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(128, 60%, 18%), hsl(158, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">存</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">存储</span><span class="tag">UFS</span></div><h3 class="post-card-title">存储底软-07UFS 凭什么全面取代 eMMC？核心优势全解析</h3><div class="post-card-meta"><time class="post-card-date" datetime="2026-08-03T22:00:00.000Z">2026年8月4日</time><span class="post-card-reading-time">· 约 8 分钟</span></div></div></a><a href="/posts/存储底软06存储参数怎么看/" class="post-card block no-underline"><div class="post-card-cover-wrapper"><img src="/images/storage-存储底软06存储参数怎么看.webp" alt="存储底软-06存储参数怎么看？顺序读写和随机读写谁更影响体验" class="post-card-cover" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><!-- Hidden gradient fallback for image load errors --><div class="post-card-cover flex items-center justify-center" style="display: none; background: linear-gradient(135deg, hsl(128, 60%, 18%), hsl(158, 50%, 12%));"><span class="flex items-center justify-center rounded-xl font-bold text-white select-none" style="width: 52px; height: 52px; font-size: 1.4rem; background: linear-gradient(135deg, hsl(${hue}, 70%, 55%), hsl(${(hue + 30) % 360}, 70%, 45%));">存</span></div></div><div class="post-card-body"><div class="flex flex-wrap gap-1.5 mb-2"><span class="tag">存储</span><span class="tag">UFS</span></div><h3 class="post-card-title">存储底软-06存储参数怎么看？顺序读写和随机读写谁更影响体验</h3><div class="post-card-meta"><time class="post-card-date" datetime="2026-07-26T22:00:00.000Z">2026年7月27日</time><span class="post-card-reading-time">· 约 8 分钟</span></div></div></a></div></section></article><!-- Desktop TOC Sidebar --><aside class="article-sidebar" data-astro-cid-ruv7hgo6><nav class="toc-wrapper" id="toc-nav" data-astro-cid-ruv7hgo6><div class="toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#ufs-版本演进全景" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 版本演进全景</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#ufs-20--21普及时代的起点2015-2016" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 2.0 / 2.1：普及时代的起点（2015-2016）</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#首批大规模商用" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>首批大规模商用</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#关键引入cmdq-命令队列" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>关键引入：CMDQ 命令队列</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#历史意义" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>历史意义</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#ufs-30--31速度翻倍时代2019-2020" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 3.0 / 3.1：速度翻倍时代（2019-2020）</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#hs-gear4-登场" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>HS-Gear4 登场</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#ufs-31-的三大增强" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 3.1 的三大增强</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#市场影响" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>市场影响</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#ufs-40--41当前旗舰标杆2022-2023" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 4.0 / 4.1：当前旗舰标杆（2022-2023）</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#hs-gear5再翻一倍" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>HS-Gear5：再翻一倍</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#不只是快" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>不只是快</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#当前市场格局" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>当前市场格局</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#三代的代际对比" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>三代的代际对比</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#总结" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总结</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#系列导航" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>系列导航</a></li></ol></nav></aside></div><button id="mobile-toc-btn" class="mobile-toc-fab" aria-label="目录" data-astro-cid-ruv7hgo6>📑</button><div id="mobile-toc-overlay" class="mobile-toc-overlay" data-astro-cid-ruv7hgo6></div><div id="mobile-toc-drawer" class="mobile-toc-drawer" data-astro-cid-ruv7hgo6><div class="mobile-toc-handle" data-astro-cid-ruv7hgo6></div><div class="mobile-toc-header" data-astro-cid-ruv7hgo6>📑 目录</div><ol class="toc-list" data-astro-cid-ruv7hgo6><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#ufs-版本演进全景" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 版本演进全景</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#ufs-20--21普及时代的起点2015-2016" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 2.0 / 2.1：普及时代的起点（2015-2016）</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#首批大规模商用" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>首批大规模商用</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#关键引入cmdq-命令队列" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>关键引入：CMDQ 命令队列</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#历史意义" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>历史意义</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#ufs-30--31速度翻倍时代2019-2020" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 3.0 / 3.1：速度翻倍时代（2019-2020）</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#hs-gear4-登场" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>HS-Gear4 登场</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#ufs-31-的三大增强" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 3.1 的三大增强</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#市场影响" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>市场影响</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#ufs-40--41当前旗舰标杆2022-2023" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>UFS 4.0 / 4.1：当前旗舰标杆（2022-2023）</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#hs-gear5再翻一倍" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>HS-Gear5：再翻一倍</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#不只是快" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>不只是快</a></li><li class="toc-item toc-depth-3" data-astro-cid-ruv7hgo6><a href="#当前市场格局" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>当前市场格局</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#三代的代际对比" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>三代的代际对比</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#总结" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>总结</a></li><li class="toc-item toc-depth-2" data-astro-cid-ruv7hgo6><a href="#系列导航" class="toc-link" data-toc-link data-astro-cid-ruv7hgo6>系列导航</a></li></ol></div></main><footer style="margin-top: 5rem; padding: 2.5rem 0; border-top: 1px solid var(--color-border); text-align: center;"><div class="container-main"><p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0 0 0.75rem; opacity: 0.8;">&copy; 2025 - 2026 By EDAdong</p><p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0 0 1rem; opacity: 0.6; max-width: 28rem; margin-inline: auto; line-height: 1.7;">做任何事情之前先想清楚事情的价值，动脑袋思考是一件累人的事情，但是带来给你的收益会让你少更多的烦恼，许愿早日年薪百万</p><div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #FF5D01 10%, transparent); color: #FF5D01; border: 1px solid color-mix(in srgb, #FF5D01 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #FF5D01;"></span>Astro</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #06B6D4 10%, transparent); color: #06B6D4; border: 1px solid color-mix(in srgb, #06B6D4 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #06B6D4;"></span>Tailwind</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #333 10%, transparent); color: #333; border: 1px solid color-mix(in srgb, #333 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #333;"></span>GitHub Pages</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #0891b2 10%, transparent); color: #0891b2; border: 1px solid color-mix(in srgb, #0891b2 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0891b2;"></span>STM32</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #8b5cf6 10%, transparent); color: #8b5cf6; border: 1px solid color-mix(in srgb, #8b5cf6 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6;"></span>FPGA</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #10b981 10%, transparent); color: #10b981; border: 1px solid color-mix(in srgb, #10b981 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>嵌入式</span></div></div></footer><div id="music-player" class="music-player" data-astro-cid-hxmsq4xn><button id="music-toggle" class="music-btn" aria-label="Toggle music" title="播放/暂停" data-astro-cid-hxmsq4xn><div class="vinyl" data-astro-cid-hxmsq4xn><div class="vinyl-grooves" data-astro-cid-hxmsq4xn></div><div class="vinyl-label" data-astro-cid-hxmsq4xn></div><div class="vinyl-hole" data-astro-cid-hxmsq4xn></div></div><span class="music-note" data-astro-cid-hxmsq4xn>♪</span></button><span class="music-tip" data-astro-cid-hxmsq4xn>轻音</span></div><script>
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.getElementById('music-toggle');
+  var player = document.getElementById('music-player');
+  if(!btn||!player)return;
+  var playing = false;
+
+  // Load music lazily — only on user interaction. The MP3 is 5MB, preloading
+  // it on every page visit wastes bandwidth and slows page load significantly.
+  var audio = null;
+  function getAudio() {
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = 'none';
+      audio.src = '/music/无损网站背景音乐.mp3';
+      audio.loop = true;
+      audio.volume = 0.12;
+    }
+    return audio;
+  }
+
+  // Save position before navigating away
+  window.addEventListener('beforeunload', function(){
+    if(audio && !audio.paused){
+      sessionStorage.setItem('musicTime', audio.currentTime);
+    }
+  });
+
+  btn.onclick = function(e){ e.preventDefault();
+    var a = getAudio();
+    if(a.paused){
+      var t = sessionStorage.getItem('musicTime');
+      if(t){ a.currentTime = parseFloat(t); sessionStorage.removeItem('musicTime'); }
+      a.play().then(function(){
+        player.classList.add('playing'); localStorage.setItem('music','on');
+      }).catch(function(){});
+    } else {
+      a.pause(); player.classList.remove('playing'); localStorage.setItem('music','off');
+    }
+  };
+});
+</script><!-- KeyboardHints: floating "?" button + shortcuts modal --><div class="kh-wrapper" data-astro-cid-ctlvvxge><button class="kh-btn" id="kh-btn" title="键盘快捷键" aria-label="键盘快捷键" data-astro-cid-ctlvvxge>?</button><div class="kh-overlay" id="kh-overlay" data-astro-cid-ctlvvxge></div><div class="kh-modal" id="kh-modal" data-astro-cid-ctlvvxge><div class="kh-modal-header" data-astro-cid-ctlvvxge><span style="font-weight:700;font-size:0.95rem;" data-astro-cid-ctlvvxge>键盘快捷键</span><button class="kh-close" id="kh-close" title="关闭" data-astro-cid-ctlvvxge>Esc</button></div><div class="kh-modal-body" data-astro-cid-ctlvvxge><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + K</kbd><span data-astro-cid-ctlvvxge>搜索</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>&larr; &rarr;</kbd><span data-astro-cid-ctlvvxge>上一篇 / 下一篇（系列导航时）</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Esc</kbd><span data-astro-cid-ctlvvxge>关闭弹窗</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + Shift + H</kbd><span data-astro-cid-ctlvvxge>回到首页</span></div></div></div></div><script>
+(function() {
+  if (typeof window === 'undefined') return;
+  function init() {
+    var btn = document.getElementById('kh-btn');
+    var overlay = document.getElementById('kh-overlay');
+    var modal = document.getElementById('kh-modal');
+    var close = document.getElementById('kh-close');
+    if (!btn || !overlay || !modal) return;
+
+    function open() {
+      overlay.classList.add('open');
+      modal.classList.add('open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+    }
+
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      overlay.classList.contains('open') ? closeModal() : open();
+    });
+    overlay.addEventListener('click', closeModal);
+    if (close) close.addEventListener('click', closeModal);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+K: focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        var searchInput = document.querySelector('#search-input, [data-search-input]');
+        if (searchInput) {
+          searchInput.focus();
+        } else {
+          // Try opening search modal
+          var searchLink = document.querySelector('a[href="/search"]');
+          if (searchLink) window.location.href = '/search';
+        }
+      }
+      // Ctrl+Shift+H: go home
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'H') {
+        e.preventDefault();
+        window.location.href = '/';
+      }
+      // Esc: close modal
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        e.preventDefault();
+        closeModal();
+      }
+      // Arrow keys for series nav
+      if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !modal.classList.contains('open')) {
+        var prevLink = document.querySelector('[data-series-prev]');
+        var nextLink = document.querySelector('[data-series-next]');
+        if (e.key === 'ArrowLeft' && prevLink) {
+          e.preventDefault();
+          window.location.href = prevLink.getAttribute('href');
+        }
+        if (e.key === 'ArrowRight' && nextLink) {
+          e.preventDefault();
+          window.location.href = nextLink.getAttribute('href');
+        }
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><button id="back-to-top" class="scroll-btn" style="bottom:2rem;" aria-label="回到顶部" title="回到顶部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>TOP</span></button><button id="go-bottom" class="scroll-btn" style="bottom:6.5rem;" aria-label="回到底部" title="回到底部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M6 9l6 6 6-6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>BOT</span></button><script type="module">(function(){var e=document.getElementById(`back-to-top`),t=document.getElementById(`go-bottom`);if(!e||!t)return;var n=!1;function r(){n||(n=!0,requestAnimationFrame(function(){var r=window.scrollY,i=document.documentElement.scrollHeight-window.innerHeight;e.classList.toggle(`visible`,r>400),t.classList.toggle(`visible`,r<i-400),n=!1}))}window.addEventListener(`scroll`,r,{passive:!0}),r(),e.onclick=function(){window.scrollTo({top:0,behavior:`smooth`})},t.onclick=function(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:`smooth`})}})();</script></body></html><script>
+  var theme=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  document.documentElement.setAttribute('data-theme',theme);
+  // Register Service Worker for offline caching
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  }
+</script><script type="module">(function(){function e(){var e=document.querySelectorAll(`[data-toc-link]`);if(e.length){e.forEach(function(e){e.addEventListener(`click`,function(e){e.preventDefault();var t=this.getAttribute(`href`)||``,n=decodeURIComponent(t.replace(/^#/,``)),r=document.getElementById(n);r&&(r.scrollIntoView({behavior:`smooth`,block:`start`}),history.replaceState(null,``,`#`+n))})});var t=new IntersectionObserver(function(e){e.forEach(function(e){var t=CSS.escape(e.target.id),n=document.querySelector(`[data-toc-link][href="#`+t+`"]`);n&&n.classList.toggle(`active`,e.isIntersecting)})},{rootMargin:`-80px 0px -60% 0px`});e.forEach(function(e){var n=e.getAttribute(`href`)||``,r=decodeURIComponent(n.replace(/^#/,``));if(r){var i=document.getElementById(r);i&&t.observe(i)}})}}document.readyState===`loading`?document.addEventListener(`DOMContentLoaded`,e):e()})();</script><script>
+  (function() {
+    var btn = document.getElementById('mobile-toc-btn');
+    var overlay = document.getElementById('mobile-toc-overlay');
+    var drawer = document.getElementById('mobile-toc-drawer');
+    if (!btn || !overlay || !drawer) return;
+
+    function open() {
+      overlay.classList.add('open');
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      overlay.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', function(e) { e.stopPropagation(); open(); });
+    overlay.addEventListener('click', close);
+    // Close when a TOC link is clicked
+    drawer.addEventListener('click', function(e) {
+      if (e.target.closest('[data-toc-link]')) {
+        setTimeout(close, 150); // wait for scroll to start
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('open')) close();
+    });
+  })();
+</script>
