@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Astro v7.1.3"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><title>关于 EDAdong | EDAdong</title><meta name="description" content="存储软件工程师 · 竞赛双国一 · FPGA 开发者"><meta property="og:title" content="关于 EDAdong"><meta property="og:type" content="website"><meta property="og:url" content="https://edadong.com/about/"><meta property="og:description" content="存储软件工程师 · 竞赛双国一 · FPGA 开发者"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"EDAdong","jobTitle":"软件开发工程师","url":"https://edadong.com/about/","sameAs":["https://github.com/EDAdong/Electron","https://space.bilibili.com/"]}</script><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="sitemap" href="/sitemap-index.xml"><link rel="dns-prefetch" href="https://github.com"><link rel="dns-prefetch" href="https://avatars.githubusercontent.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><link rel="stylesheet" href="/_astro/BaseLayout.FZUuh1sy.css"><link rel="stylesheet" href="/_astro/global.CZGXK5uF.css"></head><body style="background-color: var(--color-bg); color: var(--color-text);"><div style="position:fixed;inset:0;pointer-events:none;z-index:0;
+      background:radial-gradient(ellipse 60% 50% at 20% 30%, rgba(8,145,178,0.25), transparent 55%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(99,102,241,0.18), transparent 50%),
+      radial-gradient(ellipse 45% 40% at 55% 70%, rgba(8,145,178,0.20), transparent 55%);
+    "></div><!-- Initial loading screen: visible on first load, fades out when page ready --><div id="page-loader" class="page-loader-overlay active"><div class="page-loader-content"><div class="pl-logo">E</div><div class="pl-spinner"><div class="pl-ring"></div></div><div class="pl-text">EDAdong</div></div></div><script>
+  (function(){
+    var loader = document.getElementById('page-loader');
+    if(!loader) return;
+
+    function hide(){ loader.classList.remove('active'); }
+
+    // Hide loader as soon as page is interactive — don't wait for all resources
+    if (document.readyState === 'loading') {
+      // Initial page load: hide shortly after DOM is ready
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(hide, 50); });
+      // Fallback: hide after load event
+      window.addEventListener('load', function() { setTimeout(hide, 300); });
+    } else {
+      // View Transition navigation: DOM already ready, hide immediately
+      hide();
+    }
+    // Safety: always hide after 3s
+    setTimeout(hide, 3000);
+
+    // Show loader when clicking internal links (for View Transition nav)
+    document.addEventListener('click', function(e){
+      var link = e.target.closest('a');
+      if(!link) return;
+      var href = link.getAttribute('href');
+      if(!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('//')) return;
+      if(link.getAttribute('target') === '_blank') return;
+      loader.classList.add('active');
+    });
+  })();
+</script><!-- Adds native lazy loading to all article images --><script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.article-body img:not([loading])').forEach(function(img){
+      img.loading = 'lazy';
+      img.decoding = 'async';
+    });
+  });
+</script><header id="site-header" class="site-header" data-astro-cid-nen7h5rs><div class="container-main w-full flex items-center justify-between" data-astro-cid-nen7h5rs><a href="/" class="flex items-center gap-2 font-bold text-lg no-underline" style="color: var(--color-text);" data-astro-cid-nen7h5rs><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-bold shrink-0" style="background: linear-gradient(135deg, var(--color-accent), #6366f1);" data-astro-cid-nen7h5rs>主页</span></a><nav class="flex items-center gap-1" data-astro-cid-nen7h5rs><a href="/posts" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>文章</a><a href="/search" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>搜索</a><a href="/resources" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>资料</a><a href="/friends" class="nav-item" style="color: var(--color-text-secondary)" data-astro-cid-nen7h5rs>友链</a><a href="/about" class="nav-item" style="color: var(--color-accent)" data-astro-cid-nen7h5rs>关于</a><button id="theme-btn" class="nav-item border-none cursor-pointer" aria-label="Toggle theme" style="background:transparent; font-size:1rem;" data-astro-cid-nen7h5rs><svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" data-astro-cid-nen7h5rs></path></svg><svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 hidden" data-astro-cid-nen7h5rs><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" data-astro-cid-nen7h5rs></path></svg></button></nav></div></header><script>
+(function(){
+  var t=document.getElementById('theme-btn'),s=document.getElementById('sun-icon'),m=document.getElementById('moon-icon');
+  if(!t||!s||!m)return;
+  function u(){var d=document.documentElement.getAttribute('data-theme')==='dark';s.classList.toggle('hidden',d);m.classList.toggle('hidden',!d)}
+  u();t.onclick=function(){var n=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',n);localStorage.setItem('theme',n);u()};
+})();
+</script><main><div class="container-main page-content" style="max-width:52rem;"><!-- Hero --><div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem;flex-wrap:wrap;"><img src="/img/touxiang.webp" alt="EDAdong" style="width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--color-accent),0 8px 32px rgba(0,0,0,0.12);"><div><h1 style="font-size:1.8rem;font-weight:800;color:var(--color-text);margin:0 0 0.2rem;">EDAdong</h1><p style="font-size:0.9rem;color:var(--color-text-secondary);margin:0;line-height:1.5;">一枚深耕于存储领域的技术爱好者<br><a href="/bilibili" style="font-size:0.8rem;opacity:0.7;color:var(--color-accent);text-decoration:none;">B站 1.4W+ 粉丝 · 50+ 视频 →</a></p></div></div><!-- ====== 工作阶段 ====== --><section style="margin-bottom:3rem;"><div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1.5rem;"><span style="font-size:1.3rem;">💼</span><h2 style="font-size:1.3rem;color:var(--color-text);margin:0;">工作阶段</h2><span style="font-size:0.75rem;color:var(--color-text-secondary);background:var(--color-bg-secondary);padding:0.15rem 0.6rem;border-radius:1rem;">2025 - 至今</span></div><div style="position:relative;padding-left:2rem;border-left:2px solid var(--color-border);margin-left:0.5rem;"><div style="position:relative;padding-bottom:1.5rem;"><div style="position:absolute;left:-5px;top:0.3rem;width:8px;height:8px;border-radius:50%;background:var(--color-accent);"></div><div style="font-size:0.8rem;font-weight:700;color:var(--color-accent);margin-bottom:0.15rem;">2025.07 - 至今</div><div style="font-weight:600;color:var(--color-text);font-size:0.95rem;">软件开发工程师<span style="font-weight:400;color:var(--color-text-secondary);font-size:0.82rem;"> · 国内 TOP 科技公司 · 上海</span></div><div style="font-size:0.82rem;color:var(--color-text-secondary);line-height:1.6;margin-top:0.25rem;">从事存储软件研发，聚焦 UFS 存储协议栈与大数据存储系统，参与 AI 工程提效相关项目。深度参与底层存储软件开发与性能调优，积累大规模系统软件工程实战经验。</div></div><div style="position:relative;padding-bottom:1.5rem;"><div style="position:absolute;left:-5px;top:0.3rem;width:8px;height:8px;border-radius:50%;background:var(--color-accent);"></div><div style="font-size:0.8rem;font-weight:700;color:var(--color-accent);margin-bottom:0.15rem;">2024 秋招</div><div style="font-weight:600;color:var(--color-text);font-size:0.95rem;">校招 Offer 收割</div><div style="font-size:0.82rem;color:var(--color-text-secondary);line-height:1.6;margin-top:0.25rem;">凭借 FPGA 开发与嵌入式硬件双重背景，斩获多家大厂 SSP/SP Offer，涵盖嵌入式软硬件、FPGA 逻辑开发、存储软件等多个技术方向，最终选择存储软件赛道深耕。</div></div></div></section><!-- ====== 学生阶段 ====== --><section style="margin-bottom:3rem;"><div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:1.5rem;"><span style="font-size:1.3rem;">🎓</span><h2 style="font-size:1.3rem;color:var(--color-text);margin:0;">学生阶段</h2><span style="font-size:0.75rem;color:var(--color-text-secondary);background:var(--color-bg-secondary);padding:0.15rem 0.6rem;border-radius:1rem;">2018 - 2025</span></div><!-- Education Timeline --><div style="position:relative;padding-left:2rem;border-left:2px solid var(--color-border);margin-left:0.5rem;margin-bottom:2rem;"><div style="position:relative;padding-bottom:1rem;"><div style="position:absolute;left:-5px;top:0.3rem;width:8px;height:8px;border-radius:50%;background:var(--color-accent);"></div><div style="font-size:0.8rem;font-weight:700;color:var(--color-accent);margin-bottom:0.15rem;">2022 - 2025</div><div style="font-weight:600;color:var(--color-text);font-size:0.95rem;">华南师范大学 <span style="font-weight:400;color:var(--color-text-secondary);font-size:0.82rem;">工学硕士 · 光学工程</span></div><div style="font-size:0.75rem;color:var(--color-text-secondary);opacity:0.7;">激光生命科学教育部重点实验室</div></div><div style="position:relative;padding-bottom:1rem;"><div style="position:absolute;left:-5px;top:0.3rem;width:8px;height:8px;border-radius:50%;background:var(--color-accent);"></div><div style="font-size:0.8rem;font-weight:700;color:var(--color-accent);margin-bottom:0.15rem;">2018 - 2022</div><div style="font-weight:600;color:var(--color-text);font-size:0.95rem;">南华大学 <span style="font-weight:400;color:var(--color-text-secondary);font-size:0.82rem;">工学学士 · 电子信息工程</span></div><div style="font-size:0.75rem;color:var(--color-text-secondary);opacity:0.7;">国家一流本科专业</div></div></div><!-- Competition Awards --><h3 style="font-size:1rem;color:var(--color-text);margin:0 0 0.8rem;display:flex;align-items:center;gap:0.4rem;"><span style="width:4px;height:1rem;border-radius:2px;background:#f59e0b;display:inline-block;"></span> 竞赛与荣誉</h3><div style="display:flex;flex-direction:column;gap:0.35rem;margin-bottom:2rem;"><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2023</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">全国大学生嵌入式芯片与系统设计竞赛（教育部A类竞赛）</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">全国一等奖</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2021</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">全国大学生电子设计竞赛（教育部A类竞赛）</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">全国一等奖</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2024</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">全国大学生集成电路创新设计大赛（教育部A类竞赛）</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">全国二等奖</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2024</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">华为嵌入式软件大赛</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">全国总决赛第二名</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2024</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">研究生电子设计大赛（教育部A类竞赛）</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">华南赛区一等奖</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2023</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">AMD OpenHW 平台开源作品</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">年度九大优秀作品</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2023</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">东南大学国际 FPGA 暑期培训</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">优秀助教</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2024</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">全国大学生集成电路创新设计大赛 · 海云捷迅杯</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">优秀助教</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2023</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">华南师范大学研究生奖学金</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">一等奖</span></div><div style="display:flex;align-items:baseline;gap:0.6rem;padding:0.45rem 0.7rem;border-radius:6px;border:1px solid var(--color-border);background:var(--color-card);"><span style="font-size:0.68rem;font-weight:700;color:var(--color-accent);white-space:nowrap;min-width:3rem;">2020</span><div style="flex:1;min-width:0;"><span style="font-size:0.82rem;font-weight:600;color:var(--color-text);">南华大学本科奖学金</span></div><span style="font-size:0.72rem;font-weight:700;color:#f59e0b;white-space:nowrap;text-align:right;">一等奖</span></div></div><!-- Student Projects --><h3 style="font-size:1rem;color:var(--color-text);margin:0 0 0.8rem;display:flex;align-items:center;gap:0.4rem;"><span style="width:4px;height:1rem;border-radius:2px;background:var(--color-accent);display:inline-block;"></span> 代表项目</h3><div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:1rem;"><div style="padding:1rem 1.2rem;border-radius:10px;background:var(--color-card);border:1px solid var(--color-border);border-left:3px solid var(--color-accent);"><div style="display:flex;align-items:baseline;gap:0.4rem;margin-bottom:0.5rem;"><span style="font-size:0.65rem;font-weight:700;color:#fff;background:var(--color-accent);padding:0.1rem 0.4rem;border-radius:0.3rem;">01</span><span style="font-weight:700;font-size:0.95rem;color:var(--color-text);">多算子高速对焦显微成像系统</span></div><div style="font-size:0.72rem;color:var(--color-text-secondary);font-family:var(--font-mono);margin-bottom:0.6rem;">ZYNQ-7000 · Verilog · AXI_DMA · DDR3 · HDMI · LWIP</div><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.5rem;"><strong style="color:var(--color-text);">背景：</strong>硕士毕业设计课题，面向高端显微镜的自动对焦与高速成像需求，设计并实现了一套完整的嵌入式成像处理系统。</p><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.5rem;"><strong style="color:var(--color-text);">内容：</strong>基于 Xilinx ZYNQ-7000 异构多核平台（ARM Cortex-A9 + FPGA），在 PL 端实现高速图像采集与预处理流水线（AXI_DMA + DDR3 + HDMI 实时推流），PS 端运行自定义爬山搜索自动对焦算法（0.8s 短距 / 2-6s 长距对焦）。自主设计并绘制 10 层高速主控 PCB 板，集成电机驱动与霍尔定位模块，通过 LWIP/UDP 千兆以太网实现实时图像推流至 PC 端。</p><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.6rem;"><strong style="color:var(--color-text);">成果：</strong>对焦速度与精度对标 Nikon 和 Leica 高端显微镜。获 2023 年嵌入式芯片设计竞赛全国一等奖（A类赛事队长），入选 2023 年 AMD OpenHW 开源平台年度九大优秀作品，获 2024 年华为嵌入式软件大赛全国总决赛亚军。</p></div><div style="padding:1rem 1.2rem;border-radius:10px;background:var(--color-card);border:1px solid var(--color-border);border-left:3px solid var(--color-accent);"><div style="display:flex;align-items:baseline;gap:0.4rem;margin-bottom:0.5rem;"><span style="font-size:0.65rem;font-weight:700;color:#fff;background:var(--color-accent);padding:0.1rem 0.4rem;border-radius:0.3rem;">02</span><span style="font-weight:700;font-size:0.95rem;color:var(--color-text);">多拓扑数字开关电源设计</span></div><div style="font-size:0.72rem;color:var(--color-text-secondary);font-family:var(--font-mono);margin-bottom:0.6rem;">STM32F103/F407 · PID · SPWM · SOGI · DQ 变换 · ADC+DMA</div><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.5rem;"><strong style="color:var(--color-text);">背景：</strong>系统性研究并实现了多种电力电子拓扑结构的数字控制方案，涵盖从光伏到并网的全链路电源变换技术。</p><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.5rem;"><strong style="color:var(--color-text);">内容：</strong>基于 ARM Cortex-M 系列 MCU，独立完成六种电源拓扑的数字控制设计与验证：MPPT 光伏最大功率追踪（追踪时间 &lt; 1s）、UPS 不间断电源（整流 + BOOST + 全桥逆变）、三相微网并网逆变、单相逆变并网（SOGI 锁相环 + DQ 变换 + SPWM 调制）、双向 BUCK-BOOST 变换器、无桥 PFC 功率因数校正。采用 ADC + DMA 高速同步采集配合 ARM DSP 库实现实时控制，PID 参数在线整定。</p><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.6rem;"><strong style="color:var(--color-text);">成果：</strong>获 2021 年全国大学生电子设计竞赛全国一等奖（A类赛事队长）及湖南省电子设计竞赛一等奖。MPPT 追踪速度与转换效率达到竞赛满分标准。</p></div><div style="padding:1rem 1.2rem;border-radius:10px;background:var(--color-card);border:1px solid var(--color-border);border-left:3px solid var(--color-accent);"><div style="display:flex;align-items:baseline;gap:0.4rem;margin-bottom:0.5rem;"><span style="font-size:0.65rem;font-weight:700;color:#fff;background:var(--color-accent);padding:0.1rem 0.4rem;border-radius:0.3rem;">03</span><span style="font-weight:700;font-size:0.95rem;color:var(--color-text);">四自由度机械臂分拣搬运系统</span></div><div style="font-size:0.72rem;color:var(--color-text-secondary);font-family:var(--font-mono);margin-bottom:0.6rem;">FPGA (RTL) · CORDIC · 逆运动学 · PID · OV5640</div><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.5rem;"><strong style="color:var(--color-text);">背景：</strong>在纯 FPGA（无 CPU 软核）平台上，从零实现了一套完整的实时视觉识别与机械臂控制 SoC 系统。</p><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.5rem;"><strong style="color:var(--color-text);">内容：</strong>全部使用 Verilog RTL 级描述，在 FPGA 上实现：OV5640 摄像头实时图像采集与预处理、形状/颜色/坐标三模态实时视觉识别、自定义 CORDIC 双迭代算法高精度求解逆运动学（arcsin 高精度实现）、多轴 PID 闭环轨迹追踪。自主设计驱动板（MCU + 伺服编码器 + OLED + WiFi + 语音识别 + 继电器 + 电流检测 + 存储）。</p><p style="font-size:0.8rem;color:var(--color-text-secondary);line-height:1.65;margin:0 0 0.6rem;"><strong style="color:var(--color-text);">成果：</strong>获 2024 年全国大学生集成电路创新设计大赛全国二等奖（A类赛事队长）。实现多物体实时分拣，抗环境光干扰，识别速度与算法稳定性达到赛题满分。</p></div></div><p style="font-size:0.75rem;color:var(--color-text-secondary);opacity:0.6;text-align:right;">省级立项 2 项 · 实用新型专利 4 项 · 期刊论文 1 篇</p></section><!-- Skills --><section style="margin-bottom:3rem;padding:1.2rem 1.5rem;border-radius:12px;background:var(--color-card);border:1px solid var(--color-border);"><h3 style="font-size:0.85rem;color:var(--color-text-secondary);margin:0 0 0.6rem;text-transform:uppercase;letter-spacing:0.05em;">技术特长</h3><div style="display:flex;flex-wrap:wrap;gap:0.4rem;"><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">FPGA / Verilog</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">ZYNQ / MPSoC</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">STM32 嵌入式</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">电源拓扑设计</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">10层高速PCB</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">UFS 存储协议</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">C/C++</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">MATLAB</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">Vivado</span><span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:1rem;background:var(--color-bg-secondary);color:var(--color-text-secondary);">Altium Designer</span></div></section><div style="text-align:center;padding:1.5rem;border-radius:12px;background:color-mix(in srgb,var(--color-accent) 5%,transparent);border:1px solid color-mix(in srgb,var(--color-accent) 10%,transparent);"><p style="color:var(--color-text-secondary);margin:0;font-size:0.85rem;">📬 <strong style="color:var(--color-text);">B站：EDAdong</strong> · <strong style="color:var(--color-text);">GitHub：EDAdong</strong> · 博客：edadong.com</p></div></div></main><footer style="margin-top: 5rem; padding: 2.5rem 0; border-top: 1px solid var(--color-border); text-align: center;"><div class="container-main"><p style="font-size: 0.8rem; color: var(--color-text-secondary); margin: 0 0 0.75rem; opacity: 0.8;">&copy; 2025 - 2026 By EDAdong</p><p style="font-size: 0.78rem; color: var(--color-text-secondary); margin: 0 0 1rem; opacity: 0.6; max-width: 28rem; margin-inline: auto; line-height: 1.7;">做任何事情之前先想清楚事情的价值，动脑袋思考是一件累人的事情，但是带来给你的收益会让你少更多的烦恼，许愿早日年薪百万</p><div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;"><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #FF5D01 10%, transparent); color: #FF5D01; border: 1px solid color-mix(in srgb, #FF5D01 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #FF5D01;"></span>Astro</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #06B6D4 10%, transparent); color: #06B6D4; border: 1px solid color-mix(in srgb, #06B6D4 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #06B6D4;"></span>Tailwind</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #333 10%, transparent); color: #333; border: 1px solid color-mix(in srgb, #333 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #333;"></span>GitHub Pages</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #0891b2 10%, transparent); color: #0891b2; border: 1px solid color-mix(in srgb, #0891b2 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0891b2;"></span>STM32</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #8b5cf6 10%, transparent); color: #8b5cf6; border: 1px solid color-mix(in srgb, #8b5cf6 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #8b5cf6;"></span>FPGA</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 1rem; font-size: 0.68rem; font-weight: 500; background: color-mix(in srgb, #10b981 10%, transparent); color: #10b981; border: 1px solid color-mix(in srgb, #10b981 20%, transparent);"><span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981;"></span>嵌入式</span></div></div></footer><div id="music-player" class="music-player" data-astro-cid-hxmsq4xn><button id="music-toggle" class="music-btn" aria-label="Toggle music" title="播放/暂停" data-astro-cid-hxmsq4xn><div class="vinyl" data-astro-cid-hxmsq4xn><div class="vinyl-grooves" data-astro-cid-hxmsq4xn></div><div class="vinyl-label" data-astro-cid-hxmsq4xn></div><div class="vinyl-hole" data-astro-cid-hxmsq4xn></div></div><span class="music-note" data-astro-cid-hxmsq4xn>♪</span></button><span class="music-tip" data-astro-cid-hxmsq4xn>轻音</span></div><script>
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.getElementById('music-toggle');
+  var player = document.getElementById('music-player');
+  if(!btn||!player)return;
+  var playing = false;
+
+  // Load music lazily — only on user interaction. The MP3 is 5MB, preloading
+  // it on every page visit wastes bandwidth and slows page load significantly.
+  var audio = null;
+  function getAudio() {
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = 'none';
+      audio.src = '/music/无损网站背景音乐.mp3';
+      audio.loop = true;
+      audio.volume = 0.12;
+    }
+    return audio;
+  }
+
+  // Save position before navigating away
+  window.addEventListener('beforeunload', function(){
+    if(audio && !audio.paused){
+      sessionStorage.setItem('musicTime', audio.currentTime);
+    }
+  });
+
+  btn.onclick = function(e){ e.preventDefault();
+    var a = getAudio();
+    if(a.paused){
+      var t = sessionStorage.getItem('musicTime');
+      if(t){ a.currentTime = parseFloat(t); sessionStorage.removeItem('musicTime'); }
+      a.play().then(function(){
+        player.classList.add('playing'); localStorage.setItem('music','on');
+      }).catch(function(){});
+    } else {
+      a.pause(); player.classList.remove('playing'); localStorage.setItem('music','off');
+    }
+  };
+});
+</script><!-- KeyboardHints: floating "?" button + shortcuts modal --><div class="kh-wrapper" data-astro-cid-ctlvvxge><button class="kh-btn" id="kh-btn" title="键盘快捷键" aria-label="键盘快捷键" data-astro-cid-ctlvvxge>?</button><div class="kh-overlay" id="kh-overlay" data-astro-cid-ctlvvxge></div><div class="kh-modal" id="kh-modal" data-astro-cid-ctlvvxge><div class="kh-modal-header" data-astro-cid-ctlvvxge><span style="font-weight:700;font-size:0.95rem;" data-astro-cid-ctlvvxge>键盘快捷键</span><button class="kh-close" id="kh-close" title="关闭" data-astro-cid-ctlvvxge>Esc</button></div><div class="kh-modal-body" data-astro-cid-ctlvvxge><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + K</kbd><span data-astro-cid-ctlvvxge>搜索</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>&larr; &rarr;</kbd><span data-astro-cid-ctlvvxge>上一篇 / 下一篇（系列导航时）</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Esc</kbd><span data-astro-cid-ctlvvxge>关闭弹窗</span></div><div class="kh-row" data-astro-cid-ctlvvxge><kbd data-astro-cid-ctlvvxge>Ctrl + Shift + H</kbd><span data-astro-cid-ctlvvxge>回到首页</span></div></div></div></div><script>
+(function() {
+  if (typeof window === 'undefined') return;
+  function init() {
+    var btn = document.getElementById('kh-btn');
+    var overlay = document.getElementById('kh-overlay');
+    var modal = document.getElementById('kh-modal');
+    var close = document.getElementById('kh-close');
+    if (!btn || !overlay || !modal) return;
+
+    function open() {
+      overlay.classList.add('open');
+      modal.classList.add('open');
+    }
+    function closeModal() {
+      overlay.classList.remove('open');
+      modal.classList.remove('open');
+    }
+
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      overlay.classList.contains('open') ? closeModal() : open();
+    });
+    overlay.addEventListener('click', closeModal);
+    if (close) close.addEventListener('click', closeModal);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ctrl+K: focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        var searchInput = document.querySelector('#search-input, [data-search-input]');
+        if (searchInput) {
+          searchInput.focus();
+        } else {
+          // Try opening search modal
+          var searchLink = document.querySelector('a[href="/search"]');
+          if (searchLink) window.location.href = '/search';
+        }
+      }
+      // Ctrl+Shift+H: go home
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'H') {
+        e.preventDefault();
+        window.location.href = '/';
+      }
+      // Esc: close modal
+      if (e.key === 'Escape' && modal.classList.contains('open')) {
+        e.preventDefault();
+        closeModal();
+      }
+      // Arrow keys for series nav
+      if ((e.key === 'ArrowLeft' || e.key === 'ArrowRight') && !modal.classList.contains('open')) {
+        var prevLink = document.querySelector('[data-series-prev]');
+        var nextLink = document.querySelector('[data-series-next]');
+        if (e.key === 'ArrowLeft' && prevLink) {
+          e.preventDefault();
+          window.location.href = prevLink.getAttribute('href');
+        }
+        if (e.key === 'ArrowRight' && nextLink) {
+          e.preventDefault();
+          window.location.href = nextLink.getAttribute('href');
+        }
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script><button id="back-to-top" class="scroll-btn" style="bottom:2rem;" aria-label="回到顶部" title="回到顶部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M18 15l-6-6-6 6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>TOP</span></button><button id="go-bottom" class="scroll-btn" style="bottom:6.5rem;" aria-label="回到底部" title="回到底部" data-astro-cid-vy5be4ad><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" data-astro-cid-vy5be4ad><path d="M6 9l6 6 6-6" data-astro-cid-vy5be4ad></path></svg><span data-astro-cid-vy5be4ad>BOT</span></button><script type="module">(function(){var e=document.getElementById(`back-to-top`),t=document.getElementById(`go-bottom`);if(!e||!t)return;var n=!1;function r(){n||(n=!0,requestAnimationFrame(function(){var r=window.scrollY,i=document.documentElement.scrollHeight-window.innerHeight;e.classList.toggle(`visible`,r>400),t.classList.toggle(`visible`,r<i-400),n=!1}))}window.addEventListener(`scroll`,r,{passive:!0}),r(),e.onclick=function(){window.scrollTo({top:0,behavior:`smooth`})},t.onclick=function(){window.scrollTo({top:document.documentElement.scrollHeight,behavior:`smooth`})}})();</script></body></html><script>
+  var theme=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  document.documentElement.setAttribute('data-theme',theme);
+  // Register Service Worker for offline caching
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('/sw.js').catch(function(){});
+  }
+</script>
